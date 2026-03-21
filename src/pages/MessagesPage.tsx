@@ -1,7 +1,6 @@
 // src/pages/MessagesPage.tsx
 import { useState } from 'react'
 import { useIsMobile } from '@/hooks/useBreakpoint'
-import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useThreads, useMessages } from '@/hooks/useMessages'
 import { useAuth } from '@/lib/auth'
 import { GoldenSpinner } from '@/components/ui'
