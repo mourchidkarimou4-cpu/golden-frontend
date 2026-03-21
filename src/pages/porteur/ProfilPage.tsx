@@ -32,7 +32,6 @@ export default function ProfilPage() {
     last_name:    user?.last_name  ?? '',
     phone_number: user?.phone_number ?? '',
     city:         user?.city ?? '',
-    
   })
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState(false)
@@ -68,7 +67,7 @@ export default function ProfilPage() {
             <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Email</label>
             <input style={{ ...input, opacity: 0.5 }} value={user?.email ?? ''} readOnly />
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 24 }}>
             <div>
               <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Téléphone</label>
               <input style={input} value={form.phone_number} onChange={set('phone_number')} placeholder="+229 97 XX XX XX" />
@@ -77,10 +76,6 @@ export default function ProfilPage() {
               <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Ville</label>
               <input style={input} value={form.city} onChange={set('city')} placeholder="Cotonou" />
             </div>
-          </div>
-          <div style={{ marginBottom: 24 }}>
-            <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>Bio</label>
-            <textarea style={{ ...input, minHeight: 100, resize: 'vertical' }} value={form.bio} onChange={set('bio')} placeholder="Décrivez votre parcours..." />
           </div>
           {success && (
             <div style={{ padding: '10px 16px', background: 'rgba(74,222,128,0.1)', border: '1px solid rgba(74,222,128,0.3)', color: '#4ade80', fontSize: 12, marginBottom: 16 }}>
