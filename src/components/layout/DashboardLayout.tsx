@@ -14,12 +14,29 @@ interface NavItem {
 }
 
 interface DashboardLayoutProps {
-  children:  ReactNode
-  navItems:  NavItem[]
-  title:     string
-  subtitle?: string
+  children:       ReactNode
+  navItems:       NavItem[]
+  title:          string
+  subtitle?:      string
   headerActions?: ReactNode
 }
+
+// Bottom nav items porteur
+const BOTTOM_NAV_PORTEUR = [
+  { icon: '⊞', label: 'Accueil',   to: '/porteur' },
+  { icon: '◈', label: 'Projet',    to: '/porteur/projet' },
+  { icon: '✉', label: 'Messages',  to: '/porteur/messages' },
+  { icon: '₣', label: 'Finances',  to: '/porteur/finances' },
+  { icon: '◯', label: 'Profil',    to: '/porteur/profil' },
+]
+
+const BOTTOM_NAV_INVESTISSEUR = [
+  { icon: '⊞', label: 'Accueil',   to: '/investisseur' },
+  { icon: '◈', label: 'Projets',   to: '/investisseur/projets' },
+  { icon: '✉', label: 'Messages',  to: '/investisseur/messages' },
+  { icon: '₣', label: 'Portfolio', to: '/investisseur/portfolio' },
+  { icon: '◯', label: 'Profil',    to: '/investisseur/profil' },
+]
 
 export default function DashboardLayout({
   children, navItems, title, subtitle, headerActions
@@ -30,53 +47,40 @@ export default function DashboardLayout({
   const isMobile  = useIsMobile()
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
-  // Ferme sidebar au changement de route
   useEffect(() => { setSidebarOpen(false) }, [location.pathname])
-
-  // Ferme sidebar si on passe en desktop
   useEffect(() => { if (!isMobile) setSidebarOpen(false) }, [isMobile])
 
   const handleLogout = async () => { await logout(); navigate('/') }
 
-  const SIDEBAR_W = isMobile ? 0 : 240
+  const bottomNav = user?.role === 'porteur' ? BOTTOM_NAV_PORTEUR : BOTTOM_NAV_INVESTISSEUR
 
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--dark)' }}>
 
-      {/* Overlay mobile */}
-      {isMobile && sidebarOpen && (
-        <div onClick={() => setSidebarOpen(false)} style={{
-          position: 'fixed', inset: 0,
-          background: 'rgba(0,0,0,0.75)',
-          zIndex: 98, backdropFilter: 'blur(2px)',
-        }} />
-      )}
+      {/* Overlay sidebar mobile */}
+      <div
+        className={`sidebar-overlay ${sidebarOpen ? 'active' : ''}`}
+        onClick={() => setSidebarOpen(false)}
+      />
 
-      {/* ── Sidebar ─────────────────────────────────── */}
-      <aside style={{
-        position: 'fixed', left: 0, top: 0, height: '100%',
-        width: 240,
-        background: 'var(--dark-2)',
-        borderRight: '1px solid var(--border)',
-        zIndex: 99,
-        display: 'flex', flexDirection: 'column',
-        transform: isMobile ? (sidebarOpen ? 'translateX(0)' : 'translateX(-100%)') : 'translateX(0)',
-        transition: 'transform 0.3s ease',
-      }}>
-        {/* Logo */}
-        <div style={{ padding: '28px 20px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      {/* ── Sidebar (desktop + drawer mobile) ─────── */}
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <div style={{
+          padding: '20px 20px 16px',
+          borderBottom: '1px solid var(--border)',
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+        }}>
           <GoldenLogo size="sm" />
           {isMobile && (
             <button onClick={() => setSidebarOpen(false)} style={{
-              background: 'none', border: 'none', color: 'var(--text-muted)',
-              fontSize: 20, cursor: 'pointer', padding: 4,
+              background: 'none', border: 'none',
+              color: 'var(--text-muted)', fontSize: 20, cursor: 'pointer',
             }}>✕</button>
           )}
         </div>
 
-        {/* Navigation */}
-        <nav style={{ flex: 1, padding: '16px 0', overflowY: 'auto' }}>
-          {navItems.map((item) => (
+        <nav style={{ flex: 1, padding: '12px 0', overflowY: 'auto' }}>
+          {navItems.map(item => (
             <NavLink key={item.to} to={item.to}
               className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
@@ -93,33 +97,49 @@ export default function DashboardLayout({
           ))}
         </nav>
 
-        {/* Profil */}
-        <div style={{ padding: '16px 20px', borderTop: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ width: 34, height: 34, border: '1px solid var(--border-bright)', display: 'grid', placeItems: 'center', fontSize: 14, color: 'var(--gold)', flexShrink: 0 }}>
+        <div style={{
+          padding: '14px 20px',
+          borderTop: '1px solid var(--border)',
+          display: 'flex', alignItems: 'center', gap: 10,
+        }}>
+          <div style={{
+            width: 32, height: 32, flexShrink: 0,
+            border: '1px solid var(--border-bright)',
+            display: 'grid', placeItems: 'center',
+            fontSize: 13, color: 'var(--gold)',
+          }}>
             {user?.first_name?.[0] ?? '?'}
           </div>
           <div style={{ flex: 1, minWidth: 0 }}>
-            <div style={{ fontSize: 12, fontWeight: 500, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
+            <div style={{ fontSize: 11, fontWeight: 500, color: 'var(--text)', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>
               {user?.full_name ?? user?.email}
             </div>
-            <div style={{ fontSize: 10, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
+            <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.08em', textTransform: 'uppercase' }}>
               {user?.role}
             </div>
           </div>
-          <button onClick={handleLogout} style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 16, cursor: 'pointer', padding: 4, transition: 'color .2s' }}
-            onMouseEnter={e => (e.currentTarget.style.color = 'var(--gold)')}
-            onMouseLeave={e => (e.currentTarget.style.color = 'var(--text-muted)')}>⏻</button>
+          <button onClick={handleLogout} style={{
+            background: 'none', border: 'none',
+            color: 'var(--text-muted)', fontSize: 16,
+            cursor: 'pointer', padding: 4, transition: 'color .2s',
+          }}>⏻</button>
         </div>
       </aside>
 
-      {/* ── Main ────────────────────────────────────── */}
-      <div style={{ flex: 1, marginLeft: SIDEBAR_W, display: 'flex', flexDirection: 'column', minWidth: 0, transition: 'margin-left 0.3s ease' }}>
+      {/* ── Main Content ─────────────────────────── */}
+      <div className="dashboard-main" style={{
+        flex: 1,
+        marginLeft: isMobile ? 0 : 'var(--sidebar-w)',
+        display: 'flex', flexDirection: 'column',
+        minWidth: 0,
+        transition: 'margin-left 0.3s ease',
+      }}>
 
         {/* Header */}
         <header style={{
           position: 'sticky', top: 0, zIndex: 40,
-          padding: isMobile ? '0 16px' : '0 36px',
-          height: 64,
+          padding: isMobile ? '0 16px' : '0 32px',
+          height: 'var(--header-h)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
           background: 'rgba(10,10,10,0.95)',
           backdropFilter: 'blur(20px)',
@@ -129,37 +149,76 @@ export default function DashboardLayout({
             {isMobile && (
               <button onClick={() => setSidebarOpen(true)} style={{
                 background: 'none', border: 'none',
-                color: 'var(--text-muted)', fontSize: 22,
-                cursor: 'pointer', padding: 4,
-                display: 'flex', alignItems: 'center',
+                color: 'var(--text-muted)', fontSize: 22, cursor: 'pointer',
               }}>☰</button>
             )}
             <div>
-              <h1 style={{ fontSize: isMobile ? 14 : 16, fontWeight: 500, color: 'var(--text)', letterSpacing: '0.02em' }}>
+              <h1 style={{ fontSize: isMobile ? 13 : 15, fontWeight: 500, color: 'var(--text)', letterSpacing: '0.02em' }}>
                 {title}
               </h1>
               {subtitle && !isMobile && (
-                <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>{subtitle}</p>
+                <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 1 }}>{subtitle}</p>
               )}
             </div>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: isMobile ? 8 : 16 }}>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             {!isMobile && headerActions}
-            <button style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 18, cursor: 'pointer', position: 'relative', padding: 4 }}>
+            <button style={{
+              background: 'none', border: 'none',
+              color: 'var(--text-muted)', fontSize: 18,
+              cursor: 'pointer', position: 'relative', padding: 4,
+            }}>
               🔔
-              <span style={{ position: 'absolute', top: 0, right: 0, width: 8, height: 8, background: 'var(--gold)', borderRadius: '50%' }} />
+              <span style={{
+                position: 'absolute', top: 2, right: 2,
+                width: 7, height: 7,
+                background: 'var(--gold)', borderRadius: '50%',
+              }} />
             </button>
+            {isMobile && (
+              <div style={{
+                width: 30, height: 30,
+                border: '1px solid var(--border-bright)',
+                display: 'grid', placeItems: 'center',
+                fontSize: 12, color: 'var(--gold)',
+              }}>
+                {user?.first_name?.[0] ?? '?'}
+              </div>
+            )}
           </div>
         </header>
 
-        {/* Content */}
-        <main style={{ flex: 1, padding: isMobile ? '20px 16px' : '32px 36px', overflowY: 'auto', overflowX: 'hidden' }}>
+        {/* Page Content */}
+        <main className="dashboard-content" style={{
+          flex: 1,
+          padding: isMobile ? '16px' : '28px 32px',
+          overflowY: 'auto',
+          overflowX: 'hidden',
+          paddingBottom: isMobile ? 'calc(var(--bottom-nav-h) + 24px)' : '28px',
+        }}>
           {isMobile && headerActions && (
-            <div style={{ marginBottom: 16 }}>{headerActions}</div>
+            <div style={{ marginBottom: 14 }}>{headerActions}</div>
           )}
           {children}
         </main>
       </div>
+
+      {/* ── Bottom Navigation (mobile only) ──────── */}
+      {isMobile && (
+        <nav className="bottom-nav">
+          {bottomNav.map(item => (
+            <NavLink
+              key={item.to}
+              to={item.to}
+              className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}
+            >
+              <span className="nav-icon">{item.icon}</span>
+              <span>{item.label}</span>
+            </NavLink>
+          ))}
+        </nav>
+      )}
     </div>
   )
 }
