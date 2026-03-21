@@ -1,5 +1,6 @@
 // src/pages/DashboardPorteur.tsx
 import { useState, useEffect } from 'react'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useLocation } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { KpiCard, ProgressBar, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
@@ -22,6 +23,7 @@ const NAV_ITEMS = [
 
 export default function DashboardPorteur() {
   const { user } = useAuth()
+  const isMobile = useIsMobile()
   const location = useLocation()
   const currentPath = location.pathname
   const [dashboard, setDashboard] = useState<any>(null)
@@ -78,7 +80,7 @@ export default function DashboardPorteur() {
       )}
 
       {/* ── KPIs ────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4,1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4,1fr)', gap: 16, marginBottom: 32 }}>
         <KpiCard
           label="Capital collecté"
           value={`${((summary?.total_raised ?? 0) / 1_000_000).toFixed(0)}M`}
@@ -113,7 +115,7 @@ export default function DashboardPorteur() {
 
       {/* ── Projet principal ─────────────────────── */}
       {mainProject ? (
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 24, marginBottom: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24, marginBottom: 32 }}>
 
           {/* Carte projet */}
           <div className="kpi-card" style={{ padding: 28 }}>
