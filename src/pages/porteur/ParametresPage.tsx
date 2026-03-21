@@ -7,20 +7,20 @@ import { authAPI } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 
 const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
+  { icon: '⊞', label: "Vue d'ensemble", to: '/porteur' },
+  { icon: '◈', label: 'Mon projet',      to: '/porteur/projet' },
+  { icon: '◎', label: 'Investisseurs',   to: '/porteur/investisseurs', badge: 7 },
+  { icon: '⊕', label: 'Nouveau projet',  to: '/porteur/nouveau' },
+  { icon: '✉', label: 'Messages',        to: '/porteur/messages', badge: 3 },
+  { icon: '◷', label: 'Activité',        to: '/porteur/activite', badge: 1, badgeColor: 'green' },
+  { icon: '⊘', label: 'Documents',       to: '/porteur/documents' },
+  { icon: '₣', label: 'Finances',        to: '/porteur/finances' },
+  { icon: '◫', label: 'Rapports',        to: '/porteur/rapports' },
+  { icon: '◯', label: 'Mon profil',      to: '/porteur/profil' },
+  { icon: '⊙', label: 'Paramètres',     to: '/porteur/parametres' },
 ]
 
-const input: React.CSSProperties = {
+const inputStyle: React.CSSProperties = {
   width: '100%', padding: '10px 14px',
   background: 'var(--dark-3)', border: '1px solid var(--border)',
   color: 'var(--text)', fontSize: 13, outline: 'none', fontFamily: 'inherit',
@@ -42,8 +42,14 @@ export default function ParametresPage() {
 
   const handlePwChange = async () => {
     setPwError('')
-    if (pwForm.new_password !== pwForm.confirm) { setPwError('Les mots de passe ne correspondent pas.'); return }
-    if (pwForm.new_password.length < 8) { setPwError('Minimum 8 caractères.'); return }
+    if (pwForm.new_password !== pwForm.confirm) {
+      setPwError('Les mots de passe ne correspondent pas.')
+      return
+    }
+    if (pwForm.new_password.length < 8) {
+      setPwError('Minimum 8 caractères.')
+      return
+    }
     setSaving(true)
     try {
       await authAPI.changePassword({ old_password: pwForm.old_password, new_password: pwForm.new_password })
@@ -60,7 +66,11 @@ export default function ParametresPage() {
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Paramètres" subtitle="Gérez votre compte">
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+
+        {/* Colonne gauche */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+          {/* Mot de passe */}
           <div className="kpi-card" style={{ padding: 28 }}>
             <SectionLabel>Sécurité — Changer le mot de passe</SectionLabel>
             <div style={{ marginTop: 20, display: 'flex', flexDirection: 'column', gap: 14 }}>
@@ -70,18 +80,32 @@ export default function ParametresPage() {
                 { label: 'Confirmer', key: 'confirm' },
               ].map(f => (
                 <div key={f.key}>
-                  <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>{f.label}</label>
-                  <input type="password" style={input} value={(pwForm as any)[f.key]}
-                    onChange={e => setPwForm(p => ({ ...p, [f.key]: e.target.value }))} placeholder="••••••••" />
+                  <label style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', display: 'block', marginBottom: 6 }}>
+                    {f.label}
+                  </label>
+                  <input
+                    type="password"
+                    style={inputStyle}
+                    value={(pwForm as any)[f.key]}
+                    onChange={e => setPwForm(p => ({ ...p, [f.key]: e.target.value }))}
+                    placeholder="••••••••"
+                  />
                 </div>
               ))}
               {pwError && <p style={{ fontSize: 12, color: '#f87171' }}>{pwError}</p>}
               {pwSuccess && <p style={{ fontSize: 12, color: '#4ade80' }}>✓ Mot de passe mis à jour.</p>}
-              <button className="btn-primary" onClick={handlePwChange} disabled={saving} style={{ opacity: saving ? 0.7 : 1, marginTop: 8 }}>
+              <button
+                className="btn-primary"
+                onClick={handlePwChange}
+                disabled={saving}
+                style={{ opacity: saving ? 0.7 : 1, marginTop: 8 }}
+              >
                 {saving ? 'Enregistrement...' : 'Modifier le mot de passe'}
               </button>
             </div>
           </div>
+
+          {/* Notifications */}
           <div className="kpi-card" style={{ padding: 28 }}>
             <SectionLabel>Préférences de notifications</SectionLabel>
             <div style={{ marginTop: 20 }}>
@@ -93,32 +117,65 @@ export default function ParametresPage() {
               ].map(n => (
                 <div key={n.key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '14px 0', borderBottom: '1px solid var(--border)' }}>
                   <span style={{ fontSize: 13, color: 'var(--text)' }}>{n.label}</span>
-                  <div onClick={() => setNotifs(p => ({ ...p, [n.key]: !(p as any)[n.key] }))}
-                    style={{ width: 40, height: 22, borderRadius: 11, background: (notifs as any)[n.key] ? 'var(--gold)' : 'var(--dark-4)', border: '1px solid var(--border)', cursor: 'pointer', position: 'relative', transition: 'background .2s' }}>
-                    <div style={{ position: 'absolute', top: 2, left: (notifs as any)[n.key] ? 20 : 2, width: 16, height: 16, borderRadius: '50%', background: (notifs as any)[n.key] ? '#0A0A0A' : 'var(--text-muted)', transition: 'left .2s' }} />
+                  <div
+                    onClick={() => setNotifs(p => ({ ...p, [n.key]: !(p as any)[n.key] }))}
+                    style={{
+                      width: 40, height: 22, borderRadius: 11,
+                      background: (notifs as any)[n.key] ? 'var(--gold)' : 'var(--dark-4)',
+                      border: '1px solid var(--border)',
+                      cursor: 'pointer', position: 'relative', transition: 'background .2s',
+                    }}
+                  >
+                    <div style={{
+                      position: 'absolute', top: 2,
+                      left: (notifs as any)[n.key] ? 20 : 2,
+                      width: 16, height: 16, borderRadius: '50%',
+                      background: (notifs as any)[n.key] ? '#0A0A0A' : 'var(--text-muted)',
+                      transition: 'left .2s',
+                    }} />
                   </div>
                 </div>
               ))}
             </div>
           </div>
         </div>
+
+        {/* Colonne droite */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+
+          {/* Session */}
           <div className="kpi-card" style={{ padding: 24 }}>
             <SectionLabel>Session</SectionLabel>
-            <button className="btn-gold-sm" style={{ width: '100%', justifyContent: 'center', marginTop: 16 }}
-              onClick={async () => { await logout(); navigate('/') }}>
+            <button
+              className="btn-gold-sm"
+              style={{ width: '100%', justifyContent: 'center', marginTop: 16 }}
+              onClick={async () => { await logout(); navigate('/') }}
+            >
               ⏻ Se déconnecter
             </button>
           </div>
+
+          {/* Danger zone */}
           <div className="kpi-card" style={{ padding: 24, border: '1px solid rgba(248,113,113,0.2)' }}>
             <SectionLabel>Zone de danger</SectionLabel>
             <p style={{ fontSize: 12, color: 'var(--text-muted)', margin: '12px 0', lineHeight: 1.6 }}>
               La suppression de votre compte est irréversible.
             </p>
-            <button style={{ width: '100%', padding: 10, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.3)', color: '#f87171', cursor: 'pointer' }}
-              onClick={() => alert('Contactez le support pour supprimer votre compte.')}>
+            <button
+              style={{
+                width: '100%', padding: 10, fontSize: 11,
+                letterSpacing: '0.1em', textTransform: 'uppercase',
+                background: 'rgba(248,113,113,0.08)',
+                border: '1px solid rgba(248,113,113,0.3)',
+                color: '#f87171', cursor: 'pointer',
+              }}
+              onClick={() => alert('Contactez le support pour supprimer votre compte.')}
+            >
               Supprimer mon compte
             </button>
+          </div>
+
+          {/* Version */}
           <div className="kpi-card" style={{ padding: 24 }}>
             <SectionLabel>Version</SectionLabel>
             <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 12 }}>GOLDEN Investissement v1.0</p>
