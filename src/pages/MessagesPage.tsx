@@ -1,11 +1,14 @@
 // src/pages/MessagesPage.tsx
 import { useState } from 'react'
+import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useThreads, useMessages } from '@/hooks/useMessages'
 import { useAuth } from '@/lib/auth'
 import { GoldenSpinner } from '@/components/ui'
 
 export default function MessagesPage() {
-  const { user }                          = useAuth()
+  const { user } = useAuth()
+  const isMobile = useIsMobile()
   const { threads, loading: tLoading }    = useThreads()
   const [activeThread, setActiveThread]   = useState<string | null>(null)
   const { messages, loading: mLoading, sending, sendMessage, bottomRef } = useMessages(activeThread)
@@ -21,7 +24,7 @@ export default function MessagesPage() {
 
   return (
     <div style={{
-      display: 'grid', gridTemplateColumns: '320px 1fr',
+      display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '320px 1fr',
       height: 'calc(100vh - 64px)',
       border: '1px solid var(--border)',
     }}>

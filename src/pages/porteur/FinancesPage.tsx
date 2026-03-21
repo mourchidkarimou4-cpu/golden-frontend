@@ -1,6 +1,8 @@
 // src/pages/porteur/FinancesPage.tsx
 import { useState, useEffect } from 'react'
 import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
@@ -20,6 +22,8 @@ const NAV_ITEMS = [
 ]
 
 export default function FinancesPage() {
+  const isMobile = useIsMobile()
+  const isMobile = useIsMobile()
   const isMobile = useIsMobile()
   const [dashboard, setDashboard] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])

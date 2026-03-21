@@ -1,6 +1,8 @@
 // src/pages/porteur/ProfilPage.tsx
 import { useState } from 'react'
 import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
@@ -28,6 +30,8 @@ const input: React.CSSProperties = {
 
 export default function ProfilPage() {
   const { user, refreshUser } = useAuth()
+  const isMobile = useIsMobile()
+  const isMobile = useIsMobile()
   const isMobile = useIsMobile()
   const [form, setForm] = useState({
     first_name:   user?.first_name ?? '',
