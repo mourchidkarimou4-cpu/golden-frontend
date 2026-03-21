@@ -1,40 +1,25 @@
 // src/hooks/useBreakpoint.ts
-import { useState, useEffect } from 'react'
-
-type Breakpoint = 'xs' | 'sm' | 'md' | 'lg' | 'xl'
-
-export function useBreakpoint(): Breakpoint {
-  const getBreakpoint = (): Breakpoint => {
-    const w = window.innerWidth
-    if (w < 480)  return 'xs'
-    if (w < 640)  return 'sm'
-    if (w < 768)  return 'md'
-    if (w < 1024) return 'lg'
-    return 'xl'
-  }
-
-  const [bp, setBp] = useState<Breakpoint>(getBreakpoint)
-
-  useEffect(() => {
-    const handler = () => setBp(getBreakpoint())
-    window.addEventListener('resize', handler)
-    return () => window.removeEventListener('resize', handler)
-  }, [])
-
-  return bp
-}
+import { useMediaQuery } from 'react-responsive'
 
 export function useIsMobile() {
-  const bp = useBreakpoint()
-  return bp === 'xs' || bp === 'sm'
+  return useMediaQuery({ maxWidth: 768 })
 }
 
 export function useIsTablet() {
-  const bp = useBreakpoint()
-  return bp === 'md'
+  return useMediaQuery({ minWidth: 769, maxWidth: 1024 })
 }
 
 export function useIsDesktop() {
-  const bp = useBreakpoint()
-  return bp === 'lg' || bp === 'xl'
+  return useMediaQuery({ minWidth: 1025 })
+}
+
+export function useBreakpoint() {
+  const isMobile  = useMediaQuery({ maxWidth: 768 })
+  const isTablet  = useMediaQuery({ minWidth: 769, maxWidth: 1024 })
+  const isDesktop = useMediaQuery({ minWidth: 1025 })
+
+  if (isMobile)  return 'mobile'
+  if (isTablet)  return 'tablet'
+  if (isDesktop) return 'desktop'
+  return 'desktop'
 }
