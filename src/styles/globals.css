@@ -151,3 +151,94 @@ a, button, [role="button"], [onclick] { cursor: none; }
     color: var(--gold);
   }
 }
+
+/* ── RESPONSIVE MOBILE ────────────────────────────────── */
+
+/* Tablet (≤ 1024px) */
+@media (max-width: 1024px) {
+  :root { --sidebar-w: 200px; }
+}
+
+/* Mobile (≤ 768px) */
+@media (max-width: 768px) {
+  :root { --sidebar-w: 0px; }
+
+  /* Sidebar cachée sur mobile */
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    width: 240px !important;
+    z-index: 100;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  /* Main content pleine largeur */
+  div[style*="marginLeft: var(--sidebar-w)"],
+  div[style*="margin-left: var(--sidebar-w)"] {
+    margin-left: 0 !important;
+  }
+
+  /* Grids responsive */
+  div[style*="grid-template-columns: repeat(4"],
+  div[style*="gridTemplateColumns: 'repeat(4"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  div[style*="grid-template-columns: repeat(3"],
+  div[style*="gridTemplateColumns: 'repeat(3"] {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+
+  div[style*="grid-template-columns: 1fr 320px"],
+  div[style*="grid-template-columns: 1fr 300px"],
+  div[style*="grid-template-columns: 1fr 340px"],
+  div[style*="gridTemplateColumns: '1fr 320px'"],
+  div[style*="gridTemplateColumns: '1fr 300px'"],
+  div[style*="gridTemplateColumns: '1fr 340px'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="grid-template-columns: 1fr 1fr"],
+  div[style*="gridTemplateColumns: '1fr 1fr'"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Header padding */
+  header[style*="padding: '0 36px'"],
+  header { padding: 0 16px !important; }
+
+  /* Main padding */
+  main[style*="padding: '32px 36px'"] {
+    padding: 20px 16px !important;
+  }
+
+  /* Tables scroll horizontal */
+  table { display: block; overflow-x: auto; white-space: nowrap; }
+
+  /* Boutons pleine largeur */
+  .btn-primary, .btn-outline { width: 100%; text-align: center; }
+
+  /* KPI cards */
+  .kpi-card { padding: 16px !important; }
+
+  /* Cursor désactivé sur mobile */
+  body { cursor: auto !important; }
+  a, button, [role="button"] { cursor: pointer !important; }
+}
+
+/* Très petit mobile (≤ 480px) */
+@media (max-width: 480px) {
+  div[style*="grid-template-columns: repeat(2"],
+  div[style*="gridTemplateColumns: 'repeat(2"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  div[style*="grid-template-columns: repeat(4"],
+  div[style*="gridTemplateColumns: 'repeat(4"] {
+    grid-template-columns: 1fr !important;
+  }
+
+  h1[style*="font-size: 16px"] { font-size: 14px !important; }
+}
