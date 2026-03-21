@@ -116,7 +116,9 @@ export default function ParametresPage() {
               La suppression de votre compte est irréversible.
             </p>
             <button style={{ width: '100%', padding: 10, fontSize: 11, letterSpacing: '0.1em', textTransform: 'uppercase', background: 'rgba(248,113,113,0.08)', border: '1px solid rgba(248,113,113,0.3)', color: '#f87171', cursor: 'pointer' }}
-              onClick={()          </div>
+              onClick={() => alert('Contactez le support pour supprimer votre compte.')}>
+              Supprimer mon compte
+            </button>
           <div className="kpi-card" style={{ padding: 24 }}>
             <SectionLabel>Version</SectionLabel>
             <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 12 }}>GOLDEN Investissement v1.0</p>
