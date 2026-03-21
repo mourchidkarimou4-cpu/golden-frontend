@@ -1,0 +1,84 @@
+// src/pages/porteur/ActivitePage.tsx
+import DashboardLayout from '@/components/layout/DashboardLayout'
+import { SectionLabel } from '@/components/ui'
+
+const NAV_ITEMS = [
+  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
+  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
+  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
+  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
+  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
+  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
+  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
+  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
+  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
+  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
+  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
+]
+
+const ACTIVITIES = [
+  { msg: "Ibrahim Traoré a ajouté votre projet en favori", time: 'Il y a 2h', color: '#4ade80', icon: '♦' },
+  { msg: "Nouvelle vue depuis Abidjan, Côte d'Ivoire", time: 'Il y a 4h', color: 'var(--text-muted)', icon: '◷' },
+  { msg: "Votre projet a été validé par l'équipe GOLDEN", time: 'Hier 14:30', color: 'var(--gold)', icon: '✓' },
+  { msg: "Marie Ouédraogo a envoyé un message", time: 'Hier 09:15', color: '#60a5fa', icon: '✉' },
+  { msg: "Nouveau investissement de 15M FCFA reçu", time: 'Il y a 3 jours', color: '#4ade80', icon: '₣' },
+  { msg: "Jean-Pierre Koffi consulte votre dossier", time: 'Il y a 4 jours', color: 'var(--text-muted)', icon: '◎' },
+  { msg: "Document BP_GOLDEN_2024.pdf téléchargé", time: 'Il y a 5 jours', color: '#fbbf24', icon: '⊘' },
+  { msg: "Votre profil KYC est en cours de vérification", time: 'Il y a 1 semaine', color: '#fbbf24', icon: '⚠' },
+]
+
+export default function ActivitePage() {
+  return (
+    <DashboardLayout navItems={NAV_ITEMS} title="Activité" subtitle="Historique de votre compte">
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+        <div className="kpi-card" style={{ padding: 28 }}>
+          <SectionLabel>Activité récente</SectionLabel>
+          {ACTIVITIES.map((a, i) => (
+            <div key={i} style={{
+              padding: '16px 0',
+              borderBottom: i < ACTIVITIES.length - 1 ? '1px solid var(--border)' : 'none',
+              display: 'flex', gap: 16, alignItems: 'flex-start',
+            }}>
+              <div style={{
+                width: 32, height: 32, flexShrink: 0,
+                border: `1px solid ${a.color}44`,
+                display: 'grid', placeItems: 'center',
+                fontSize: 14, color: a.color,
+              }}>{a.icon}</div>
+              <div style={{ flex: 1 }}>
+                <p style={{ fontSize: 13, color: 'var(--text)', marginBottom: 4, lineHeight: 1.5 }}>{a.msg}</p>
+                <span style={{ fontSize: 11, color: 'var(--text-dim)' }}>{a.time}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
+          <div className="kpi-card" style={{ padding: 24 }}>
+            <SectionLabel>Cette semaine</SectionLabel>
+            {[
+              { label: 'Nouvelles vues', value: '+28', color: '#4ade80' },
+              { label: 'Nouveaux favoris', value: '+3', color: 'var(--gold)' },
+              { label: 'Messages reçus', value: '5', color: '#60a5fa' },
+              { label: 'Investissements', value: '1', color: '#4ade80' },
+            ].map(s => (
+              <div key={s.label} style={{ display: 'flex', justifyContent: 'space-between', padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
+                <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{s.label}</span>
+                <span style={{ fontSize: 13, color: s.color, fontWeight: 500 }}>{s.value}</span>
+              </div>
+            ))}
+          </div>
+          <div className="kpi-card" style={{ padding: 24 }}>
+            <SectionLabel>Action requise</SectionLabel>
+            <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginTop: 12 }}>
+              Vous avez <span style={{ color: 'var(--gold)' }}>1 action</span> en attente : compléter votre dossier KYC.
+            </p>
+            <button className="btn-gold-sm" style={{ marginTop: 16, width: '100%', justifyContent: 'center' }}
+              onClick={() => window.location.href = '/kyc'}>
+              Compléter le KYC →
+            </button>
+          </div>
+        </div>
+      </div>
+    </DashboardLayout>
+  )
+}

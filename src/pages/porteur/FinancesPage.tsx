@@ -1,0 +1,113 @@
+// src/pages/porteur/FinancesPage.tsx
+import { useState, useEffect } from 'react'
+import DashboardLayout from '@/components/layout/DashboardLayout'
+import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
+import { reportingAPI, investmentsAPI } from '@/lib/api'
+
+const NAV_ITEMS = [
+  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
+  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
+  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
+  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
+  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
+  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
+  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
+  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
+  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
+  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
+  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
+]
+
+export default function FinancesPage() {
+  const [dashboard, setDashboard] = useState<any>(null)
+  const [investments, setInvestments] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    Promise.all([
+      reportingAPI.dashboardPorteur(),
+      investmentsAPI.list(),
+    ]).then(([dash, inv]) => {
+      setDashboard(dash.data)
+      setInvestments(inv.data.results ?? inv.data ?? [])
+    }).finally(() => setLoading(false))
+  }, [])
+
+  if (loading) return (
+    <DashboardLayout navItems={NAV_ITEMS} title="Finances">
+      <GoldenSpinner />
+    </DashboardLayout>
+  )
+
+  const { projects = [] } = dashboard ?? {}
+  const mainProject = projects[0]
+  const totalRaised = investments.reduce((s, i) => s + (i.amount ?? 0), 0)
+  const amountNeeded = mainProject?.amount_needed ?? 0
+  const pct = amountNeeded > 0 ? Math.min(100, Math.round((totalRaised / amountNeeded) * 100)) : 0
+  const MONTHS = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun']
+  const mockData = [8, 14, 10, 22, 18, 28]
+  const maxVal = Math.max(...mockData)
+
+  return (
+    <DashboardLayout navItems={NAV_ITEMS} title="Finances" subtitle="Suivi financier de votre projet">
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+        {[
+          { label: 'Capital levé', value: `${(totalRaised/1_000_000).toFixed(1)}M`, unit: 'FCFA' },
+          { label: 'Objectif', value: `${(amountNeeded/1_000_000).toFixed(1)}M`, unit: 'FCFA' },
+          { label: 'Progression', value: `${pct}%`, unit: '' },
+          { label: 'ROI estimé', value: `${mainProject?.roi_estimated ?? 0}%`, unit: 'annuel' },
+        ].map(k => (
+          <div key={k.label} className="kpi-card" style={{ padding: 24 }}>
+            <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{k.label}</div>
+            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 30, color: 'var(--gold-light)' }}>{k.value}</div>
+            {k.unit && <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>{k.unit}</div>}
+          </div>
+        ))}
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 24 }}>
+        <div className="kpi-card" style={{ padding: 28 }}>
+          <SectionLabel>Évolution du financement (6 mois)</SectionLabel>
+          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 160, marginTop: 24, marginBottom: 16 }}>
+            {mockData.map((v, i) => (
+              <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
+                <div style={{
+                  width: '100%', height: `${(v/maxVal)*140}px`,
+                  background: 'linear-gradient(to top, rgba(201,168,76,0.8), rgba(201,168,76,0.2))',
+                  border: '1px solid rgba(201,168,76,0.4)',
+                }} />
+                <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{MONTHS[i]}</span>
+              </div>
+            ))}
+          </div>
+          <div style={{ marginTop: 20 }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
+              <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Progression globale</span>
+              <span style={{ fontSize: 12, color: 'var(--gold)' }}>{pct}%</span>
+            </div>
+            <ProgressBar value={pct} />
+          </div>
+        </div>
+        <div className="kpi-card" style={{ padding: 24 }}>
+          <SectionLabel>Investissements reçus</SectionLabel>
+          {investments.length === 0 ? (
+            <p style={{ color: 'var(--text-muted)', fontSize: 13, padding: '20px 0' }}>Aucun investissement reçu.</p>
+          ) : (
+            investments.slice(0, 6).map((inv: any, i: number) => (
+              <div key={i} style={{ padding: '12px 0', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                <div>
+                  <div style={{ fontSize: 12, color: 'var(--text)' }}>{inv.investor_name ?? 'Investisseur'}</div>
+                  <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
+                    {inv.created_at ? new Date(inv.created_at).toLocaleDateString('fr-FR') : '—'}
+                  </div>
+                </div>
+                <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: '#4ade80' }}>
+                  +{((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </DashboardLayout>
+  )
+}

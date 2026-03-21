@@ -1,5 +1,6 @@
 // src/pages/DashboardPorteur.tsx
 import { useState, useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { KpiCard, ProgressBar, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
@@ -21,6 +22,8 @@ const NAV_ITEMS = [
 
 export default function DashboardPorteur() {
   const { user } = useAuth()
+  const location = useLocation()
+  const currentPath = location.pathname
   const [dashboard, setDashboard] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)

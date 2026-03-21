@@ -12,6 +12,15 @@ import DashboardInvestisseur from '@/pages/DashboardInvestisseur'
 import MessagesPage          from '@/pages/MessagesPage'
 import CreateProjectPage     from '@/pages/CreateProjectPage'
 
+import MonProjetPage      from '@/pages/porteur/MonProjetPage'
+import InvestisseursPage  from '@/pages/porteur/InvestisseursPage'
+import ActivitePage       from '@/pages/porteur/ActivitePage'
+import DocumentsPage      from '@/pages/porteur/DocumentsPage'
+import FinancesPage       from '@/pages/porteur/FinancesPage'
+import RapportsPage       from '@/pages/porteur/RapportsPage'
+import ProfilPage         from '@/pages/porteur/ProfilPage'
+import ParametresPage     from '@/pages/porteur/ParametresPage'
+
 function PrivateRoute({ children, role }: { children: React.ReactNode; role?: string }) {
   const { user, loading } = useAuth()
   if (loading) return <div style={{ background: '#0A0A0A', minHeight: '100vh' }} />
@@ -36,29 +45,24 @@ function AppRoutes() {
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route path="/kyc"      element={<PrivateRoute><KYCPage /></PrivateRoute>} />
 
-      {/* Routes Porteur */}
-      <Route path="/porteur"                element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/messages"       element={<PrivateRoute role="porteur"><MessagesPage /></PrivateRoute>} />
-      <Route path="/porteur/nouveau"        element={<PrivateRoute role="porteur"><CreateProjectPage /></PrivateRoute>} />
-      <Route path="/porteur/projet"         element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/investisseurs"  element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/activite"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/documents"      element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/finances"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/rapports"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/profil"         element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/parametres"     element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      {/* Dashboard principal porteur */}
+      <Route path="/porteur"               element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/nouveau"       element={<PrivateRoute role="porteur"><CreateProjectPage /></PrivateRoute>} />
+      <Route path="/porteur/messages"      element={<PrivateRoute role="porteur"><MessagesPage /></PrivateRoute>} />
 
-      {/* Routes Investisseur */}
+      {/* Pages porteur */}
+      <Route path="/porteur/projet"        element={<PrivateRoute role="porteur"><MonProjetPage /></PrivateRoute>} />
+      <Route path="/porteur/investisseurs" element={<PrivateRoute role="porteur"><InvestisseursPage /></PrivateRoute>} />
+      <Route path="/porteur/activite"      element={<PrivateRoute role="porteur"><ActivitePage /></PrivateRoute>} />
+      <Route path="/porteur/documents"     element={<PrivateRoute role="porteur"><DocumentsPage /></PrivateRoute>} />
+      <Route path="/porteur/finances"      element={<PrivateRoute role="porteur"><FinancesPage /></PrivateRoute>} />
+      <Route path="/porteur/rapports"      element={<PrivateRoute role="porteur"><RapportsPage /></PrivateRoute>} />
+      <Route path="/porteur/profil"        element={<PrivateRoute role="porteur"><ProfilPage /></PrivateRoute>} />
+      <Route path="/porteur/parametres"    element={<PrivateRoute role="porteur"><ParametresPage /></PrivateRoute>} />
+
+      {/* Investisseur */}
       <Route path="/investisseur"           element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
       <Route path="/investisseur/messages"  element={<PrivateRoute role="investisseur"><MessagesPage /></PrivateRoute>} />
-      <Route path="/investisseur/projets"   element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/portfolio" element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/activite"  element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/favoris"   element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/rapports"  element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/profil"    element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/parametres" element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
@@ -75,4 +79,3 @@ export default function App() {
     </AuthProvider>
   )
 }
-EO
