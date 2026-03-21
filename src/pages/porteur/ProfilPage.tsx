@@ -32,7 +32,7 @@ export default function ProfilPage() {
     last_name:    user?.last_name  ?? '',
     phone_number: user?.phone_number ?? '',
     city:         user?.city ?? '',
-    bio:          user?.bio ?? '',
+    
   })
   const [saving, setSaving] = useState(false)
   const [success, setSuccess] = useState(false)
