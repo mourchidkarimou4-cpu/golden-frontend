@@ -62,7 +62,7 @@ export default function CreateProjectPage() {
       })
       navigate('/porteur')
     } catch (err: any) {
-      setError(err.response?.data?.detail ?? 'Erreur lors de la création.')
+      const d = err.response?.data; setError(typeof d?.detail === 'string' ? d.detail : d?.error ?? JSON.stringify(d) ?? 'Erreur lors de la création.')
     } finally {
       setLoading(false)
     }

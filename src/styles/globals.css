@@ -242,3 +242,10 @@ a, button, [role="button"], [onclick] { cursor: none; }
 
   h1[style*="font-size: 16px"] { font-size: 14px !important; }
 }
+
+/* ── Hamburger & Sidebar mobile ───────────────────────── */
+@media (max-width: 768px) {
+  .hamburger { display: block !important; }
+  .sidebar-close { display: block !important; }
+  .mobile-overlay { display: block !important; }
+}

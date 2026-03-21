@@ -25,7 +25,7 @@ export default function DashboardLayout({
 }: DashboardLayoutProps) {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
-  const [notifOpen, setNotifOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   const handleLogout = async () => {
     await logout()
@@ -35,22 +35,40 @@ export default function DashboardLayout({
   return (
     <div style={{ display: 'flex', minHeight: '100vh', background: 'var(--dark)' }}>
 
+      {/* Overlay mobile */}
+      {sidebarOpen && (
+        <div
+          onClick={() => setSidebarOpen(false)}
+          style={{
+            position: 'fixed', inset: 0,
+            background: 'rgba(0,0,0,0.7)',
+            zIndex: 99,
+            display: 'none',
+          }}
+          className="mobile-overlay"
+        />
+      )}
+
       {/* ── Sidebar ─────────────────────────────────── */}
-      <aside className="sidebar">
-        {/* Logo */}
-        <div style={{ padding: '28px 20px 24px', borderBottom: '1px solid var(--border)' }}>
+      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
+        <div style={{ padding: '28px 20px 24px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <GoldenLogo size="sm" />
+          <button
+            onClick={() => setSidebarOpen(false)}
+            className="sidebar-close"
+            style={{ background: 'none', border: 'none', color: 'var(--text-muted)', fontSize: 20, cursor: 'pointer', display: 'none' }}
+          >
+            ✕
+          </button>
         </div>
 
-        {/* Navigation */}
         <nav style={{ flex: 1, padding: '16px 0', overflowY: 'auto' }}>
           {navItems.map((item) => (
             <NavLink
               key={item.to}
               to={item.to}
-              className={({ isActive }) =>
-                `nav-item ${isActive ? 'active' : ''}`
-              }
+              onClick={() => setSidebarOpen(false)}
+              className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
               <span style={{ fontSize: 16, opacity: 0.7 }}>{item.icon}</span>
               <span style={{ flex: 1 }}>{item.label}</span>
@@ -67,7 +85,6 @@ export default function DashboardLayout({
           ))}
         </nav>
 
-        {/* Profil bas de sidebar */}
         <div style={{
           padding: '16px 20px',
           borderTop: '1px solid var(--border)',
@@ -77,8 +94,7 @@ export default function DashboardLayout({
             width: 34, height: 34,
             border: '1px solid var(--border-bright)',
             display: 'grid', placeItems: 'center',
-            fontSize: 14, color: 'var(--gold)',
-            flexShrink: 0,
+            fontSize: 14, color: 'var(--gold)', flexShrink: 0,
           }}>
             {user?.first_name?.[0] ?? '?'}
           </div>
@@ -92,8 +108,7 @@ export default function DashboardLayout({
           </div>
           <button onClick={handleLogout} title="Déconnexion" style={{
             background: 'none', border: 'none', color: 'var(--text-muted)',
-            fontSize: 16, cursor: 'none', padding: 4,
-            transition: 'color .2s',
+            fontSize: 16, cursor: 'pointer', padding: 4, transition: 'color .2s',
           }}
             onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--gold)')}
             onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--text-muted)')}
@@ -114,25 +129,36 @@ export default function DashboardLayout({
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--border)',
         }}>
-          <div>
-            <h1 style={{ fontSize: 16, fontWeight: 500, color: 'var(--text)', letterSpacing: '0.02em' }}>
-              {title}
-            </h1>
-            {subtitle && (
-              <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>{subtitle}</p>
-            )}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+            {/* Bouton hamburger mobile */}
+            <button
+              onClick={() => setSidebarOpen(true)}
+              className="hamburger"
+              style={{
+                background: 'none', border: 'none',
+                color: 'var(--text-muted)', fontSize: 22,
+                cursor: 'pointer', padding: 4,
+                display: 'none',
+              }}
+            >
+              ☰
+            </button>
+            <div>
+              <h1 style={{ fontSize: 16, fontWeight: 500, color: 'var(--text)', letterSpacing: '0.02em' }}>
+                {title}
+              </h1>
+              {subtitle && (
+                <p style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>{subtitle}</p>
+              )}
+            </div>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
             {headerActions}
-            {/* Notif bell */}
-            <button
-              onClick={() => setNotifOpen(!notifOpen)}
-              style={{
-                background: 'none', border: 'none',
-                color: 'var(--text-muted)', fontSize: 18,
-                cursor: 'none', position: 'relative', padding: 4,
-              }}
-            >
+            <button style={{
+              background: 'none', border: 'none',
+              color: 'var(--text-muted)', fontSize: 18,
+              cursor: 'pointer', position: 'relative', padding: 4,
+            }}>
               🔔
               <span style={{
                 position: 'absolute', top: 0, right: 0,
@@ -147,7 +173,6 @@ export default function DashboardLayout({
         <main style={{ flex: 1, padding: '32px 36px', overflowY: 'auto' }}>
           {children}
         </main>
-
       </div>
     </div>
   )
