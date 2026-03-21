@@ -1,5 +1,6 @@
 // src/pages/porteur/FinancesPage.tsx
 import { useState, useEffect } from 'react'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
@@ -19,6 +20,7 @@ const NAV_ITEMS = [
 ]
 
 export default function FinancesPage() {
+  const isMobile = useIsMobile()
   const [dashboard, setDashboard] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
@@ -50,7 +52,7 @@ export default function FinancesPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Finances" subtitle="Suivi financier de votre projet">
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: 16, marginBottom: 28 }}>
         {[
           { label: 'Capital levé', value: `${(totalRaised/1_000_000).toFixed(1)}M`, unit: 'FCFA' },
           { label: 'Objectif', value: `${(amountNeeded/1_000_000).toFixed(1)}M`, unit: 'FCFA' },
@@ -64,7 +66,7 @@ export default function FinancesPage() {
           </div>
         ))}
       </div>
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 28 }}>
           <SectionLabel>Évolution du financement (6 mois)</SectionLabel>
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 160, marginTop: 24, marginBottom: 16 }}>

@@ -1,5 +1,6 @@
 // src/pages/porteur/ProfilPage.tsx
 import { useState } from 'react'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
@@ -27,6 +28,7 @@ const input: React.CSSProperties = {
 
 export default function ProfilPage() {
   const { user, refreshUser } = useAuth()
+  const isMobile = useIsMobile()
   const [form, setForm] = useState({
     first_name:   user?.first_name ?? '',
     last_name:    user?.last_name  ?? '',
@@ -50,7 +52,7 @@ export default function ProfilPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Mon Profil" subtitle="Gérez vos informations personnelles">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 32 }}>
           <SectionLabel>Informations personnelles</SectionLabel>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginTop: 20, marginBottom: 16 }}>
