@@ -36,12 +36,29 @@ function AppRoutes() {
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route path="/kyc"      element={<PrivateRoute><KYCPage /></PrivateRoute>} />
 
-      <Route path="/porteur"          element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
-      <Route path="/porteur/messages" element={<PrivateRoute role="porteur"><MessagesPage /></PrivateRoute>} />
-      <Route path="/porteur/nouveau"  element={<PrivateRoute role="porteur"><CreateProjectPage /></PrivateRoute>} />
+      {/* Routes Porteur */}
+      <Route path="/porteur"                element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/messages"       element={<PrivateRoute role="porteur"><MessagesPage /></PrivateRoute>} />
+      <Route path="/porteur/nouveau"        element={<PrivateRoute role="porteur"><CreateProjectPage /></PrivateRoute>} />
+      <Route path="/porteur/projet"         element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/investisseurs"  element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/activite"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/documents"      element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/finances"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/rapports"       element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/profil"         element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
+      <Route path="/porteur/parametres"     element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
 
-      <Route path="/investisseur"          element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
-      <Route path="/investisseur/messages" element={<PrivateRoute role="investisseur"><MessagesPage /></PrivateRoute>} />
+      {/* Routes Investisseur */}
+      <Route path="/investisseur"           element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/messages"  element={<PrivateRoute role="investisseur"><MessagesPage /></PrivateRoute>} />
+      <Route path="/investisseur/projets"   element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/portfolio" element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/activite"  element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/favoris"   element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/rapports"  element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/profil"    element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
+      <Route path="/investisseur/parametres" element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
@@ -58,3 +75,4 @@ export default function App() {
     </AuthProvider>
   )
 }
+EO
