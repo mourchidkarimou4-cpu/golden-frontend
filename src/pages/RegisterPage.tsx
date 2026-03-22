@@ -16,7 +16,7 @@ export default function RegisterPage() {
     first_name: '', last_name: '',
     email: '', phone_number: '',
     password: '', password2: '',
-    role: searchParams.get('role') ?? 'porteur',
+    role: (searchParams.get('role') ?? 'porteur') as 'porteur' | 'investisseur',
   })
 
   useEffect(() => { setTimeout(() => setVisible(true), 50) }, [])

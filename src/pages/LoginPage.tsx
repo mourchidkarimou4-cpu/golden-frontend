@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '@/lib/auth'
 
 export default function LoginPage() {
-  const { login } = useAuth()
+  const { login, user } = useAuth()
   const navigate = useNavigate()
   const [form, setForm] = useState({ email: '', password: '' })
   const [error, setError] = useState('')
@@ -18,8 +18,9 @@ export default function LoginPage() {
     setError('')
     setLoading(true)
     try {
-      const user = await login(form.email, form.password)
-      navigate(user.role === 'porteur' ? '/porteur' : '/investisseur')
+      await login(form.email, form.password)
+      const stored = JSON.parse(localStorage.getItem('golden_user') ?? '{}')
+      navigate(stored.role === 'porteur' ? '/porteur' : '/investisseur')
     } catch {
       setError('Email ou mot de passe incorrect.')
     } finally {
