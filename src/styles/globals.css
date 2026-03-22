@@ -33,24 +33,24 @@
   --danger:        #E05C5C;
 }
 
-/* ── MODE JOUR — Ardoise & Platine ── */
+/* ── MODE JOUR — Savane Claire ── */
 [data-theme="light"] {
-  --primary:       #2D3748;
-  --primary-light: #4A5568;
-  --primary-pale:  rgba(45,55,72,0.08);
-  --gold:          #2D3748;
-  --gold-light:    #4A5568;
-  --gold-pale:     rgba(45,55,72,0.06);
-  --dark:          #F8F9FA;
-  --dark-2:        #EDF2F7;
-  --dark-3:        #E2E8F0;
-  --dark-4:        #CBD5E0;
-  --text:          #1A202C;
-  --text-muted:    #718096;
-  --text-dim:      #A0AEC0;
-  --border:        rgba(45,55,72,0.12);
-  --border-bright: rgba(45,55,72,0.28);
-  --accent:        #4A90D9;
+  --primary:       #8B4513;
+  --primary-light: #D4893A;
+  --primary-pale:  rgba(139,69,19,0.08);
+  --gold:          #8B4513;
+  --gold-light:    #D4893A;
+  --gold-pale:     rgba(139,69,19,0.06);
+  --dark:          #FAF7F2;
+  --dark-2:        #F0EAE0;
+  --dark-3:        #E8DDD0;
+  --dark-4:        #DDD0C0;
+  --text:          #1A1208;
+  --text-muted:    #8B7355;
+  --text-dim:      #B8A898;
+  --border:        rgba(139,69,19,0.15);
+  --border-bright: rgba(139,69,19,0.35);
+  --accent:        #D4893A;
   --success:       #38A169;
   --danger:        #E53E3E;
 }
