@@ -390,3 +390,24 @@ body {
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
 }
+
+/* ── Mode jour — overrides spécifiques ── */
+[data-theme="light"] body {
+  background: var(--dark);
+  color: var(--text);
+}
+[data-theme="light"] nav {
+  background: rgba(250,247,242,0.97) !important;
+  border-bottom: 1px solid rgba(139,69,19,0.15) !important;
+}
+[data-theme="light"] nav a,
+[data-theme="light"] nav span,
+[data-theme="light"] nav button {
+  color: var(--text) !important;
+}
+[data-theme="light"] .section-title,
+[data-theme="light"] h1,
+[data-theme="light"] h2,
+[data-theme="light"] h3 {
+  color: var(--text) !important;
+}
