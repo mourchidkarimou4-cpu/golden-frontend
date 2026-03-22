@@ -6,11 +6,11 @@ import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useScrollReveal } from '@/hooks/useCountUp'
 
 const HERO_SLIDES = [
-  { url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=80&auto=format&fit=crop', label: 'Entrepreneurs africains', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=80&auto=format&fit=crop', label: 'Équipes qui innovent', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1600&q=80&auto=format&fit=crop', label: 'Vision & Leadership', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=80&auto=format&fit=crop', label: 'Investisseurs de confiance', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=80&auto=format&fit=crop', label: 'Partenariats solides', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=1600&q=90&auto=format&fit=crop', label: 'Entrepreneurs africains', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?w=1600&q=90&auto=format&fit=crop', label: 'Équipes qui innovent', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=90&auto=format&fit=crop', label: 'Vision & Leadership', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1600&q=90&auto=format&fit=crop', label: 'Investisseurs de confiance', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1556761175-4b46d72b3c5b?w=1600&q=90&auto=format&fit=crop', label: 'Partenariats solides', position: 'center' },
 ]
 
 const HOW_SLIDES = [
