@@ -147,7 +147,7 @@ export default function RegisterPage() {
                     { val: 'porteur', label: '💡 Porteur de projet' },
                     { val: 'investisseur', label: '💰 Investisseur' },
                   ].map(r => (
-                    <div key={r.val} onClick={() => setForm(f => ({ ...f, role: r.val }))} style={{
+                    <div key={r.val} onClick={() => setForm(f => ({ ...f, role: r.val as 'porteur' | 'investisseur' }))} style={{
                       padding: '12px 14px', cursor: 'pointer',
                       background: form.role === r.val ? 'rgba(201,168,76,.1)' : 'rgba(255,255,255,.03)',
                       border: `1px solid ${form.role === r.val ? '#C9A84C' : 'rgba(201,168,76,.2)'}`,
