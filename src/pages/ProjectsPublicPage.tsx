@@ -15,7 +15,7 @@ export default function ProjectsPublicPage() {
   const [search, setSearch] = useState('')
 
   useEffect(() => {
-    projectsAPI.list?.({ status: 'published' })
+    projectsAPI.list?.({})
       .then((r: any) => setProjects(r.data?.results ?? r.data ?? []))
       .catch(() => setProjects([]))
       .finally(() => setLoading(false))
