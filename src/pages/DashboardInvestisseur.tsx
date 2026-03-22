@@ -5,6 +5,7 @@ import DashboardLayout from '@/components/layout/DashboardLayout'
 import { KpiCard, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
 import { investmentsAPI, matchingAPI, reportingAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useScrollReveal } from '@/hooks/useCountUp'
 import InvestModal from '@/components/dashboard/InvestModal'
 
 const NAV_ITEMS = [
@@ -23,6 +24,7 @@ const SECTOR_COLORS = ['#C9A84C','#E8C97A','#8B7535','#F5E9C8','#6B5A2A','#A0804
 
 export default function DashboardInvestisseur() {
   const isMobile = useIsMobile()
+  useScrollReveal()
   const navigate = useNavigate()
   const [dashboard, setDashboard]   = useState<any>(null)
   const [recommendations, setRecos] = useState<any[]>([])
@@ -100,7 +102,7 @@ export default function DashboardInvestisseur() {
 
       {/* ── Répartition sectorielle ───────────────── */}
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '280px 1fr', gap: 24, marginBottom: 28 }}>
-        <div className="kpi-card" style={{ padding: 24 }}>
+        <div className="kpi-card card-hover" style={{ padding: 24 }}>
           <SectionLabel>Répartition sectorielle</SectionLabel>
           {donutData.length === 0 ? (
             <p style={{ color: 'var(--text-muted)', fontSize: 13, textAlign: 'center', padding: '32px 0' }}>
@@ -147,7 +149,7 @@ export default function DashboardInvestisseur() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', gap: 16 }}>
             {filteredRecos.length > 0 ? filteredRecos.slice(0, 4).map((p: any) => (
-              <div key={p.id} className="kpi-card" style={{ padding: 20 }}>
+              <div key={p.id} className="kpi-card card-hover" style={{ padding: 20 }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
                   <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 18, fontWeight: 400 }}>{p.title}</h3>
                   <span style={{ fontSize: 10, padding: '2px 8px', background: 'rgba(201,168,76,0.1)', color: 'var(--gold)', letterSpacing: '0.08em' }}>
@@ -184,7 +186,7 @@ export default function DashboardInvestisseur() {
       </div>
 
       {/* ── Portefeuille récent ──────────────────────── */}
-      <div className="kpi-card" style={{ padding: 24 }}>
+      <div className="kpi-card card-hover" style={{ padding: 24 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
           <SectionLabel>Mon portefeuille</SectionLabel>
           <button className="btn-gold-sm" style={{ fontSize: 10 }} onClick={() => navigate('/investisseur/portfolio')}>

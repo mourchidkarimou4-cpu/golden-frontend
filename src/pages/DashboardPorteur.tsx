@@ -6,6 +6,7 @@ import DashboardLayout from '@/components/layout/DashboardLayout'
 import { KpiCard, ProgressBar, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
 import { useAuth } from '@/lib/auth'
+import { useScrollReveal } from '@/hooks/useCountUp'
 
 const NAV_ITEMS = [
   { icon: '⊞', label: 'Vue d\'ensemble',     to: '/porteur' },
@@ -24,6 +25,7 @@ const NAV_ITEMS = [
 
 export default function DashboardPorteur() {
   const { user } = useAuth()
+  useScrollReveal()
   const isMobile = useIsMobile()
   const location = useLocation()
   const currentPath = location.pathname
@@ -119,7 +121,7 @@ export default function DashboardPorteur() {
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24, marginBottom: 32 }}>
 
           {/* Carte projet */}
-          <div className="kpi-card" style={{ padding: 28 }}>
+          <div className="kpi-card card-hover" style={{ padding: 28 }}>
             {/* Onglets */}
             <div style={{ display: 'flex', gap: 0, marginBottom: 24, borderBottom: '1px solid var(--border)' }}>
               {(['apercu', 'activite', 'finances'] as const).map(tab => (
@@ -225,7 +227,7 @@ export default function DashboardPorteur() {
           </div>
 
           {/* Panel investisseurs intéressés */}
-          <div className="kpi-card" style={{ padding: 24 }}>
+          <div className="kpi-card card-hover" style={{ padding: 24 }}>
             <div style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)', marginBottom: 16 }}>
               Investisseurs intéressés
             </div>
@@ -259,7 +261,7 @@ export default function DashboardPorteur() {
 
         </div>
       ) : (
-        <div className="kpi-card" style={{ padding: 40, textAlign: 'center' }}>
+        <div className="kpi-card card-hover" style={{ padding: 40, textAlign: 'center' }}>
           <p style={{ color: 'var(--text-muted)', marginBottom: 20 }}>
             Vous n'avez pas encore de projet. Créez votre premier projet pour commencer.
           </p>

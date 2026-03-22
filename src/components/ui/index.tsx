@@ -1,4 +1,5 @@
 // src/components/ui/index.tsx
+export { KpiCard } from './KpiCard'
 // Composants UI réutilisables GOLDEN
 
 import { useEffect, useRef, ReactNode } from 'react'

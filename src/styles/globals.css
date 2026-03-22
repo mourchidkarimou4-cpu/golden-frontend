@@ -269,3 +269,83 @@ body {
 @media (max-width: 768px) {
   .sidebar-overlay.active { display: block; }
 }
+
+/* ═══════════════════════════════════════════════════════
+   ANIMATIONS GOLDEN
+═══════════════════════════════════════════════════════ */
+
+@keyframes fadeUp   { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+@keyframes fadeIn   { from{opacity:0} to{opacity:1} }
+@keyframes slideUp  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+@keyframes slideLeft{ from{opacity:0;transform:translateX(-16px)} to{opacity:1;transform:translateX(0)} }
+@keyframes pulse-gold { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.6;transform:scale(.85)} }
+@keyframes shimmer  { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
+@keyframes glowPip  { 0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.5)} 50%{box-shadow:0 0 0 6px rgba(201,168,76,0)} }
+
+/* Entrée des éléments */
+.anim-fade-up    { animation: fadeUp  .6s ease both; }
+.anim-fade-in    { animation: fadeIn  .5s ease both; }
+.anim-slide-up   { animation: slideUp .5s ease both; }
+.anim-slide-left { animation: slideLeft .5s ease both; }
+
+/* Délais en cascade */
+.delay-1 { animation-delay: .08s; }
+.delay-2 { animation-delay: .16s; }
+.delay-3 { animation-delay: .24s; }
+.delay-4 { animation-delay: .32s; }
+.delay-5 { animation-delay: .40s; }
+.delay-6 { animation-delay: .48s; }
+
+/* Hover sur cartes */
+.card-hover {
+  transition: border-color .25s, transform .25s;
+  position: relative; overflow: hidden;
+}
+.card-hover::before {
+  content: '';
+  position: absolute; left: 0; top: 0; bottom: 0;
+  width: 2px; background: var(--gold);
+  transform: scaleY(0); transform-origin: bottom;
+  transition: transform .3s;
+}
+.card-hover::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  opacity: 0; transition: opacity .3s;
+}
+.card-hover:hover { border-color: var(--border-bright) !important; transform: translateY(-3px); }
+.card-hover:hover::before { transform: scaleY(1); }
+.card-hover:hover::after  { opacity: 1; }
+
+/* Pulse badge match */
+.badge-pulse { animation: pulse-gold 1.8s ease-in-out infinite; }
+
+/* Pip de notification */
+.notif-pip-anim { animation: glowPip 2s ease-in-out infinite; }
+
+/* Transition de page */
+.page-enter { animation: fadeUp .5s ease both; }
+
+/* Scroll reveal */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.reveal.from-left { transform:translateX(-28px); }
+.reveal.from-left.visible { transform:translateX(0); }
+
+/* Shimmer sur skeleton loading */
+.skeleton {
+  background: var(--dark-4);
+  position: relative; overflow: hidden;
+}
+.skeleton::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(201,168,76,.06), transparent);
+  animation: shimmer 1.5s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

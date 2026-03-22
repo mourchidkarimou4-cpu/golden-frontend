@@ -21,6 +21,7 @@ const STATS = [
 export default function LandingPage() {
   const navRef = useRef<HTMLElement>(null)
   const isMobile = useIsMobile()
+  useScrollReveal()
   const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
