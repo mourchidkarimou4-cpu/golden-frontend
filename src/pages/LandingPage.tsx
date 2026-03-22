@@ -110,12 +110,12 @@ export default function LandingPage() {
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
           <ThemeToggle />
           <Link to="/login" style={{
-            fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none',
-            letterSpacing: '0.08em', textTransform: 'uppercase',
-          }}>Connexion</Link>
-          <Link to="/register" className="btn-gold-sm" style={{ fontSize: 11 }}>
-            {isMobile ? 'Commencer' : 'Commencer →'}
-          </Link>
+            padding: '8px 20px', border: '1px solid var(--gold)',
+            color: 'var(--gold)', textDecoration: 'none',
+            fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
+            transition: 'all .2s',
+          }}>Connexion →</Link>
+
           {isMobile && (
             <button onClick={() => setMenuOpen(!menuOpen)} style={{
               background: 'none', border: 'none', color: 'var(--text-muted)',
