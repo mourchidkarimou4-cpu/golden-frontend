@@ -68,6 +68,11 @@ export default function ParametresPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Paramètres" subtitle="Gérez votre compte">
+      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
+        <span style={{ color: 'var(--text-dim)' }}>|</span>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
 
         {/* Colonne gauche */}

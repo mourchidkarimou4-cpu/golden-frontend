@@ -1,6 +1,7 @@
 // src/pages/porteur/ActivitePage.tsx
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 
 const NAV_ITEMS = [
   { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
@@ -29,9 +30,15 @@ const ACTIVITIES = [
 ]
 
 export default function ActivitePage() {
+  const isMobile = useIsMobile()
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Activité" subtitle="Historique de votre compte">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
+        <span style={{ color: 'var(--text-dim)' }}>|</span>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
+      </div>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 28 }}>
           <SectionLabel>Activité récente</SectionLabel>
           {ACTIVITIES.map((a, i) => (

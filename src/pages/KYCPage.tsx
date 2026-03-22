@@ -75,6 +75,11 @@ export default function KYCPage() {
       <div style={{ maxWidth: 560, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 48 }}>
           <GoldenLogo />
+          <button onClick={() => navigate(-1 as any)} style={{
+            background: 'none', border: 'none', color: 'var(--text-muted)',
+            fontSize: 12, cursor: 'pointer', letterSpacing: '.08em',
+            textTransform: 'uppercase', fontFamily: 'inherit',
+          }}>← Retour</button>
         </div>
 
         <SectionLabel>Vérification KYC</SectionLabel>

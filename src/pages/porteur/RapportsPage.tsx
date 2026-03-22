@@ -37,6 +37,11 @@ export default function RapportsPage() {
 
   if (loading) return (
     <DashboardLayout navItems={NAV_ITEMS} title="Rapports">
+      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
+        <span style={{ color: 'var(--text-dim)' }}>|</span>
+        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
+      </div>
       <GoldenSpinner />
     </DashboardLayout>
   )

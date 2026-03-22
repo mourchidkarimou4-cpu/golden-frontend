@@ -14,6 +14,7 @@ import DashboardInvestisseur from '@/pages/DashboardInvestisseur'
 import MessagesPage          from '@/pages/MessagesPage'
 import CreateProjectPage     from '@/pages/CreateProjectPage'
 import AboutPage             from '@/pages/AboutPage'
+import ProjectsPublicPage    from '@/pages/ProjectsPublicPage'
 
 import MonProjetPage         from '@/pages/porteur/MonProjetPage'
 import InvestisseursPage     from '@/pages/porteur/InvestisseursPage'
@@ -52,6 +53,7 @@ function AppRoutes() {
     <Routes>
       <Route path="/"         element={<LandingPage />} />
       <Route path="/about"     element={<AboutPage />} />
+      <Route path="/projets"    element={<ProjectsPublicPage />} />
       <Route path="/login"    element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route path="/kyc"      element={<PrivateRoute><KYCPage /></PrivateRoute>} />

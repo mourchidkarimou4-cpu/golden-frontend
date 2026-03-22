@@ -68,8 +68,9 @@ export default function PortfolioPage() {
         {/* Graphique */}
         <div className="kpi-card" style={{ padding: 28 }}>
           <SectionLabel>Évolution du portfolio (6 mois)</SectionLabel>
+          {investments.length === 0 && <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-muted)', fontSize: 13 }}>Aucun investissement pour le moment.</div>}
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 160, marginTop: 24, marginBottom: 16 }}>
-            {mockData.map((v, i) => (
+            {investments.length > 0 && mockData.map((v, i) => (
               <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
                 <div style={{
                   width: '100%', height: `${(v/maxVal)*140}px`,

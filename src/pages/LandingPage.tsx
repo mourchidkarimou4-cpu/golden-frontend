@@ -92,7 +92,7 @@ export default function LandingPage() {
         {/* Desktop nav */}
         {!isMobile && (
           <ul style={{ display: 'flex', alignItems: 'center', gap: 40, listStyle: 'none' }}>
-            {[['#comment','Comment ça marche'],['#profils','Profils'],['#projets','Projets']].map(([href, label]) => (
+            {[['#comment','Comment ça marche'],['#profils','Profils'],['/projets','Projets']].map(([href, label]) => (
               <li key={href}>
                 <a href={href} style={{
                   color: 'var(--text-muted)', textDecoration: 'none',
@@ -108,6 +108,7 @@ export default function LandingPage() {
         )}
 
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <ThemeToggle />
           <Link to="/login" style={{
             fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none',
             letterSpacing: '0.08em', textTransform: 'uppercase',
@@ -142,7 +143,7 @@ export default function LandingPage() {
               fontSize: 24, cursor: 'pointer',
             }}>✕</button>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-              {[['#comment','Comment ça marche'],['#profils','Profils'],['#projets','Projets']].map(([href, label]) => (
+              {[['#comment','Comment ça marche'],['#profils','Profils'],['/projets','Projets']].map(([href, label]) => (
                 <a key={href} href={href} onClick={() => setMenuOpen(false)} style={{
                   color: 'var(--text)', textDecoration: 'none',
                   fontSize: 18, fontFamily: '"Cormorant Garamond", serif',
@@ -434,7 +435,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── Footer Premium ──────────────────────────── */}
-      <footer style={{ background: '#070705', borderTop: '1px solid rgba(201,168,76,.15)', position: 'relative', overflow: 'hidden' }}>
+      <footer style={{ background: 'var(--dark)', borderTop: '1px solid rgba(201,168,76,.15)', position: 'relative', overflow: 'hidden' }}>
 
         {/* Top gold line */}
         <div style={{ height: 2, background: 'linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)' }} />
@@ -448,23 +449,23 @@ export default function LandingPage() {
               {/* Logo mark */}
               <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
                 <div style={{ width: 42, height: 42, border: '1px solid #C9A84C', transform: 'rotate(45deg)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
-                  <span style={{ transform: 'rotate(-45deg)', fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, color: '#C9A84C' }}>G</span>
+                  <span style={{ transform: 'rotate(-45deg)', fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, color: 'var(--gold)' }}>G</span>
                 </div>
                 <div>
-                  <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, letterSpacing: '.08em', color: '#F0EDE6' }}>GOLDEN</div>
-                  <div style={{ fontSize: 9, letterSpacing: '.22em', textTransform: 'uppercase', color: '#C9A84C', marginTop: 1 }}>Investissement</div>
+                  <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, letterSpacing: '.08em', color: 'var(--text)' }}>GOLDEN</div>
+                  <div style={{ fontSize: 9, letterSpacing: '.22em', textTransform: 'uppercase', color: 'var(--gold)', marginTop: 1 }}>Investissement</div>
                 </div>
               </div>
 
               {/* Tagline */}
-              <p style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 16, fontStyle: 'italic', fontWeight: 300, color: '#8A8070', lineHeight: 1.7, marginBottom: 24, maxWidth: 280 }}>
+              <p style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 16, fontStyle: 'italic', fontWeight: 300, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 24, maxWidth: 280 }}>
                 "Là où les visionnaires rencontrent les capitaux qui transforment l'Afrique."
               </p>
 
               {/* Location badge */}
-              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', border: '1px solid rgba(201,168,76,.2)', background: 'rgba(201,168,76,.04)' }}>
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', border: '1px solid rgba(201,168,76,.2)', background: 'var(--primary-pale)' }}>
                 <div style={{ width: 6, height: 6, background: '#3DD68C', borderRadius: '50%', animation: 'pulse-dot 2s infinite' }} />
-                <span style={{ fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', color: '#8A8070' }}>Cotonou, Bénin · Afrique de l'Ouest</span>
+                <span style={{ fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>Cotonou, Bénin · Afrique de l'Ouest</span>
               </div>
 
               {/* Social links */}
@@ -478,12 +479,12 @@ export default function LandingPage() {
                   <div key={s.label} title={s.title} style={{
                     width: 34, height: 34, border: '1px solid rgba(201,168,76,.2)',
                     display: 'grid', placeItems: 'center', cursor: 'pointer',
-                    fontSize: 10, color: '#6A5F48', letterSpacing: '.05em',
+                    fontSize: 10, color: 'var(--text-muted)', letterSpacing: '.05em',
                     transition: 'all .2s',
                     fontFamily: 'sans-serif',
                   }}
-                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor='#C9A84C'; (e.currentTarget as HTMLElement).style.color='#C9A84C' }}
-                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor='rgba(201,168,76,.2)'; (e.currentTarget as HTMLElement).style.color='#6A5F48' }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor='var(--gold)'; (e.currentTarget as HTMLElement).style.color='var(--gold)' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor='var(--border)'; (e.currentTarget as HTMLElement).style.color='var(--text-muted)' }}
                   >{s.label}</div>
                 ))}
               </div>
@@ -491,7 +492,7 @@ export default function LandingPage() {
 
             {/* Plateforme */}
             <div>
-              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
                 Plateforme
               </div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -505,12 +506,12 @@ export default function LandingPage() {
                 ].map(l => (
                   <li key={l}>
                     <a href="#" style={{
-                      fontSize: 12, color: '#6A5F48', textDecoration: 'none',
+                      fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none',
                       letterSpacing: '.04em', transition: 'color .2s',
                       display: 'flex', alignItems: 'center', gap: 6,
                     }}
-                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
-                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#6A5F48'}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--gold)'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='var(--text-muted)'}
                     >
                       <span style={{ width: 12, height: 1, background: 'currentColor', display: 'inline-block', flexShrink: 0 }} />
                       {l}
@@ -522,7 +523,7 @@ export default function LandingPage() {
 
             {/* Ressources */}
             <div>
-              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
                 Ressources
               </div>
               <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
@@ -536,12 +537,12 @@ export default function LandingPage() {
                 ].map(l => (
                   <li key={l}>
                     <a href="#" style={{
-                      fontSize: 12, color: '#6A5F48', textDecoration: 'none',
+                      fontSize: 12, color: 'var(--text-muted)', textDecoration: 'none',
                       letterSpacing: '.04em', transition: 'color .2s',
                       display: 'flex', alignItems: 'center', gap: 6,
                     }}
-                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
-                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#6A5F48'}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--gold)'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='var(--text-muted)'}
                     >
                       <span style={{ width: 12, height: 1, background: 'currentColor', display: 'inline-block', flexShrink: 0 }} />
                       {l}
@@ -553,10 +554,10 @@ export default function LandingPage() {
 
             {/* Newsletter */}
             <div>
-              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
                 Newsletter
               </div>
-              <p style={{ fontSize: 12, color: '#6A5F48', lineHeight: 1.7, marginBottom: 16 }}>
+              <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.7, marginBottom: 16 }}>
                 Recevez les meilleures opportunités d'investissement chaque semaine.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
@@ -566,22 +567,22 @@ export default function LandingPage() {
                   style={{
                     background: 'rgba(255,255,255,.03)',
                     border: '1px solid rgba(201,168,76,.2)',
-                    padding: '10px 14px', color: '#F0EDE6',
+                    padding: '10px 14px', color: 'var(--text)',
                     fontSize: 12, outline: 'none', fontFamily: 'inherit',
                     width: '100%',
                   }}
                   onFocus={e => (e.target as HTMLElement).style.borderColor='rgba(201,168,76,.5)'}
-                  onBlur={e => (e.target as HTMLElement).style.borderColor='rgba(201,168,76,.2)'}
+                  onBlur={e => (e.target as HTMLElement).style.borderColor='var(--border)'}
                 />
                 <button style={{
-                  background: '#C9A84C', color: '#070705',
+                  background: 'var(--gold)', color: 'var(--dark)',
                   border: 'none', padding: '10px', width: '100%',
                   fontSize: 10, letterSpacing: '.15em', textTransform: 'uppercase',
                   fontFamily: 'inherit', cursor: 'pointer', fontWeight: 500,
                   transition: 'background .2s',
                 }}
-                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background='#E8C97A'}
-                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background='#C9A84C'}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background='var(--gold-light)'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background='var(--gold)'}
                 >
                   S'abonner →
                 </button>
@@ -595,9 +596,9 @@ export default function LandingPage() {
                   { val: '98%', label: 'Satisfaction' },
                   { val: '4.2Mrd', label: 'Capital ₣' },
                 ].map(s => (
-                  <div key={s.label} style={{ padding: '10px', background: 'rgba(201,168,76,.04)', border: '1px solid rgba(201,168,76,.1)', textAlign: 'center' }}>
-                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 18, color: '#C9A84C', fontWeight: 300 }}>{s.val}</div>
-                    <div style={{ fontSize: 8, color: '#6A5F48', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: 2 }}>{s.label}</div>
+                  <div key={s.label} style={{ padding: '10px', background: 'var(--primary-pale)', border: '1px solid rgba(201,168,76,.1)', textAlign: 'center' }}>
+                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 18, color: 'var(--gold)', fontWeight: 300 }}>{s.val}</div>
+                    <div style={{ fontSize: 8, color: 'var(--text-muted)', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: 2 }}>{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -613,18 +614,18 @@ export default function LandingPage() {
           alignItems: 'center', justifyContent: 'space-between',
           gap: isMobile ? 12 : 0,
         }}>
-          <div style={{ fontSize: 10, color: '#3A3530', letterSpacing: '.06em' }}>
+          <div style={{ fontSize: 10, color: 'var(--text-dim)', letterSpacing: '.06em' }}>
             © 2026 GOLDEN Investissement. Tous droits réservés. · Plateforme réglementée BCEAO/UEMOA
           </div>
           <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
-            {['Mentions légales', 'Confidentialité', 'CGU', 'Cookies'].map(l => (
-              <a key={l} href="#" style={{
-                fontSize: 10, color: '#3A3530', textDecoration: 'none',
+            {[{l:'Mentions légales',h:'/about'},{l:'Confidentialité',h:'/about'},{l:'CGU',h:'/about'},{l:'Cookies',h:'/about'}].map(({l,h}) => (
+              <a key={l} href={h} style={{
+                fontSize: 10, color: 'var(--text-dim)', textDecoration: 'none',
                 letterSpacing: '.08em', textTransform: 'uppercase',
                 transition: 'color .2s',
               }}
-                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
-                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#3A3530'}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='var(--gold)'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='var(--text-dim)'}
               >{l}</a>
             ))}
           </div>

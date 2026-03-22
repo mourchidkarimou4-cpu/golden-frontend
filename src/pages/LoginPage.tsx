@@ -32,13 +32,13 @@ export default function LoginPage() {
     width: '100%', padding: '14px 16px',
     background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(201,168,76,0.2)',
-    color: '#F0EDE6', fontSize: 14, outline: 'none',
+    color: 'var(--text)', fontSize: 14, outline: 'none',
     fontFamily: 'inherit', transition: 'border-color .2s',
   }
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#0A0A0A',
+      minHeight: '100vh', background: 'var(--dark)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '20px', position: 'relative', overflow: 'hidden',
     }}>
@@ -64,7 +64,7 @@ export default function LoginPage() {
       {/* Card */}
       <div style={{
         width: '100%', maxWidth: 440,
-        background: '#111',
+        background: 'var(--dark-2)',
         border: '1px solid rgba(201,168,76,0.18)',
         padding: '48px 40px',
         position: 'relative', zIndex: 1,
@@ -89,15 +89,15 @@ export default function LoginPage() {
             <span style={{
               transform: 'rotate(-45deg)',
               fontFamily: '"Cormorant Garamond", serif',
-              fontSize: 22, fontWeight: 600, color: '#C9A84C',
+              fontSize: 22, fontWeight: 600, color: 'var(--gold)',
             }}>G</span>
           </div>
           <h1 style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 26, fontWeight: 300, color: '#F0EDE6',
+            fontSize: 26, fontWeight: 300, color: 'var(--text)',
             letterSpacing: '.06em', marginBottom: 6,
           }}>Connexion</h1>
-          <p style={{ fontSize: 13, color: '#8A8070', letterSpacing: '.04em' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)', letterSpacing: '.04em' }}>
             Bienvenue sur GOLDEN Investissement
           </p>
         </div>
@@ -114,7 +114,7 @@ export default function LoginPage() {
             <label style={{
               display: 'block', fontSize: 9,
               letterSpacing: '.18em', textTransform: 'uppercase',
-              color: '#8A8070', marginBottom: 8,
+              color: 'var(--text-muted)', marginBottom: 8,
             }}>Adresse email</label>
             <input
               type="email" required style={inp}
@@ -136,7 +136,7 @@ export default function LoginPage() {
             <label style={{
               display: 'block', fontSize: 9,
               letterSpacing: '.18em', textTransform: 'uppercase',
-              color: '#8A8070', marginBottom: 8,
+              color: 'var(--text-muted)', marginBottom: 8,
             }}>Mot de passe</label>
             <input
               type="password" required style={inp}
@@ -162,8 +162,8 @@ export default function LoginPage() {
             type="submit" disabled={loading}
             style={{
               width: '100%', padding: '14px',
-              background: loading ? 'rgba(201,168,76,.6)' : '#C9A84C',
-              color: '#0A0A0A', border: 'none',
+              background: loading ? 'rgba(201,168,76,.6)' : 'var(--gold)',
+              color: 'var(--dark)', border: 'none',
               fontFamily: 'inherit', fontSize: 12,
               fontWeight: 500, letterSpacing: '.12em',
               textTransform: 'uppercase', cursor: loading ? 'not-allowed' : 'pointer',
@@ -171,8 +171,8 @@ export default function LoginPage() {
               opacity: visible ? 1 : 0,
               transform: visible ? 'translateY(0)' : 'translateY(16px)',
             }}
-            onMouseEnter={e => { if (!loading) (e.target as HTMLElement).style.background = '#E8C97A' }}
-            onMouseLeave={e => { if (!loading) (e.target as HTMLElement).style.background = '#C9A84C' }}
+            onMouseEnter={e => { if (!loading) (e.target as HTMLElement).style.background = 'var(--gold-light)' }}
+            onMouseLeave={e => { if (!loading) (e.target as HTMLElement).style.background = 'var(--gold)' }}
           >
             {loading ? 'Connexion en cours...' : 'Se connecter →'}
           </button>
@@ -185,9 +185,9 @@ export default function LoginPage() {
           transition: 'opacity .5s .4s ease',
         }}>
           <div style={{ width: '100%', height: 1, background: 'rgba(201,168,76,.1)', marginBottom: 20 }} />
-          <p style={{ fontSize: 13, color: '#8A8070' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
             Pas encore de compte ?{' '}
-            <Link to="/register" style={{ color: '#C9A84C', textDecoration: 'none', fontWeight: 500 }}>
+            <Link to="/register" style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 500 }}>
               Créer un compte →
             </Link>
           </p>

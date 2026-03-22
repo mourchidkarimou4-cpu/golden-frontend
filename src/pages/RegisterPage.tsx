@@ -42,19 +42,19 @@ export default function RegisterPage() {
     width: '100%', padding: '13px 16px',
     background: 'rgba(255,255,255,0.04)',
     border: '1px solid rgba(201,168,76,0.2)',
-    color: '#F0EDE6', fontSize: 13, outline: 'none',
+    color: 'var(--text)', fontSize: 13, outline: 'none',
     fontFamily: 'inherit', transition: 'border-color .2s',
   }
 
   const lbl: React.CSSProperties = {
     display: 'block', fontSize: 9,
     letterSpacing: '.18em', textTransform: 'uppercase',
-    color: '#8A8070', marginBottom: 7,
+    color: 'var(--text-muted)', marginBottom: 7,
   }
 
   return (
     <div style={{
-      minHeight: '100vh', background: '#0A0A0A',
+      minHeight: '100vh', background: 'var(--dark)',
       display: 'flex', alignItems: 'center', justifyContent: 'center',
       padding: '20px', position: 'relative', overflow: 'hidden',
     }}>
@@ -80,7 +80,7 @@ export default function RegisterPage() {
       {/* Card */}
       <div style={{
         width: '100%', maxWidth: 500,
-        background: '#111',
+        background: 'var(--dark-2)',
         border: '1px solid rgba(201,168,76,0.18)',
         padding: '44px 40px',
         position: 'relative', zIndex: 1,
@@ -104,15 +104,15 @@ export default function RegisterPage() {
             <span style={{
               transform: 'rotate(-45deg)',
               fontFamily: '"Cormorant Garamond", serif',
-              fontSize: 20, fontWeight: 600, color: '#C9A84C',
+              fontSize: 20, fontWeight: 600, color: 'var(--gold)',
             }}>G</span>
           </div>
           <h1 style={{
             fontFamily: '"Cormorant Garamond", serif',
-            fontSize: 24, fontWeight: 300, color: '#F0EDE6',
+            fontSize: 24, fontWeight: 300, color: 'var(--text)',
             letterSpacing: '.06em', marginBottom: 6,
           }}>Créer un compte</h1>
-          <p style={{ fontSize: 12, color: '#8A8070' }}>
+          <p style={{ fontSize: 12, color: 'var(--text-muted)' }}>
             GOLDEN Investissement — Rejoignez la plateforme
           </p>
         </div>
@@ -123,13 +123,13 @@ export default function RegisterPage() {
             <div key={s} style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
               <div style={{
                 width: 28, height: 28, borderRadius: '50%',
-                border: `1px solid ${step >= s ? '#C9A84C' : 'rgba(201,168,76,.2)'}`,
+                border: `1px solid ${step >= s ? 'var(--gold)' : 'rgba(201,168,76,.2)'}`,
                 background: step >= s ? 'rgba(201,168,76,.15)' : 'transparent',
                 display: 'grid', placeItems: 'center',
-                fontSize: 11, color: step >= s ? '#C9A84C' : '#8A8070',
+                fontSize: 11, color: step >= s ? 'var(--gold)' : 'var(--text-muted)',
                 transition: 'all .3s',
               }}>{s}</div>
-              {s < 2 && <div style={{ width: 40, height: 1, background: step > 1 ? '#C9A84C' : 'rgba(201,168,76,.2)', transition: 'background .3s' }} />}
+              {s < 2 && <div style={{ width: 40, height: 1, background: step > 1 ? 'var(--gold)' : 'rgba(201,168,76,.2)', transition: 'background .3s' }} />}
             </div>
           ))}
         </div>
@@ -150,8 +150,8 @@ export default function RegisterPage() {
                     <div key={r.val} onClick={() => setForm(f => ({ ...f, role: r.val as 'porteur' | 'investisseur' }))} style={{
                       padding: '12px 14px', cursor: 'pointer',
                       background: form.role === r.val ? 'rgba(201,168,76,.1)' : 'rgba(255,255,255,.03)',
-                      border: `1px solid ${form.role === r.val ? '#C9A84C' : 'rgba(201,168,76,.2)'}`,
-                      color: form.role === r.val ? '#E8C97A' : '#8A8070',
+                      border: `1px solid ${form.role === r.val ? 'var(--gold)' : 'rgba(201,168,76,.2)'}`,
+                      color: form.role === r.val ? 'var(--gold-light)' : 'var(--text-muted)',
                       fontSize: 12, textAlign: 'center', transition: 'all .2s',
                     }}>{r.label}</div>
                   ))}
@@ -190,13 +190,13 @@ export default function RegisterPage() {
 
               <button type="button" onClick={() => { if (!form.first_name || !form.email) { setError('Remplissez les champs requis.'); return } setError(''); setStep(2) }} style={{
                 width: '100%', padding: '13px',
-                background: '#C9A84C', color: '#0A0A0A',
+                background: 'var(--gold)', color: 'var(--dark)',
                 border: 'none', fontFamily: 'inherit',
                 fontSize: 12, fontWeight: 500, letterSpacing: '.12em',
                 textTransform: 'uppercase', cursor: 'pointer', transition: 'background .2s',
               }}
-                onMouseEnter={e => (e.target as HTMLElement).style.background = '#E8C97A'}
-                onMouseLeave={e => (e.target as HTMLElement).style.background = '#C9A84C'}
+                onMouseEnter={e => (e.target as HTMLElement).style.background = 'var(--gold-light)'}
+                onMouseLeave={e => (e.target as HTMLElement).style.background = 'var(--gold)'}
               >
                 Continuer →
               </button>
@@ -225,9 +225,9 @@ export default function RegisterPage() {
                 background: 'rgba(201,168,76,.06)',
                 border: '1px solid rgba(201,168,76,.15)',
               }}>
-                <div style={{ fontSize: 10, color: '#8A8070', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 8 }}>Récapitulatif</div>
-                <div style={{ fontSize: 12, color: '#F0EDE6' }}>{form.first_name} {form.last_name}</div>
-                <div style={{ fontSize: 11, color: '#8A8070', marginTop: 3 }}>{form.email} · {form.role}</div>
+                <div style={{ fontSize: 10, color: 'var(--text-muted)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 8 }}>Récapitulatif</div>
+                <div style={{ fontSize: 12, color: 'var(--text)' }}>{form.first_name} {form.last_name}</div>
+                <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 3 }}>{form.email} · {form.role}</div>
               </div>
 
               {error && (
@@ -242,22 +242,22 @@ export default function RegisterPage() {
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 10 }}>
                 <button type="button" onClick={() => setStep(1)} style={{
                   padding: '13px', background: 'transparent',
-                  border: '1px solid rgba(201,168,76,.3)', color: '#8A8070',
+                  border: '1px solid rgba(201,168,76,.3)', color: 'var(--text-muted)',
                   fontFamily: 'inherit', fontSize: 12, cursor: 'pointer', transition: 'all .2s',
                 }}
-                  onMouseEnter={e => { (e.target as HTMLElement).style.borderColor = '#C9A84C'; (e.target as HTMLElement).style.color = '#C9A84C' }}
-                  onMouseLeave={e => { (e.target as HTMLElement).style.borderColor = 'rgba(201,168,76,.3)'; (e.target as HTMLElement).style.color = '#8A8070' }}
+                  onMouseEnter={e => { (e.target as HTMLElement).style.borderColor = 'var(--gold)'; (e.target as HTMLElement).style.color = 'var(--gold)' }}
+                  onMouseLeave={e => { (e.target as HTMLElement).style.borderColor = 'rgba(201,168,76,.3)'; (e.target as HTMLElement).style.color = 'var(--text-muted)' }}
                 >← Retour</button>
                 <button type="submit" disabled={loading} style={{
                   padding: '13px',
-                  background: loading ? 'rgba(201,168,76,.6)' : '#C9A84C',
-                  color: '#0A0A0A', border: 'none',
+                  background: loading ? 'rgba(201,168,76,.6)' : 'var(--gold)',
+                  color: 'var(--dark)', border: 'none',
                   fontFamily: 'inherit', fontSize: 12, fontWeight: 500,
                   letterSpacing: '.12em', textTransform: 'uppercase',
                   cursor: loading ? 'not-allowed' : 'pointer', transition: 'background .2s',
                 }}
-                  onMouseEnter={e => { if (!loading) (e.target as HTMLElement).style.background = '#E8C97A' }}
-                  onMouseLeave={e => { if (!loading) (e.target as HTMLElement).style.background = '#C9A84C' }}
+                  onMouseEnter={e => { if (!loading) (e.target as HTMLElement).style.background = 'var(--gold-light)' }}
+                  onMouseLeave={e => { if (!loading) (e.target as HTMLElement).style.background = 'var(--gold)' }}
                 >
                   {loading ? 'Création...' : 'Créer mon compte →'}
                 </button>
@@ -269,9 +269,9 @@ export default function RegisterPage() {
         {/* Footer */}
         <div style={{ marginTop: 24, textAlign: 'center' }}>
           <div style={{ width: '100%', height: 1, background: 'rgba(201,168,76,.1)', marginBottom: 18 }} />
-          <p style={{ fontSize: 13, color: '#8A8070' }}>
+          <p style={{ fontSize: 13, color: 'var(--text-muted)' }}>
             Déjà un compte ?{' '}
-            <Link to="/login" style={{ color: '#C9A84C', textDecoration: 'none', fontWeight: 500 }}>
+            <Link to="/login" style={{ color: 'var(--gold)', textDecoration: 'none', fontWeight: 500 }}>
               Se connecter →
             </Link>
           </p>

@@ -50,6 +50,11 @@ export default function ProfilPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Mon Profil" subtitle="Gérez vos informations personnelles">
+      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
+        <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
+        <span style={{ color: 'var(--text-dim)' }}>|</span>
+        <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
+      </div>
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 32 }}>
           <SectionLabel>Informations personnelles</SectionLabel>
