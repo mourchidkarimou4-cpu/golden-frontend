@@ -107,14 +107,16 @@ export default function LandingPage() {
           </ul>
         )}
 
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
           <ThemeToggle />
           <Link to="/login" style={{
-            padding: '8px 20px', border: '1px solid var(--gold)',
+            padding: isMobile ? '6px 12px' : '8px 20px',
+            border: '1px solid var(--gold)',
             color: 'var(--gold)', textDecoration: 'none',
-            fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
-            transition: 'all .2s',
-          }}>Connexion →</Link>
+            fontSize: isMobile ? 10 : 11,
+            letterSpacing: '.08em', textTransform: 'uppercase',
+            transition: 'all .2s', whiteSpace: 'nowrap',
+          }}>{isMobile ? 'Connexion' : 'Connexion →'}</Link>
 
           {isMobile && (
             <button onClick={() => setMenuOpen(!menuOpen)} style={{
@@ -152,14 +154,7 @@ export default function LandingPage() {
                 }}>{label}</a>
               ))}
             </div>
-            <div style={{ marginTop: 40, display: 'flex', flexDirection: 'column', gap: 12 }}>
-              <Link to="/login" className="btn-outline" onClick={() => setMenuOpen(false)}>
-                Se connecter
-              </Link>
-              <Link to="/register" className="btn-primary" onClick={() => setMenuOpen(false)}>
-                Créer un compte
-              </Link>
-            </div>
+
           </div>
         </>
       )}
