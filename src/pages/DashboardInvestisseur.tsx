@@ -15,6 +15,7 @@ const NAV_ITEMS = [
   { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
   { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
   { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
+  { icon: '🪪', label: 'KYC', to: '/kyc' },
   { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
 ]
 

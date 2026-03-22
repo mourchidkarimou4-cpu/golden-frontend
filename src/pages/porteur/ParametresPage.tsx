@@ -17,6 +17,7 @@ const NAV_ITEMS = [
   { icon: '₣', label: 'Finances',        to: '/porteur/finances' },
   { icon: '◫', label: 'Rapports',        to: '/porteur/rapports' },
   { icon: '◯', label: 'Mon profil',      to: '/porteur/profil' },
+  { icon: '🪪', label: 'KYC', to: '/kyc' },
   { icon: '⊙', label: 'Paramètres',     to: '/porteur/parametres' },
 ]
 
