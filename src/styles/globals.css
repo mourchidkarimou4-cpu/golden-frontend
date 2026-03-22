@@ -396,9 +396,11 @@ body {
   background: var(--dark);
   color: var(--text);
 }
-[data-theme="light"] nav {
+[data-theme="light"] nav,
+[data-theme="light"] header {
   background: rgba(250,247,242,0.97) !important;
   border-bottom: 1px solid rgba(139,69,19,0.15) !important;
+  color: var(--text) !important;
 }
 [data-theme="light"] nav a,
 [data-theme="light"] nav span,
