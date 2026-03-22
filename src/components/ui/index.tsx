@@ -96,47 +96,6 @@ export function SectionLabel({ children }: { children: ReactNode }) {
   )
 }
 
-// ── KPI Card ──────────────────────────────────────────────
-interface KpiCardProps {
-  label:    string
-  value:    string | number
-  sub?:     string
-  trend?:   string
-  trendUp?: boolean
-  icon?:    string
-}
-
-export function KpiCard({ label, value, sub, trend, trendUp, icon }: KpiCardProps) {
-  return (
-    <div className="kpi-card">
-      <div className="flex items-start justify-between mb-3">
-        <span style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
-          {label}
-        </span>
-        {icon && (
-          <div style={{
-            width: 28, height: 28,
-            border: '1px solid var(--border)',
-            display: 'grid', placeItems: 'center',
-            fontSize: 13, color: 'var(--gold)',
-          }}>{icon}</div>
-        )}
-      </div>
-      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 36, fontWeight: 300, lineHeight: 1, color: 'var(--gold-light)' }}>
-        {value}
-      </div>
-      {trend && (
-        <span style={{ fontSize: 11, color: trendUp ? '#4ade80' : 'var(--text-muted)', marginTop: 6, display: 'block' }}>
-          {trend}
-        </span>
-      )}
-      {sub && (
-        <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 4 }}>{sub}</div>
-      )}
-    </div>
-  )
-}
-
 // ── Gold Divider ──────────────────────────────────────────
 export function GoldDivider() {
   return <div style={{ width: '100%', height: 1, background: 'var(--border)' }} />

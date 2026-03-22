@@ -3,6 +3,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GoldenLogo, SectionLabel } from '@/components/ui'
 import { useIsMobile } from '@/hooks/useBreakpoint'
+import { useScrollReveal } from '@/hooks/useCountUp'
 
 const STEPS = [
   { num: '01', title: 'Créez votre profil vérifié', desc: "Inscription sécurisée avec vérification d'identité KYC. Porteur ou investisseur — chaque profil est validé par notre équipe." },
