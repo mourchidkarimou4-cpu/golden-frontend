@@ -351,12 +351,12 @@ export default function LandingPage() {
               transition: 'border-color .4s',
             }}>
               {/* Slideshow card */}
-              <div style={{ marginBottom: 20 }}>
+              <div style={{ marginBottom: 20, height: 160, overflow: 'hidden' }}>
                 <Slideshow
                   images={card.num === '01' ? PORTEUR_SLIDES : INVEST_SLIDES}
                   height={160}
                   interval={card.num === '01' ? 4000 : 4500}
-                  overlay="linear-gradient(to bottom, rgba(6,6,4,.2) 0%, rgba(6,6,4,.85) 100%)"
+                  overlay="linear-gradient(to bottom, rgba(6,6,4,.1) 0%, rgba(6,6,4,.5) 100%)"
                 />
               </div>
               <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: isMobile ? 48 : 80, fontWeight: 300, color: 'var(--text-dim)', lineHeight: 1, display: 'block', marginBottom: 20 }}>{card.num}</span>

@@ -13,6 +13,8 @@
 
 /* ── MODE NUIT — Nuit de Dakar ── */
 [data-theme="dark"], :root {
+  --nav-bg:        rgba(10,14,26,0.95);
+  --nav-border:    rgba(184,115,51,0.12);
   --primary:       #B87333;
   --primary-light: #D4956A;
   --primary-pale:  rgba(184,115,51,0.1);
@@ -35,6 +37,8 @@
 
 /* ── MODE JOUR — Savane Claire ── */
 [data-theme="light"] {
+  --nav-bg:        rgba(250,247,242,0.95);
+  --nav-border:    rgba(139,69,19,0.12);
   --primary:       #8B4513;
   --primary-light: #D4893A;
   --primary-pale:  rgba(139,69,19,0.08);
