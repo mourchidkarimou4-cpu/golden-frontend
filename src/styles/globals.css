@@ -6,21 +6,53 @@
 
 /* ── Design tokens GOLDEN ─────────────────────────────── */
 :root {
-  --gold:          #C9A84C;
-  --gold-light:    #E8C97A;
-  --gold-pale:     #F5E9C8;
-  --dark:          #0A0A0A;
-  --dark-2:        #111111;
-  --dark-3:        #1A1A1A;
-  --dark-4:        #222222;
-  --text:          #F0EDE6;
-  --text-muted:    #8A8070;
-  --text-dim:      #3A3530;
-  --border:        rgba(201,168,76,0.15);
-  --border-bright: rgba(201,168,76,0.35);
   --sidebar-w:     240px;
   --bottom-nav-h:  64px;
   --header-h:      60px;
+}
+
+/* ── MODE NUIT — Nuit de Dakar ── */
+[data-theme="dark"], :root {
+  --primary:       #B87333;
+  --primary-light: #D4956A;
+  --primary-pale:  rgba(184,115,51,0.1);
+  --gold:          #B87333;
+  --gold-light:    #D4956A;
+  --gold-pale:     rgba(184,115,51,0.08);
+  --dark:          #0A0E1A;
+  --dark-2:        #0F1628;
+  --dark-3:        #162040;
+  --dark-4:        #1E2A50;
+  --text:          #E8EEF8;
+  --text-muted:    #5A7AAA;
+  --text-dim:      #2A3558;
+  --border:        rgba(184,115,51,0.15);
+  --border-bright: rgba(184,115,51,0.35);
+  --accent:        #4A90D9;
+  --success:       #3DD68C;
+  --danger:        #E05C5C;
+}
+
+/* ── MODE JOUR — Ardoise & Platine ── */
+[data-theme="light"] {
+  --primary:       #2D3748;
+  --primary-light: #4A5568;
+  --primary-pale:  rgba(45,55,72,0.08);
+  --gold:          #2D3748;
+  --gold-light:    #4A5568;
+  --gold-pale:     rgba(45,55,72,0.06);
+  --dark:          #F8F9FA;
+  --dark-2:        #EDF2F7;
+  --dark-3:        #E2E8F0;
+  --dark-4:        #CBD5E0;
+  --text:          #1A202C;
+  --text-muted:    #718096;
+  --text-dim:      #A0AEC0;
+  --border:        rgba(45,55,72,0.12);
+  --border-bright: rgba(45,55,72,0.28);
+  --accent:        #4A90D9;
+  --success:       #38A169;
+  --danger:        #E53E3E;
 }
 
 /* ── Reset ────────────────────────────────────────────── */
@@ -35,9 +67,14 @@ body {
 }
 
 /* ── Cursor personnalisé (desktop only) ───────────────── */
-@media (min-width: 769px) {
+@media (min-width: 1024px) {
   body { cursor: none; }
   a, button, [role="button"] { cursor: none; }
+}
+@media (max-width: 1023px) {
+  body { cursor: auto !important; }
+  a, button, [role="button"] { cursor: pointer !important; }
+  .golden-cursor, .golden-cursor-ring { display: none !important; }
 }
 
 /* ── Scrollbar ────────────────────────────────────────── */

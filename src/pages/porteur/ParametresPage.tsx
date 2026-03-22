@@ -3,6 +3,7 @@ import { useState } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 import { authAPI } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 
@@ -29,6 +30,7 @@ const inputStyle: React.CSSProperties = {
 
 export default function ParametresPage() {
   const { logout } = useAuth()
+  const isMobile = useIsMobile()
   const navigate = useNavigate()
   const [pwForm, setPwForm] = useState({ old_password: '', new_password: '', confirm: '' })
   const [pwError, setPwError] = useState('')
@@ -66,7 +68,7 @@ export default function ParametresPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Paramètres" subtitle="Gérez votre compte">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
 
         {/* Colonne gauche */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>

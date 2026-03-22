@@ -1,5 +1,7 @@
 // src/components/ui/index.tsx
 export { KpiCard } from './KpiCard'
+export { Slideshow } from './Slideshow'
+export { ThemeToggle } from './ThemeToggle'
 // Composants UI réutilisables GOLDEN
 
 import { useEffect, useRef, ReactNode } from 'react'
@@ -34,6 +36,8 @@ export function GoldenCursor() {
     return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf) }
   }, [])
 
+  const isMobile = window.innerWidth < 1024
+  if (isMobile) return null
   return (
     <>
       <div ref={dot}  className="cursor-dot"  style={{

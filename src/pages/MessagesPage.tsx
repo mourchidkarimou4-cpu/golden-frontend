@@ -30,7 +30,14 @@ export default function MessagesPage() {
 
       {/* ── Liste des threads ────────────────────── */}
       <div style={{ borderRight: '1px solid var(--border)', overflowY: 'auto' }}>
-        <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)' }}>
+        <div style={{ padding: '16px 20px', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: 12 }}>
+          {isMobile && activeThread && (
+            <button onClick={() => setActiveThread(null)} style={{
+              background: 'none', border: 'none', color: 'var(--gold)',
+              fontSize: 18, cursor: 'pointer', padding: '0 4px',
+              flexShrink: 0,
+            }}>←</button>
+          )}
           <span style={{ fontSize: 10, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-muted)' }}>
             Messages
           </span>

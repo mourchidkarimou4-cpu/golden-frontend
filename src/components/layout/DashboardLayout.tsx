@@ -1,5 +1,6 @@
 // src/components/layout/DashboardLayout.tsx
 import { ReactNode, useState, useEffect } from 'react'
+import { ThemeToggle } from '@/components/ui'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { GoldenLogo } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
@@ -146,6 +147,7 @@ export default function DashboardLayout({
           borderBottom: '1px solid var(--border)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+            <ThemeToggle />
             {isMobile && (
               <button onClick={() => setSidebarOpen(true)} style={{
                 background: 'none', border: 'none',

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel } from '@/components/ui'
 import { projectsAPI } from '@/lib/api'
+import { useIsMobile } from '@/hooks/useBreakpoint'
 
 const NAV_ITEMS = [
   { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
@@ -28,6 +29,7 @@ const DOC_TYPES = [
 ]
 
 export default function DocumentsPage() {
+  const isMobile = useIsMobile()
   const [projects, setProjects] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [uploading, setUploading] = useState(false)
@@ -60,7 +62,7 @@ export default function DocumentsPage() {
 
   return (
     <DashboardLayout navItems={NAV_ITEMS} title="Documents" subtitle="Gérez les pièces de votre dossier">
-      <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 28 }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
             <SectionLabel>Documents soumis</SectionLabel>

@@ -1,5 +1,5 @@
 // src/App.tsx
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
 import { GoldenCursor } from '@/components/ui'
@@ -13,6 +13,7 @@ import DashboardPorteur      from '@/pages/DashboardPorteur'
 import DashboardInvestisseur from '@/pages/DashboardInvestisseur'
 import MessagesPage          from '@/pages/MessagesPage'
 import CreateProjectPage     from '@/pages/CreateProjectPage'
+import AboutPage             from '@/pages/AboutPage'
 
 import MonProjetPage         from '@/pages/porteur/MonProjetPage'
 import InvestisseursPage     from '@/pages/porteur/InvestisseursPage'
@@ -50,6 +51,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/"         element={<LandingPage />} />
+      <Route path="/about"     element={<AboutPage />} />
       <Route path="/login"    element={<PublicRoute><LoginPage /></PublicRoute>} />
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route path="/kyc"      element={<PrivateRoute><KYCPage /></PrivateRoute>} />
@@ -82,6 +84,11 @@ function AppRoutes() {
 
 export default function App() {
   const [splashDone, setSplashDone] = useState(false)
+
+  useEffect(() => {
+    const saved = localStorage.getItem('golden_theme') ?? 'dark'
+    document.documentElement.setAttribute('data-theme', saved)
+  }, [])
   const handleDone = useCallback(() => setSplashDone(true), [])
 
   return (

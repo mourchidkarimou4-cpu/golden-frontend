@@ -1,9 +1,36 @@
 // src/pages/LandingPage.tsx
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { GoldenLogo, SectionLabel } from '@/components/ui'
+import { GoldenLogo, SectionLabel, Slideshow, ThemeToggle } from '@/components/ui'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useScrollReveal } from '@/hooks/useCountUp'
+
+const HERO_SLIDES = [
+  { url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=80&auto=format&fit=crop', label: 'Entrepreneurs africains', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=80&auto=format&fit=crop', label: 'Équipes qui innovent', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1600&q=80&auto=format&fit=crop', label: 'Vision & Leadership', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=1600&q=80&auto=format&fit=crop', label: 'Investisseurs de confiance', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=80&auto=format&fit=crop', label: 'Partenariats solides', position: 'center' },
+]
+
+const HOW_SLIDES = [
+  { url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=800&q=80&auto=format&fit=crop', label: 'Présentation de projet' },
+  { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80&auto=format&fit=crop', label: 'Analyse & due diligence' },
+  { url: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80&auto=format&fit=crop', label: 'Négociation & accord' },
+  { url: 'https://images.unsplash.com/photo-1560250097-0dc05329d0ea?w=800&q=80&auto=format&fit=crop', label: 'Signature & financement' },
+]
+
+const PORTEUR_SLIDES = [
+  { url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop', label: 'Porteur de projet', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=600&q=80&auto=format&fit=crop', label: 'Entrepreneur africain', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=600&q=80&auto=format&fit=crop', label: 'Vision & projet', position: 'center top' },
+]
+
+const INVEST_SLIDES = [
+  { url: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80&auto=format&fit=crop', label: 'Investisseur', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1556761175-4b46d72b3c5b?w=600&q=80&auto=format&fit=crop', label: 'Analyse de portefeuille', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop', label: 'Partenariat stratégique', position: 'center' },
+]
 
 const STEPS = [
   { num: '01', title: 'Créez votre profil vérifié', desc: "Inscription sécurisée avec vérification d'identité KYC. Porteur ou investisseur — chaque profil est validé par notre équipe." },
@@ -143,6 +170,16 @@ export default function LandingPage() {
         padding: isMobile ? '100px 24px 60px' : '140px 60px 80px',
         position: 'relative', overflow: 'hidden',
       }}>
+        {/* Hero Slideshow background */}
+        <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
+          <Slideshow
+            images={HERO_SLIDES}
+            height="100%"
+            interval={5000}
+            overlay="linear-gradient(135deg, rgba(6,6,4,.92) 0%, rgba(6,6,4,.75) 50%, rgba(201,168,76,.05) 100%)"
+            style={{ position: 'absolute', inset: 0 }}
+          />
+        </div>
         {/* BG circles - hidden on mobile for perf */}
         {!isMobile && [600,900,400].map((s,i) => (
           <div key={i} style={{
@@ -235,6 +272,29 @@ export default function LandingPage() {
         borderTop: '1px solid var(--border)',
         borderBottom: '1px solid var(--border)',
       }}>
+        {/* Photo banner */}
+        <div style={{
+          marginBottom: isMobile ? 40 : 60,
+          display: 'grid',
+          gridTemplateColumns: isMobile ? '1fr' : 'repeat(3,1fr)',
+          gap: 12, height: isMobile ? 180 : 220,
+        }}>
+          {[
+            { url: 'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?w=600&q=80&auto=format&fit=crop', label: 'Présentation de projet' },
+            { url: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80&auto=format&fit=crop', label: 'Négociation' },
+            { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&auto=format&fit=crop', label: 'Signature & accord' },
+          ].map((img, i) => (
+            <div key={i} style={{ position: 'relative', overflow: 'hidden', display: isMobile && i > 0 ? 'none' : 'block' }}>
+              <img src={img.url} alt={img.label} style={{ width: '100%', height: '100%', objectFit: 'cover', opacity: .55, transition: 'opacity .3s', display: 'block' }}
+                onMouseEnter={e => (e.target as HTMLImageElement).style.opacity='.75'}
+                onMouseLeave={e => (e.target as HTMLImageElement).style.opacity='.55'}
+              />
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(6,6,4,.8) 0%, transparent 60%)' }} />
+              <div style={{ position: 'absolute', bottom: 12, left: 14, fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', color: 'rgba(201,168,76,.8)' }}>{img.label}</div>
+              <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 2, background: 'linear-gradient(90deg, transparent, rgba(201,168,76,.4), transparent)' }} />
+            </div>
+          ))}
+        </div>
         <div style={{
           display: 'grid',
           gridTemplateColumns: isMobile ? '1fr' : '1fr 2fr',
@@ -294,6 +354,15 @@ export default function LandingPage() {
               border: '1px solid var(--border)',
               transition: 'border-color .4s',
             }}>
+              {/* Slideshow card */}
+              <div style={{ marginBottom: 20 }}>
+                <Slideshow
+                  images={card.num === '01' ? PORTEUR_SLIDES : INVEST_SLIDES}
+                  height={160}
+                  interval={card.num === '01' ? 4000 : 4500}
+                  overlay="linear-gradient(to bottom, rgba(6,6,4,.2) 0%, rgba(6,6,4,.85) 100%)"
+                />
+              </div>
               <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: isMobile ? 48 : 80, fontWeight: 300, color: 'var(--text-dim)', lineHeight: 1, display: 'block', marginBottom: 20 }}>{card.num}</span>
               <div style={{ display: 'inline-block', padding: '4px 12px', border: '1px solid var(--border-bright)', fontSize: 10, letterSpacing: '0.15em', textTransform: 'uppercase', color: 'var(--gold)', marginBottom: 16 }}>{card.tag}</div>
               <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: isMobile ? 22 : 28, fontWeight: 400, marginBottom: 12, lineHeight: 1.3 }}>{card.title}</h3>
@@ -364,27 +433,206 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── Footer ─────────────────────────────────── */}
-      <footer style={{
-        padding: isMobile ? '40px 24px' : '60px',
-        borderTop: '1px solid var(--border)',
-        display: 'flex',
-        flexDirection: isMobile ? 'column' : 'row',
-        alignItems: isMobile ? 'flex-start' : 'center',
-        justifyContent: 'space-between',
-        gap: isMobile ? 24 : 0,
-      }}>
-        <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 14, color: 'var(--text-muted)', letterSpacing: '0.1em' }}>
-          GOLDEN <span style={{ color: 'var(--gold)' }}>Investissement</span> &nbsp;·&nbsp; Cotonou, Bénin
+      {/* ── Footer Premium ──────────────────────────── */}
+      <footer style={{ background: '#070705', borderTop: '1px solid rgba(201,168,76,.15)', position: 'relative', overflow: 'hidden' }}>
+
+        {/* Top gold line */}
+        <div style={{ height: 2, background: 'linear-gradient(90deg, transparent, #C9A84C 30%, #E8C97A 50%, #C9A84C 70%, transparent)' }} />
+
+        {/* Main footer body */}
+        <div style={{ padding: isMobile ? '48px 24px 32px' : '72px 60px 48px' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '2fr 1fr 1fr 1fr', gap: isMobile ? 40 : 60 }}>
+
+            {/* Brand column */}
+            <div>
+              {/* Logo mark */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, marginBottom: 20 }}>
+                <div style={{ width: 42, height: 42, border: '1px solid #C9A84C', transform: 'rotate(45deg)', display: 'grid', placeItems: 'center', flexShrink: 0 }}>
+                  <span style={{ transform: 'rotate(-45deg)', fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, color: '#C9A84C' }}>G</span>
+                </div>
+                <div>
+                  <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, fontWeight: 600, letterSpacing: '.08em', color: '#F0EDE6' }}>GOLDEN</div>
+                  <div style={{ fontSize: 9, letterSpacing: '.22em', textTransform: 'uppercase', color: '#C9A84C', marginTop: 1 }}>Investissement</div>
+                </div>
+              </div>
+
+              {/* Tagline */}
+              <p style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 16, fontStyle: 'italic', fontWeight: 300, color: '#8A8070', lineHeight: 1.7, marginBottom: 24, maxWidth: 280 }}>
+                "Là où les visionnaires rencontrent les capitaux qui transforment l'Afrique."
+              </p>
+
+              {/* Location badge */}
+              <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 14px', border: '1px solid rgba(201,168,76,.2)', background: 'rgba(201,168,76,.04)' }}>
+                <div style={{ width: 6, height: 6, background: '#3DD68C', borderRadius: '50%', animation: 'pulse-dot 2s infinite' }} />
+                <span style={{ fontSize: 10, letterSpacing: '.12em', textTransform: 'uppercase', color: '#8A8070' }}>Cotonou, Bénin · Afrique de l'Ouest</span>
+              </div>
+
+              {/* Social links */}
+              <div style={{ display: 'flex', gap: 10, marginTop: 20 }}>
+                {[
+                  { label: 'Li', title: 'LinkedIn' },
+                  { label: 'Tw', title: 'Twitter / X' },
+                  { label: 'Fb', title: 'Facebook' },
+                  { label: 'Ig', title: 'Instagram' },
+                ].map(s => (
+                  <div key={s.label} title={s.title} style={{
+                    width: 34, height: 34, border: '1px solid rgba(201,168,76,.2)',
+                    display: 'grid', placeItems: 'center', cursor: 'pointer',
+                    fontSize: 10, color: '#6A5F48', letterSpacing: '.05em',
+                    transition: 'all .2s',
+                    fontFamily: 'sans-serif',
+                  }}
+                    onMouseEnter={e => { (e.currentTarget as HTMLElement).style.borderColor='#C9A84C'; (e.currentTarget as HTMLElement).style.color='#C9A84C' }}
+                    onMouseLeave={e => { (e.currentTarget as HTMLElement).style.borderColor='rgba(201,168,76,.2)'; (e.currentTarget as HTMLElement).style.color='#6A5F48' }}
+                  >{s.label}</div>
+                ))}
+              </div>
+            </div>
+
+            {/* Plateforme */}
+            <div>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+                Plateforme
+              </div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  'Comment ça marche',
+                  'Porteurs de projets',
+                  'Investisseurs',
+                  'Secteurs couverts',
+                  'Nos partenaires',
+                  'Témoignages',
+                ].map(l => (
+                  <li key={l}>
+                    <a href="#" style={{
+                      fontSize: 12, color: '#6A5F48', textDecoration: 'none',
+                      letterSpacing: '.04em', transition: 'color .2s',
+                      display: 'flex', alignItems: 'center', gap: 6,
+                    }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#6A5F48'}
+                    >
+                      <span style={{ width: 12, height: 1, background: 'currentColor', display: 'inline-block', flexShrink: 0 }} />
+                      {l}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Ressources */}
+            <div>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+                Ressources
+              </div>
+              <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: 12 }}>
+                {[
+                  "Centre d'aide",
+                  'Documentation API',
+                  'Blog et Actualites',
+                  'Guide investisseur',
+                  'Rapport annuel',
+                  'Presse & Médias',
+                ].map(l => (
+                  <li key={l}>
+                    <a href="#" style={{
+                      fontSize: 12, color: '#6A5F48', textDecoration: 'none',
+                      letterSpacing: '.04em', transition: 'color .2s',
+                      display: 'flex', alignItems: 'center', gap: 6,
+                    }}
+                      onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
+                      onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#6A5F48'}
+                    >
+                      <span style={{ width: 12, height: 1, background: 'currentColor', display: 'inline-block', flexShrink: 0 }} />
+                      {l}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Newsletter */}
+            <div>
+              <div style={{ fontSize: 9, letterSpacing: '.2em', textTransform: 'uppercase', color: '#C9A84C', marginBottom: 20, paddingBottom: 10, borderBottom: '1px solid rgba(201,168,76,.1)' }}>
+                Newsletter
+              </div>
+              <p style={{ fontSize: 12, color: '#6A5F48', lineHeight: 1.7, marginBottom: 16 }}>
+                Recevez les meilleures opportunités d'investissement chaque semaine.
+              </p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                <input
+                  type="email"
+                  placeholder="votre@email.com"
+                  style={{
+                    background: 'rgba(255,255,255,.03)',
+                    border: '1px solid rgba(201,168,76,.2)',
+                    padding: '10px 14px', color: '#F0EDE6',
+                    fontSize: 12, outline: 'none', fontFamily: 'inherit',
+                    width: '100%',
+                  }}
+                  onFocus={e => (e.target as HTMLElement).style.borderColor='rgba(201,168,76,.5)'}
+                  onBlur={e => (e.target as HTMLElement).style.borderColor='rgba(201,168,76,.2)'}
+                />
+                <button style={{
+                  background: '#C9A84C', color: '#070705',
+                  border: 'none', padding: '10px', width: '100%',
+                  fontSize: 10, letterSpacing: '.15em', textTransform: 'uppercase',
+                  fontFamily: 'inherit', cursor: 'pointer', fontWeight: 500,
+                  transition: 'background .2s',
+                }}
+                  onMouseEnter={e => (e.currentTarget as HTMLElement).style.background='#E8C97A'}
+                  onMouseLeave={e => (e.currentTarget as HTMLElement).style.background='#C9A84C'}
+                >
+                  S'abonner →
+                </button>
+              </div>
+
+              {/* Stats rapides */}
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10, marginTop: 24 }}>
+                {[
+                  { val: '240+', label: 'Projets' },
+                  { val: '6', label: 'Pays' },
+                  { val: '98%', label: 'Satisfaction' },
+                  { val: '4.2Mrd', label: 'Capital ₣' },
+                ].map(s => (
+                  <div key={s.label} style={{ padding: '10px', background: 'rgba(201,168,76,.04)', border: '1px solid rgba(201,168,76,.1)', textAlign: 'center' }}>
+                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 18, color: '#C9A84C', fontWeight: 300 }}>{s.val}</div>
+                    <div style={{ fontSize: 8, color: '#6A5F48', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: 2 }}>{s.label}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
-        <ul style={{ display: 'flex', flexWrap: 'wrap', gap: isMobile ? 16 : 32, listStyle: 'none' }}>
-          {['À propos','Légal','Confidentialité','Contact'].map(l => (
-            <li key={l}>
-              <a href="#" style={{ fontSize: 11, color: 'var(--text-dim)', textDecoration: 'none', letterSpacing: '0.08em', textTransform: 'uppercase' }}>{l}</a>
-            </li>
-          ))}
-        </ul>
-        <div style={{ fontSize: 11, color: 'var(--text-dim)' }}>© 2026 GOLDEN Investissement</div>
+
+        {/* Bottom bar */}
+        <div style={{
+          borderTop: '1px solid rgba(201,168,76,.08)',
+          padding: isMobile ? '16px 24px' : '20px 60px',
+          display: 'flex', flexDirection: isMobile ? 'column' : 'row',
+          alignItems: 'center', justifyContent: 'space-between',
+          gap: isMobile ? 12 : 0,
+        }}>
+          <div style={{ fontSize: 10, color: '#3A3530', letterSpacing: '.06em' }}>
+            © 2026 GOLDEN Investissement. Tous droits réservés. · Plateforme réglementée BCEAO/UEMOA
+          </div>
+          <div style={{ display: 'flex', gap: 20, flexWrap: 'wrap' }}>
+            {['Mentions légales', 'Confidentialité', 'CGU', 'Cookies'].map(l => (
+              <a key={l} href="#" style={{
+                fontSize: 10, color: '#3A3530', textDecoration: 'none',
+                letterSpacing: '.08em', textTransform: 'uppercase',
+                transition: 'color .2s',
+              }}
+                onMouseEnter={e => (e.currentTarget as HTMLElement).style.color='#C9A84C'}
+                onMouseLeave={e => (e.currentTarget as HTMLElement).style.color='#3A3530'}
+              >{l}</a>
+            ))}
+          </div>
+        </div>
+
+        <style>{`
+          @keyframes pulse-dot { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.5;transform:scale(.7)} }
+        `}</style>
       </footer>
 
       <style>{`
