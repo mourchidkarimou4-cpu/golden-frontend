@@ -1,7 +1,9 @@
 // src/App.tsx
+import { useState, useCallback } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
 import { GoldenCursor } from '@/components/ui'
+import SplashScreen from '@/components/ui/SplashScreen'
 
 import LandingPage           from '@/pages/LandingPage'
 import LoginPage             from '@/pages/LoginPage'
@@ -12,7 +14,6 @@ import DashboardInvestisseur from '@/pages/DashboardInvestisseur'
 import MessagesPage          from '@/pages/MessagesPage'
 import CreateProjectPage     from '@/pages/CreateProjectPage'
 
-// Pages porteur
 import MonProjetPage         from '@/pages/porteur/MonProjetPage'
 import InvestisseursPage     from '@/pages/porteur/InvestisseursPage'
 import ActivitePage          from '@/pages/porteur/ActivitePage'
@@ -22,7 +23,6 @@ import RapportsPagePorteur   from '@/pages/porteur/RapportsPage'
 import ProfilPagePorteur     from '@/pages/porteur/ProfilPage'
 import ParametresPagePorteur from '@/pages/porteur/ParametresPage'
 
-// Pages investisseur
 import ProjetsPage           from '@/pages/investisseur/ProjetsPage'
 import PortfolioPage         from '@/pages/investisseur/PortfolioPage'
 import FavorisPage           from '@/pages/investisseur/FavorisPage'
@@ -33,7 +33,7 @@ import ParametresPageInv     from '@/pages/investisseur/ParametresPage'
 function PrivateRoute({ children, role }: { children: React.ReactNode; role?: string }) {
   const { user, loading } = useAuth()
   if (loading) return <div style={{ background: '#0A0A0A', minHeight: '100vh' }} />
-  if (!user)   return <Navigate to="/login" replace />
+  if (!user) return <Navigate to="/login" replace />
   if (role && user.role !== role)
     return <Navigate to={user.role === 'porteur' ? '/porteur' : '/investisseur'} replace />
   return <>{children}</>
@@ -54,7 +54,6 @@ function AppRoutes() {
       <Route path="/register" element={<PublicRoute><RegisterPage /></PublicRoute>} />
       <Route path="/kyc"      element={<PrivateRoute><KYCPage /></PrivateRoute>} />
 
-      {/* ── Porteur ── */}
       <Route path="/porteur"               element={<PrivateRoute role="porteur"><DashboardPorteur /></PrivateRoute>} />
       <Route path="/porteur/nouveau"       element={<PrivateRoute role="porteur"><CreateProjectPage /></PrivateRoute>} />
       <Route path="/porteur/messages"      element={<PrivateRoute role="porteur"><MessagesPage /></PrivateRoute>} />
@@ -67,7 +66,6 @@ function AppRoutes() {
       <Route path="/porteur/profil"        element={<PrivateRoute role="porteur"><ProfilPagePorteur /></PrivateRoute>} />
       <Route path="/porteur/parametres"    element={<PrivateRoute role="porteur"><ParametresPagePorteur /></PrivateRoute>} />
 
-      {/* ── Investisseur ── */}
       <Route path="/investisseur"                element={<PrivateRoute role="investisseur"><DashboardInvestisseur /></PrivateRoute>} />
       <Route path="/investisseur/messages"       element={<PrivateRoute role="investisseur"><MessagesPage /></PrivateRoute>} />
       <Route path="/investisseur/projets"        element={<PrivateRoute role="investisseur"><ProjetsPage /></PrivateRoute>} />
@@ -83,12 +81,18 @@ function AppRoutes() {
 }
 
 export default function App() {
+  const [splashDone, setSplashDone] = useState(false)
+  const handleDone = useCallback(() => setSplashDone(true), [])
+
   return (
     <AuthProvider>
-      <BrowserRouter>
-        <GoldenCursor />
-        <AppRoutes />
-      </BrowserRouter>
+      {!splashDone && <SplashScreen onDone={handleDone} />}
+      {splashDone && (
+        <BrowserRouter>
+          <GoldenCursor />
+          <AppRoutes />
+        </BrowserRouter>
+      )}
     </AuthProvider>
   )
 }
