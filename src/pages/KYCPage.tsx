@@ -1,5 +1,6 @@
 // src/pages/KYCPage.tsx
-import { useState } from 'react'
+import { useState , useRef} from 'react'
+import { CheckCircle, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { authAPI } from '@/lib/api'
 import { useAuth } from '@/lib/auth'
@@ -59,7 +60,7 @@ export default function KYCPage() {
   if (success) return (
     <div style={{ minHeight: '100vh', background: 'var(--dark)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ textAlign: 'center' }}>
-        <div style={{ fontSize: 48, marginBottom: 20, color: '#4ade80' }}>✓</div>
+        <CheckCircle size={48} strokeWidth={1.5} color='#4ade80' style={{ marginBottom: 20 }} />
         <h2 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 28, fontWeight: 300, marginBottom: 12 }}>
           Documents soumis avec succès
         </h2>
@@ -164,7 +165,7 @@ export default function KYCPage() {
                   />
                   {upload.file ? (
                     <div>
-                      <div style={{ color: '#4ade80', fontSize: 20, marginBottom: 6 }}>✓</div>
+                      <CheckCircle size={20} strokeWidth={1.5} color='#4ade80' style={{ marginBottom: 6 }} />
                       <div style={{ fontSize: 12, color: 'var(--text)' }}>{upload.file.name}</div>
                       <div style={{ fontSize: 11, color: 'var(--text-muted)', marginTop: 2 }}>
                         {(upload.file.size / 1024).toFixed(0)} Ko
@@ -172,7 +173,7 @@ export default function KYCPage() {
                     </div>
                   ) : (
                     <>
-                      <div style={{ fontSize: 24, color: 'var(--text-muted)', marginBottom: 8, opacity: 0.5 }}>⊕</div>
+                      <Plus size={24} strokeWidth={1.5} style={{ color: 'var(--text-muted)', marginBottom: 8, opacity: 0.5 }} />
                       <div style={{ fontSize: 13, color: 'var(--text-muted)' }}>
                         Glisser-déposer ou <span style={{ color: 'var(--gold)' }}>parcourir</span>
                       </div>

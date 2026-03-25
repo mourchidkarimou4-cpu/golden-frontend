@@ -1,5 +1,6 @@
 // src/pages/CreateProjectPage.tsx
 import { useState } from 'react'
+import { Check, Plus } from 'lucide-react'
 import { useNavigate } from 'react-router-dom'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import { projectsAPI } from '@/lib/api'
@@ -104,7 +105,7 @@ export default function CreateProjectPage() {
                   fontSize: 11, color: i < step ? 'var(--dark)' : i === step ? 'var(--gold)' : 'var(--text-muted)',
                   fontWeight: 500,
                 }}>
-                  {i < step ? '✓' : i + 1}
+                  {i < step ? <Check size={12} strokeWidth={2} /> : i + 1}
                 </div>
                 <span style={{ fontSize: 12, color: i === step ? 'var(--text)' : 'var(--text-muted)' }}>{s}</span>
               </div>
