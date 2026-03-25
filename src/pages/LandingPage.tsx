@@ -50,9 +50,8 @@ export default function LandingPage() {
   const navRef = useRef<HTMLElement>(null)
   const isMobile = useIsMobile()
 
-  if (!splashDone) return <SplashScreen onDone={() => setSplashDone(true)} />
-  useScrollReveal()
   const [menuOpen, setMenuOpen] = useState(false)
+  useScrollReveal()
 
   useEffect(() => {
     const onScroll = () => {
