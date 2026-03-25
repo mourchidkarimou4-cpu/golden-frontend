@@ -56,6 +56,8 @@ export default function LandingPage() {
   useScrollReveal()
   const [menuOpen, setMenuOpen] = useState(false)
 
+  if (!splashDone) return <SplashScreen onDone={() => setSplashDone(true)} />
+
   useEffect(() => {
     const onScroll = () => {
       if (navRef.current) {
