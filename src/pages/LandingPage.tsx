@@ -634,7 +634,7 @@ export default function LandingPage() {
 
       <style>{`
         .navbar.scrolled {
-          background: rgba(10,10,10,0.95) !important;
+          background: var(--nav-bg) !important;
           backdrop-filter: blur(20px);
           border-color: var(--border) !important;
           padding-top: 12px !important;

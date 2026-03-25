@@ -138,7 +138,7 @@ export default function ParametresPage() {
                       position: 'absolute', top: 2,
                       left: (notifs as any)[n.key] ? 20 : 2,
                       width: 16, height: 16, borderRadius: '50%',
-                      background: (notifs as any)[n.key] ? '#0A0A0A' : 'var(--text-muted)',
+                      background: (notifs as any)[n.key] ? 'var(--dark)' : 'var(--text-muted)',
                       transition: 'left .2s',
                     }} />
                   </div>

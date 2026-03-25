@@ -33,7 +33,7 @@ import ParametresPageInv     from '@/pages/investisseur/ParametresPage'
 
 function PrivateRoute({ children, role }: { children: React.ReactNode; role?: string }) {
   const { user, loading } = useAuth()
-  if (loading) return <div style={{ background: '#0A0A0A', minHeight: '100vh' }} />
+  if (loading) return <div style={{ background: 'var(--dark)', minHeight: '100vh' }} />
   if (!user) return <Navigate to="/login" replace />
   if (role && user.role !== role)
     return <Navigate to={user.role === 'porteur' ? '/porteur' : '/investisseur'} replace />

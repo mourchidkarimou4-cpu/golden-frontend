@@ -201,7 +201,7 @@ body {
   .mobile-header {
     @apply fixed top-0 left-0 right-0 flex items-center justify-between px-4;
     height: var(--header-h);
-    background: rgba(10,10,10,0.95);
+    background: var(--nav-bg);
     border-bottom: 1px solid var(--border);
     backdrop-filter: blur(20px);
     z-index: 40;

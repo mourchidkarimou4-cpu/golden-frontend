@@ -101,7 +101,7 @@ export default function ParametresPage() {
                   <span style={{ fontSize: 13, color: 'var(--text)' }}>{n.label}</span>
                   <div onClick={() => setNotifs(p => ({ ...p, [n.key]: !(p as any)[n.key] }))}
                     style={{ width: 40, height: 22, borderRadius: 11, background: (notifs as any)[n.key] ? 'var(--gold)' : 'var(--dark-4)', border: '1px solid var(--border)', cursor: 'pointer', position: 'relative', transition: 'background .2s' }}>
-                    <div style={{ position: 'absolute', top: 2, left: (notifs as any)[n.key] ? 20 : 2, width: 16, height: 16, borderRadius: '50%', background: (notifs as any)[n.key] ? '#0A0A0A' : 'var(--text-muted)', transition: 'left .2s' }} />
+                    <div style={{ position: 'absolute', top: 2, left: (notifs as any)[n.key] ? 20 : 2, width: 16, height: 16, borderRadius: '50%', background: (notifs as any)[n.key] ? 'var(--dark)' : 'var(--text-muted)', transition: 'left .2s' }} />
                   </div>
                 </div>
               ))}
