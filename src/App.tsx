@@ -3,7 +3,6 @@ import { useState, useCallback, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
 import { GoldenCursor } from '@/components/ui'
-import SplashScreen from '@/components/ui/SplashScreen'
 
 import LandingPage           from '@/pages/LandingPage'
 import LoginPage             from '@/pages/LoginPage'
@@ -85,23 +84,18 @@ function AppRoutes() {
 }
 
 export default function App() {
-  const [splashDone, setSplashDone] = useState(false)
 
   useEffect(() => {
     const saved = localStorage.getItem('golden_theme') ?? 'dark'
     document.documentElement.setAttribute('data-theme', saved)
   }, [])
-  const handleDone = useCallback(() => setSplashDone(true), [])
 
   return (
     <AuthProvider>
-      {!splashDone && <SplashScreen onDone={handleDone} />}
-      {splashDone && (
-        <BrowserRouter>
+              <BrowserRouter>
           <GoldenCursor />
           <AppRoutes />
         </BrowserRouter>
-      )}
     </AuthProvider>
   )
 }
