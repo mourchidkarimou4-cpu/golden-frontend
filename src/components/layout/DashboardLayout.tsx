@@ -142,7 +142,7 @@ export default function DashboardLayout({
           padding: isMobile ? '0 16px' : '0 32px',
           height: 'var(--header-h)',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: 'rgba(10,10,10,0.95)',
+          background: 'var(--nav-bg)',
           backdropFilter: 'blur(20px)',
           borderBottom: '1px solid var(--border)',
         }}>
