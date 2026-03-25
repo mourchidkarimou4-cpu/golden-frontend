@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, NegotiationFlow } from '@/components/ui'
 import { DollarSign } from 'lucide-react'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
 
@@ -88,17 +88,14 @@ export default function FinancesPage() {
             />
           ) : (
             investments.slice(0, 6).map((inv: any, i: number) => (
-              <div key={i} style={{ padding: '12px 0', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div>
-                  <div style={{ fontSize: 12, color: 'var(--text)' }}>{inv.investor_name ?? 'Investisseur'}</div>
-                  <div style={{ fontSize: 10, color: 'var(--text-muted)' }}>
-                    {inv.created_at ? new Date(inv.created_at).toLocaleDateString('fr-FR') : '—'}
-                  </div>
-                </div>
-                <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: '#4ade80' }}>
-                  +{((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
-                </div>
-              </div>
+              <NegotiationFlow
+                key={i}
+                investmentId={inv.id}
+                investorName={inv.investor_name}
+                amount={inv.amount ?? 0}
+                status={inv.status ?? 'pending'}
+                createdAt={inv.created_at}
+              />
             ))
           )}
         </div>

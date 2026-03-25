@@ -110,6 +110,7 @@ export const investmentsAPI = {
   portfolio:  ()                                              => api.get('/investments/portfolio/'),
   rate:       (id: string, data: {score: number, comment?: string}) => api.post(`/investments/${id}/rate/`, data),
   myRatings:  ()                                              => api.get('/investments/my-ratings/'),
+  history:    (id: string)                                    => api.get(`/investments/${id}/history/`),
   create:    (data: InvestmentData)     => api.post('/investments/', data),
   detail:    (id: string)               => api.get(`/investments/${id}/`),
   update:    (id: string, data: object) => api.patch(`/investments/${id}/`, data),

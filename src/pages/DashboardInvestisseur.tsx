@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { KpiCard, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
+import { KpiCard, StatusBadge, GoldenSpinner, SectionLabel , ProjectCard} from '@/components/ui'
 import { investmentsAPI, matchingAPI, reportingAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useScrollReveal } from '@/hooks/useCountUp'
@@ -139,33 +139,11 @@ export default function DashboardInvestisseur() {
           </div>
           <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', gap: 16 }}>
             {filteredRecos.length > 0 ? filteredRecos.slice(0, 4).map((p: any) => (
-              <div key={p.id} className="kpi-card card-hover" style={{ padding: 20 }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 10 }}>
-                  <h3 style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 18, fontWeight: 400 }}>{p.title}</h3>
-                  <span style={{ fontSize: 10, padding: '2px 8px', background: 'rgba(201,168,76,0.1)', color: 'var(--gold)', letterSpacing: '0.08em' }}>
-                    {p.match_score ? `${p.match_score}%` : p.sector}
-                  </span>
-                </div>
-                <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 12 }}>
-                  {p.tagline ?? p.description?.slice(0, 80) + '...'}
-                </p>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginBottom: 12 }}>
-                  {[
-                    { label: 'Montant', value: `${((p.amount_needed ?? 0)/1_000_000).toFixed(0)}M ₣` },
-                    { label: 'ROI', value: `${p.roi_estimated ?? 0}%` },
-                    { label: 'Durée', value: `${p.duration_months ?? 0}m` },
-                  ].map(s => (
-                    <div key={s.label} style={{ padding: 8, background: 'var(--dark-4)', border: '1px solid var(--border)', textAlign: 'center' }}>
-                      <div style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 3 }}>{s.label}</div>
-                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 14, color: 'var(--text)' }}>{s.value}</div>
-                    </div>
-                  ))}
-                </div>
-                <button className="btn-primary" style={{ width: '100%', fontSize: 11, padding: '8px' }}
-                  onClick={() => setModalProject(p)}>
-                  Investir →
-                </button>
-              </div>
+              <ProjectCard
+                key={p.id}
+                project={{ ...p, matching_score: p.match_score }}
+                onClick={() => setModalProject(p)}
+              />
             )) : (
               <div style={{ gridColumn: '1/-1', padding: '32px 0', textAlign: 'center', color: 'var(--text-muted)', fontSize: 13 }}>
                 Aucun projet recommandé. <button className="btn-gold-sm" style={{ marginLeft: 12 }} onClick={() => navigate('/investisseur/projets')}>Explorer →</button>

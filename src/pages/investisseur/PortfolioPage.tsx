@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, RatingWidget } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, RatingWidget, NegotiationFlow } from '@/components/ui'
 import { TrendingUp } from 'lucide-react'
 import { investmentsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
@@ -108,6 +108,13 @@ export default function PortfolioPage() {
                   </div>
                 </div>
               </div>
+              <NegotiationFlow
+                investmentId={inv.id}
+                investorName="Moi"
+                amount={inv.amount ?? 0}
+                status={inv.status ?? 'pending'}
+                createdAt={inv.created_at}
+              />
               {(inv.status === 'confirmed' || inv.status === 'completed') && (
                 <RatingWidget
                   investmentId={inv.id}

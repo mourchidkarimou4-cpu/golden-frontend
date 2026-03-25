@@ -2,8 +2,8 @@
 import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SkeletonKpiGrid, EmptyState } from '@/components/ui'
-import { TrendingUp, Heart } from 'lucide-react'
+import { GoldenSpinner, SkeletonKpiGrid, EmptyState, ProjectCard } from '@/components/ui'
+import { TrendingUp } from 'lucide-react'
 import { projectsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
@@ -75,54 +75,11 @@ export default function ProjetsPage() {
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', gap: 16 }}>
           {filtered.map((project: any) => (
-            <div key={project.id} style={{
-              padding: 20, border: '1px solid var(--border)',
-              background: 'var(--dark-2)', transition: 'border-color .2s',
-            }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
-                <div>
-                  <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 4 }}>
-                    {project.sector}
-                  </div>
-                  <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, color: 'var(--text)' }}>
-                    {project.title}
-                  </div>
-                </div>
-                {project.matching_score && (
-                  <span style={{ fontSize: 10, color: '#3DD68C', background: 'rgba(61,214,140,.08)', border: '1px solid rgba(61,214,140,.2)', padding: '2px 8px' }}>
-                    Match {project.matching_score}%
-                  </span>
-                )}
-              </div>
-              <p style={{ fontSize: 12, color: 'var(--text-muted)', lineHeight: 1.6, marginBottom: 16 }}>
-                {project.tagline ?? project.description?.slice(0, 100)}
-              </p>
-              <div style={{ display: 'flex', gap: 20, marginBottom: 16 }}>
-                {[
-                  { label: 'Objectif', val: `${(parseFloat(String(project.funding_goal ?? 0))/1000000).toFixed(0)}M ₣` },
-                  { label: 'ROI estimé', val: `${project.expected_roi ?? '--'}%` },
-                  { label: 'Durée', val: `${project.duration_months ?? '--'}m` },
-                ].map(s => (
-                  <div key={s.label}>
-                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, color: 'var(--text)' }}>{s.val}</div>
-                    <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '.1em', textTransform: 'uppercase' }}>{s.label}</div>
-                  </div>
-                ))}
-              </div>
-              <div style={{ display: 'flex', gap: 8 }}>
-                <button onClick={() => projectsAPI.toggleFav?.(project.id)} style={{
-                  display: 'flex', alignItems: 'center', gap: 6,
-                  padding: '8px 14px', background: 'transparent',
-                  border: '1px solid var(--border)', color: 'var(--text-muted)',
-                  fontSize: 10, cursor: 'pointer', letterSpacing: '.08em',
-                }}><Heart size={12} strokeWidth={1.5} /> Favori</button>
-                <button style={{
-                  flex: 1, padding: '8px', background: 'var(--gold)', color: 'var(--dark)',
-                  border: 'none', fontSize: 10, cursor: 'pointer',
-                  letterSpacing: '.1em', textTransform: 'uppercase', fontFamily: 'inherit',
-                }}>Voir le projet →</button>
-              </div>
-            </div>
+            <ProjectCard
+              key={project.id}
+              project={project}
+              onFav={() => setProjects(p => [...p])}
+            />
           ))}
         </div>
       )}
