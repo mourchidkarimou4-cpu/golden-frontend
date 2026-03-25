@@ -36,8 +36,7 @@ export function GoldenCursor() {
     return () => { document.removeEventListener('mousemove', onMove); cancelAnimationFrame(raf) }
   }, [])
 
-  const isMobile = window.innerWidth < 1024
-  if (isMobile) return null
+  if (typeof window !== 'undefined' && window.innerWidth < 1024) return null
   return (
     <>
       <div ref={dot}  className="cursor-dot"  style={{

@@ -2,7 +2,6 @@
 import { useState, useCallback, useEffect } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
-import { GoldenCursor } from '@/components/ui'
 
 import LandingPage           from '@/pages/LandingPage'
 import LoginPage             from '@/pages/LoginPage'
@@ -93,7 +92,6 @@ export default function App() {
   return (
     <AuthProvider>
               <BrowserRouter>
-          <GoldenCursor />
           <AppRoutes />
         </BrowserRouter>
     </AuthProvider>

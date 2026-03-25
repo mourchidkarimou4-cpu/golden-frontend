@@ -71,10 +71,7 @@ body {
 }
 
 /* ── Cursor personnalisé (desktop only) ───────────────── */
-@media (min-width: 1024px) {
-  body { cursor: none; }
-  a, button, [role="button"] { cursor: none; }
-}
+
 @media (max-width: 1023px) {
   body { cursor: auto !important; }
   a, button, [role="button"] { cursor: pointer !important; }
