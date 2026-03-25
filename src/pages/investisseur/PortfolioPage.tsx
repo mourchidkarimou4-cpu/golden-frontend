@@ -1,21 +1,11 @@
 // src/pages/investisseur/PortfolioPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
 import { investmentsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",  to: '/investisseur' },
-  { icon: '◈', label: 'Projets',          to: '/investisseur/projets' },
-  { icon: '₣', label: 'Portfolio',        to: '/investisseur/portfolio' },
-  { icon: '✉', label: 'Messages',         to: '/investisseur/messages' },
-  { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
-  { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
-  { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
-]
 
 export default function PortfolioPage() {
   const isMobile = useIsMobile()
@@ -34,7 +24,7 @@ export default function PortfolioPage() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Portfolio">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Portfolio">
       <GoldenSpinner />
     </DashboardLayout>
   )
@@ -47,7 +37,7 @@ export default function PortfolioPage() {
   const maxVal = Math.max(...mockData)
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Portfolio" subtitle="Suivi de vos investissements">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Portfolio" subtitle="Suivi de vos investissements">
       {/* KPIs */}
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2,1fr)' : 'repeat(4,1fr)', gap: 16, marginBottom: 28 }}>
         {[

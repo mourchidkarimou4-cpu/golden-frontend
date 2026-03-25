@@ -1,21 +1,11 @@
 // src/pages/investisseur/RapportsPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel } from '@/components/ui'
 import { reportingAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",  to: '/investisseur' },
-  { icon: '◈', label: 'Projets',          to: '/investisseur/projets' },
-  { icon: '₣', label: 'Portfolio',        to: '/investisseur/portfolio' },
-  { icon: '✉', label: 'Messages',         to: '/investisseur/messages' },
-  { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
-  { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
-  { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
-]
 
 const RAPPORTS = [
   { title: 'Rapport de performance Q1 2026', date: 'Mars 2026', type: 'Performance', icon: '◫' },
@@ -35,7 +25,7 @@ export default function RapportsPage() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Rapports">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Rapports">
       <GoldenSpinner />
     </DashboardLayout>
   )
@@ -43,7 +33,7 @@ export default function RapportsPage() {
   const { summary } = dashboard ?? {}
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Rapports" subtitle="Analyses et synthèses de vos investissements">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Rapports" subtitle="Analyses et synthèses de vos investissements">
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 300px', gap: 24 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           {/* Résumé */}

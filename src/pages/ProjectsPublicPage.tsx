@@ -33,20 +33,24 @@ export default function ProjectsPublicPage() {
       {/* Navbar */}
       <nav style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: isMobile ? '16px 20px' : '20px 60px',
+        padding: isMobile ? '10px 16px' : '20px 60px',
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-        background: 'rgba(6,6,4,.95)', backdropFilter: 'blur(20px)',
+        background: 'var(--nav-bg)', backdropFilter: 'blur(20px)',
         borderBottom: '1px solid var(--border)',
+        height: isMobile ? 52 : 64,
       }}>
-        <Link to="/" style={{ textDecoration: 'none' }}><GoldenLogo /></Link>
-        <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
-          <Link to="/" style={{ fontSize: 11, color: 'var(--text-muted)', textDecoration: 'none', letterSpacing: '.08em', textTransform: 'uppercase' }}>← Accueil</Link>
-          <Link to="/login" style={{ fontSize: 11, color: 'var(--text-muted)', textDecoration: 'none', letterSpacing: '.08em', textTransform: 'uppercase' }}>Connexion</Link>
+        <Link to="/" style={{ textDecoration: 'none' }}><GoldenLogo size={isMobile ? 'sm' : 'md'} /></Link>
+        <div style={{ display: 'flex', gap: isMobile ? 10 : 16, alignItems: 'center' }}>
+          {!isMobile && (
+            <Link to="/" style={{ fontSize: 11, color: 'var(--text-muted)', textDecoration: 'none', letterSpacing: '.08em', textTransform: 'uppercase' }}>← Accueil</Link>
+          )}
+          <Link to="/login" style={{ fontSize: isMobile ? 10 : 11, color: 'var(--text-muted)', textDecoration: 'none', letterSpacing: '.08em', textTransform: 'uppercase' }}>Connexion</Link>
           <Link to="/register" style={{
-            padding: '8px 20px', border: '1px solid var(--gold)',
+            padding: isMobile ? '5px 10px' : '8px 20px',
+            border: '1px solid var(--gold)',
             color: 'var(--gold)', textDecoration: 'none',
-            fontSize: 11, letterSpacing: '.1em', textTransform: 'uppercase',
-          }}>Rejoindre →</Link>
+            fontSize: isMobile ? 10 : 11, letterSpacing: '.1em', textTransform: 'uppercase',
+          }}>{isMobile ? 'Rejoindre' : 'Rejoindre →'}</Link>
         </div>
       </nav>
 

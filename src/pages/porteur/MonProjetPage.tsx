@@ -1,24 +1,11 @@
 // src/pages/porteur/MonProjetPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { StatusBadge, GoldenSpinner, ProgressBar, SectionLabel } from '@/components/ui'
 import { projectsAPI } from '@/lib/api'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
-]
 
 export default function MonProjetPage() {
   const navigate = useNavigate()
@@ -35,7 +22,7 @@ export default function MonProjetPage() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Mon Projet">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Mon Projet">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>
@@ -46,7 +33,7 @@ export default function MonProjetPage() {
   )
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Mon Projet" subtitle="Gérez et suivez votre projet"
+    <DashboardLayout navItems={NAV_PORTEUR} title="Mon Projet" subtitle="Gérez et suivez votre projet"
       headerActions={<button className="btn-gold-sm" onClick={() => navigate('/porteur/nouveau')}>⊕ Nouveau projet</button>}
     >
       {projects.length === 0 ? (

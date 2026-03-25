@@ -1,5 +1,6 @@
 // src/pages/investisseur/ParametresPage.tsx
 import { useState } from 'react'
+import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
@@ -7,17 +8,6 @@ import { authAPI } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",  to: '/investisseur' },
-  { icon: '◈', label: 'Projets',          to: '/investisseur/projets' },
-  { icon: '₣', label: 'Portfolio',        to: '/investisseur/portfolio' },
-  { icon: '✉', label: 'Messages',         to: '/investisseur/messages' },
-  { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
-  { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
-  { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
-]
 
 const input: React.CSSProperties = {
   width: '100%', padding: '10px 14px',
@@ -58,7 +48,7 @@ export default function ParametresPage() {
   }
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Paramètres" subtitle="Gérez votre compte">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Paramètres" subtitle="Gérez votre compte">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>

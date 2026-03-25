@@ -1,22 +1,9 @@
 // src/pages/porteur/ActivitePage.tsx
 import DashboardLayout from '@/components/layout/DashboardLayout'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { SectionLabel } from '@/components/ui'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
-]
 
 const ACTIVITIES = [
   { msg: "Ibrahim Traoré a ajouté votre projet en favori", time: 'Il y a 2h', color: '#4ade80', icon: '♦' },
@@ -32,7 +19,7 @@ const ACTIVITIES = [
 export default function ActivitePage() {
   const isMobile = useIsMobile()
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Activité" subtitle="Historique de votre compte">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Activité" subtitle="Historique de votre compte">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>

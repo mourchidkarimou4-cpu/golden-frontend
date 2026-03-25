@@ -1,5 +1,6 @@
 // src/pages/DashboardPorteur.tsx
 import { useState, useEffect } from 'react'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useLocation } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
@@ -8,20 +9,6 @@ import { reportingAPI, investmentsAPI } from '@/lib/api'
 import { useAuth } from '@/lib/auth'
 import { useScrollReveal } from '@/hooks/useCountUp'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: 'Vue d\'ensemble',     to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',          to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',       to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',      to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',            to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',            to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',           to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',            to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',            to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',          to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',         to: '/porteur/parametres' },
-]
 
 export default function DashboardPorteur() {
   const { user } = useAuth()
@@ -44,7 +31,7 @@ export default function DashboardPorteur() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Tableau de bord porteur">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Tableau de bord porteur">
       <GoldenSpinner />
     </DashboardLayout>
   )
@@ -55,7 +42,7 @@ export default function DashboardPorteur() {
 
   return (
     <DashboardLayout
-      navItems={NAV_ITEMS}
+      navItems={NAV_PORTEUR}
       title="Tableau de bord"
       subtitle={`Bonjour, ${user?.first_name ?? 'porteur'}`}
       headerActions={

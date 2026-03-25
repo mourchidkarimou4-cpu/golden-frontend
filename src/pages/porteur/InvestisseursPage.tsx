@@ -1,24 +1,11 @@
 // src/pages/porteur/InvestisseursPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel } from '@/components/ui'
 import { investmentsAPI } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
-]
 
 const STATUS_COLOR: Record<string, string> = {
   pending:   '#fbbf24',
@@ -44,7 +31,7 @@ export default function InvestisseursPage() {
   const confirmed = investments.filter(i => i.status === 'confirmed').length
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Investisseurs">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Investisseurs">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>
@@ -55,7 +42,7 @@ export default function InvestisseursPage() {
   )
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Investisseurs" subtitle="Gérez vos relations investisseurs">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Investisseurs" subtitle="Gérez vos relations investisseurs">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
         {[
           { label: 'Total investisseurs', value: investments.length, icon: '◎' },

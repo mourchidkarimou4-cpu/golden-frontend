@@ -1,5 +1,6 @@
 // src/pages/DashboardInvestisseur.tsx
 import { useState, useEffect } from 'react'
+import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import { useNavigate } from 'react-router-dom'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { KpiCard, StatusBadge, GoldenSpinner, SectionLabel } from '@/components/ui'
@@ -8,17 +9,6 @@ import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useScrollReveal } from '@/hooks/useCountUp'
 import InvestModal from '@/components/dashboard/InvestModal'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",  to: '/investisseur' },
-  { icon: '◈', label: 'Projets',          to: '/investisseur/projets' },
-  { icon: '₣', label: 'Portfolio',        to: '/investisseur/portfolio' },
-  { icon: '✉', label: 'Messages',         to: '/investisseur/messages', badge: 2 },
-  { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
-  { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
-  { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
-]
 
 const SECTOR_COLORS = ['#C9A84C','#E8C97A','#8B7535','#F5E9C8','#6B5A2A','#A08040']
 
@@ -46,7 +36,7 @@ export default function DashboardInvestisseur() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Tableau de bord">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Tableau de bord">
       <GoldenSpinner />
     </DashboardLayout>
   )
@@ -63,7 +53,7 @@ export default function DashboardInvestisseur() {
 
   return (
     <DashboardLayout
-      navItems={NAV_ITEMS}
+      navItems={NAV_INVESTISSEUR}
       title="Tableau de bord"
       subtitle={new Date().toLocaleDateString('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' })}
       headerActions={

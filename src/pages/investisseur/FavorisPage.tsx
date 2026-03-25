@@ -1,21 +1,11 @@
 // src/pages/investisseur/FavorisPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel, StatusBadge } from '@/components/ui'
 import { projectsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",  to: '/investisseur' },
-  { icon: '◈', label: 'Projets',          to: '/investisseur/projets' },
-  { icon: '₣', label: 'Portfolio',        to: '/investisseur/portfolio' },
-  { icon: '✉', label: 'Messages',         to: '/investisseur/messages' },
-  { icon: '♦', label: 'Favoris',          to: '/investisseur/favoris' },
-  { icon: '◫', label: 'Rapports',         to: '/investisseur/rapports' },
-  { icon: '◯', label: 'Mon profil',       to: '/investisseur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',      to: '/investisseur/parametres' },
-]
 
 export default function FavorisPage() {
   const isMobile = useIsMobile()
@@ -34,7 +24,7 @@ export default function FavorisPage() {
   }
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Favoris">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Favoris">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>
@@ -45,7 +35,7 @@ export default function FavorisPage() {
   )
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Favoris" subtitle="Vos projets sauvegardés">
+    <DashboardLayout navItems={NAV_INVESTISSEUR} title="Favoris" subtitle="Vos projets sauvegardés">
       {favorites.length === 0 ? (
         <div className="kpi-card" style={{ padding: 60, textAlign: 'center' }}>
           <div style={{ fontSize: 40, marginBottom: 16, opacity: 0.3 }}>♦</div>

@@ -1,5 +1,7 @@
 // src/components/layout/DashboardLayout.tsx
 import { ReactNode, useState, useEffect } from 'react'
+import React from 'react'
+import type { LucideIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
 import { GoldenLogo } from '@/components/ui'
@@ -7,7 +9,7 @@ import { useAuth } from '@/lib/auth'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
 interface NavItem {
-  icon:   string
+  icon:   LucideIcon
   label:  string
   to:     string
   badge?: number | string
@@ -85,7 +87,7 @@ export default function DashboardLayout({
             <NavLink key={item.to} to={item.to}
               className={({ isActive }) => `nav-item ${isActive ? 'active' : ''}`}
             >
-              <span style={{ fontSize: 16, opacity: 0.7 }}>{item.icon}</span>
+              <item.icon size={16} strokeWidth={1.5} />
               <span style={{ flex: 1 }}>{item.label}</span>
               {item.badge !== undefined && (
                 <span style={{

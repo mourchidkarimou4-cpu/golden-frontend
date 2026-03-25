@@ -1,25 +1,12 @@
 // src/pages/porteur/ProfilPage.tsx
 import { useState } from 'react'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { SectionLabel } from '@/components/ui'
 import { useAuth } from '@/lib/auth'
 import { authAPI } from '@/lib/api'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
-]
 
 const input: React.CSSProperties = {
   width: '100%', padding: '10px 14px',
@@ -52,7 +39,7 @@ export default function ProfilPage() {
   }
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Mon Profil" subtitle="Gérez vos informations personnelles">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Mon Profil" subtitle="Gérez vos informations personnelles">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>

@@ -1,23 +1,10 @@
 // src/pages/porteur/RapportsPage.tsx
 import { useState, useEffect } from 'react'
+import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
 import { GoldenSpinner, SectionLabel } from '@/components/ui'
 import { reportingAPI } from '@/lib/api'
 
-const NAV_ITEMS = [
-  { icon: '⊞', label: "Vue d'ensemble",    to: '/porteur' },
-  { icon: '◈', label: 'Mon projet',         to: '/porteur/projet' },
-  { icon: '◎', label: 'Investisseurs',      to: '/porteur/investisseurs', badge: 7 },
-  { icon: '⊕', label: 'Nouveau projet',     to: '/porteur/nouveau' },
-  { icon: '✉', label: 'Messages',           to: '/porteur/messages', badge: 3 },
-  { icon: '◷', label: 'Activité',           to: '/porteur/activite', badge: 1, badgeColor: 'green' },
-  { icon: '⊘', label: 'Documents',          to: '/porteur/documents' },
-  { icon: '₣', label: 'Finances',           to: '/porteur/finances' },
-  { icon: '◫', label: 'Rapports',           to: '/porteur/rapports' },
-  { icon: '◯', label: 'Mon profil',         to: '/porteur/profil' },
-  { icon: '🪪', label: 'KYC', to: '/kyc' },
-  { icon: '⊙', label: 'Paramètres',        to: '/porteur/parametres' },
-]
 
 const RAPPORTS = [
   { title: 'Rapport de performance mensuel', date: 'Mars 2026', type: 'Performance', icon: '◫' },
@@ -36,7 +23,7 @@ export default function RapportsPage() {
   }, [])
 
   if (loading) return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Rapports">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Rapports">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
         <span style={{ color: 'var(--text-dim)' }}>|</span>
@@ -50,7 +37,7 @@ export default function RapportsPage() {
   const mainProject = projects[0]
 
   return (
-    <DashboardLayout navItems={NAV_ITEMS} title="Rapports" subtitle="Analyses et synthèses de votre projet">
+    <DashboardLayout navItems={NAV_PORTEUR} title="Rapports" subtitle="Analyses et synthèses de votre projet">
       <div style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: 24 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 20 }}>
           <div className="kpi-card" style={{ padding: 28 }}>
