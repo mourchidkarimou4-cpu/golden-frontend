@@ -3,7 +3,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { GoldenLogo, SectionLabel, Slideshow, ThemeToggle } from '@/components/ui'
 import { useIsMobile } from '@/hooks/useBreakpoint'
-import SplashScreen from '@/components/ui/SplashScreen'
 import { useScrollReveal } from '@/hooks/useCountUp'
 
 const HERO_SLIDES = [
@@ -48,15 +47,12 @@ const STATS = [
 ]
 
 export default function LandingPage() {
-  const [splashDone, setSplashDone] = useState(false)
   const navRef = useRef<HTMLElement>(null)
   const isMobile = useIsMobile()
 
   if (!splashDone) return <SplashScreen onDone={() => setSplashDone(true)} />
   useScrollReveal()
   const [menuOpen, setMenuOpen] = useState(false)
-
-  if (!splashDone) return <SplashScreen onDone={() => setSplashDone(true)} />
 
   useEffect(() => {
     const onScroll = () => {
