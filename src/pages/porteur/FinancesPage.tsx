@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState } from '@/components/ui'
+import { DollarSign } from 'lucide-react'
 import { reportingAPI, investmentsAPI } from '@/lib/api'
 
 
@@ -25,12 +26,7 @@ export default function FinancesPage() {
 
   if (loading) return (
     <DashboardLayout navItems={NAV_PORTEUR} title="Finances">
-      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
-        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
-        <span style={{ color: 'var(--text-dim)' }}>|</span>
-        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
-      </div>
-      <GoldenSpinner />
+      <SkeletonKpiGrid />
     </DashboardLayout>
   )
 
@@ -54,7 +50,7 @@ export default function FinancesPage() {
         ].map(k => (
           <div key={k.label} className="kpi-card" style={{ padding: 24 }}>
             <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{k.label}</div>
-            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 30, color: 'var(--gold-light)' }}>{k.value}</div>
+            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 30, color: 'var(--text)' }}>{k.value}</div>
             {k.unit && <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>{k.unit}</div>}
           </div>
         ))}
@@ -77,7 +73,7 @@ export default function FinancesPage() {
           <div style={{ marginTop: 20 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
               <span style={{ fontSize: 11, color: 'var(--text-muted)' }}>Progression globale</span>
-              <span style={{ fontSize: 12, color: 'var(--gold)' }}>{pct}%</span>
+              <span style={{ fontSize: 12, color: 'var(--text-muted)' }}>{pct}%</span>
             </div>
             <ProgressBar value={pct} />
           </div>
@@ -85,7 +81,11 @@ export default function FinancesPage() {
         <div className="kpi-card" style={{ padding: 24 }}>
           <SectionLabel>Investissements reçus</SectionLabel>
           {investments.length === 0 ? (
-            <p style={{ color: 'var(--text-muted)', fontSize: 13, padding: '20px 0' }}>Aucun investissement reçu.</p>
+            <EmptyState
+              icon={DollarSign}
+              title="Aucun investissement reçu"
+              description="Les investissements reçus apparaîtront ici."
+            />
           ) : (
             investments.slice(0, 6).map((inv: any, i: number) => (
               <div key={i} style={{ padding: '12px 0', borderBottom: '1px solid var(--border)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>

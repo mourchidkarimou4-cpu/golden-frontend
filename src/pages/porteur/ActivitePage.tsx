@@ -6,13 +6,13 @@ import { useIsMobile } from '@/hooks/useBreakpoint'
 
 
 const ACTIVITIES = [
-  { msg: "Ibrahim Traoré a ajouté votre projet en favori", time: 'Il y a 2h', color: '#4ade80', icon: '♦' },
-  { msg: "Nouvelle vue depuis Abidjan, Côte d'Ivoire", time: 'Il y a 4h', color: 'var(--text-muted)', icon: '◷' },
-  { msg: "Votre projet a été validé par l'équipe GOLDEN", time: 'Hier 14:30', color: 'var(--gold)', icon: '✓' },
-  { msg: "Marie Ouédraogo a envoyé un message", time: 'Hier 09:15', color: '#60a5fa', icon: '✉' },
-  { msg: "Nouveau investissement de 15M FCFA reçu", time: 'Il y a 3 jours', color: '#4ade80', icon: '₣' },
-  { msg: "Jean-Pierre Koffi consulte votre dossier", time: 'Il y a 4 jours', color: 'var(--text-muted)', icon: '◎' },
-  { msg: "Document BP_GOLDEN_2024.pdf téléchargé", time: 'Il y a 5 jours', color: '#fbbf24', icon: '⊘' },
+  { msg: "Ibrahim Traoré a ajouté votre projet en favori", time: 'Il y a 2h', color: '#4ade80' },
+  { msg: "Nouvelle vue depuis Abidjan, Côte d'Ivoire", time: 'Il y a 4h', color: 'var(--text-muted)' },
+  { msg: "Votre projet a été validé par l'équipe GOLDEN", time: 'Hier 14:30', color: 'var(--gold)' },
+  { msg: "Marie Ouédraogo a envoyé un message", time: 'Hier 09:15', color: '#60a5fa' },
+  { msg: "Nouveau investissement de 15M FCFA reçu", time: 'Il y a 3 jours', color: '#4ade80' },
+  { msg: "Jean-Pierre Koffi consulte votre dossier", time: 'Il y a 4 jours', color: 'var(--text-muted)' },
+  { msg: "Document BP_GOLDEN_2024.pdf téléchargé", time: 'Il y a 5 jours', color: '#fbbf24' },
   { msg: "Votre profil KYC est en cours de vérification", time: 'Il y a 1 semaine', color: '#fbbf24', icon: '⚠' },
 ]
 
@@ -39,7 +39,7 @@ export default function ActivitePage() {
                 border: `1px solid ${a.color}44`,
                 display: 'grid', placeItems: 'center',
                 fontSize: 14, color: a.color,
-              }}>{a.icon}</div>
+              }}></div>
               <div style={{ flex: 1 }}>
                 <p style={{ fontSize: 13, color: 'var(--text)', marginBottom: 4, lineHeight: 1.5 }}>{a.msg}</p>
                 <span style={{ fontSize: 11, color: 'var(--text-dim)' }}>{a.time}</span>

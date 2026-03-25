@@ -19,10 +19,10 @@ const AFRICA_SLIDES = [
 ]
 
 const VALUES = [
-  { icon: '◈', title: 'Transparence', desc: 'Chaque transaction, chaque décision est traçable et vérifiable. Nous croyons que la confiance se construit dans la clarté.' },
-  { icon: '◎', title: 'Impact', desc: "Nous finançons des projets qui créent de la valeur réelle — emplois, innovation, développement local en Afrique." },
-  { icon: '♦', title: 'Excellence', desc: 'Nos standards sont ceux des meilleures plateformes mondiales, adaptés aux réalités et aux opportunités africaines.' },
-  { icon: '⊞', title: 'Inclusion', desc: "Nous ouvrons l'investissement à tous — petits porteurs comme grands fonds — pour démocratiser la finance africaine." },
+  { Icon: 'diamond', title: 'Transparence', desc: 'Chaque transaction, chaque décision est traçable et vérifiable. Nous croyons que la confiance se construit dans la clarté.' },
+  { title: 'Impact', desc: "Nous finançons des projets qui créent de la valeur réelle — emplois, innovation, développement local en Afrique." },
+  { title: 'Excellence', desc: 'Nos standards sont ceux des meilleures plateformes mondiales, adaptés aux réalités et aux opportunités africaines.' },
+  { title: 'Inclusion', desc: "Nous ouvrons l'investissement à tous — petits porteurs comme grands fonds — pour démocratiser la finance africaine." },
 ]
 
 const TEAM = [
@@ -194,7 +194,7 @@ export default function AboutPage() {
               border: '1px solid rgba(201,168,76,.12)',
               animationDelay: `${i*.08}s`,
             }}>
-              <div style={{ fontSize: 28, color: '#C9A84C', marginBottom: 20, opacity: .7 }}>{v.icon}</div>
+              <div style={{ fontSize: 28, color: '#C9A84C', marginBottom: 20, opacity: .7 }}></div>
               <h3 style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 22, fontWeight: 400, marginBottom: 12, color: '#F0EDE6' }}>{v.title}</h3>
               <p style={{ fontSize: 13, lineHeight: 1.75, color: '#6A5F48' }}>{v.desc}</p>
             </div>

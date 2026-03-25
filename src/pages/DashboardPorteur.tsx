@@ -47,7 +47,7 @@ export default function DashboardPorteur() {
       subtitle={`Bonjour, ${user?.first_name ?? 'porteur'}`}
       headerActions={
         <button className="btn-gold-sm" onClick={() => window.location.href = '/porteur/nouveau'}>
-          ⊕ Modifier le projet
+          Modifier le projet
         </button>
       }
     >
@@ -70,14 +70,14 @@ export default function DashboardPorteur() {
       )}
 
       {/* ── KPIs ────────────────────────────────────── */}
-      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4,1fr)', gap: 16, marginBottom: 32 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(4,1fr)', gap: 16, marginBottom: 48 }}>
         <KpiCard
           label="Capital collecté"
           value={`${((summary?.total_raised ?? 0) / 1_000_000).toFixed(0)}M`}
           sub={`Objectif : ${((summary?.total_needed ?? 0) / 1_000_000).toFixed(0)}M FCFA`}
           trend="↑ +12% ce mois"
           trendUp
-          icon="₣"
+          
         />
         <KpiCard
           label="Investisseurs intéressés"
@@ -85,7 +85,7 @@ export default function DashboardPorteur() {
           sub="2 en négociation active"
           trend="↑ +3 cette semaine"
           trendUp
-          icon="◎"
+          
         />
         <KpiCard
           label="Vues du projet"
@@ -93,19 +93,19 @@ export default function DashboardPorteur() {
           sub="Depuis mise en ligne"
           trend="↑ +28% cette semaine"
           trendUp
-          icon="◷"
+          
         />
         <KpiCard
           label="Projets actifs"
           value={summary?.active_projects ?? 0}
           sub={`${summary?.total_projects ?? 0} au total`}
-          icon="◈"
+          
         />
       </div>
 
       {/* ── Projet principal ─────────────────────── */}
       {mainProject ? (
-        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24, marginBottom: 32 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24, marginBottom: 48 }}>
 
           {/* Carte projet */}
           <div className="kpi-card card-hover" style={{ padding: 28 }}>
@@ -121,7 +121,7 @@ export default function DashboardPorteur() {
                     background: 'none', border: 'none',
                     borderBottom: activeTab === tab ? '1px solid var(--gold)' : '1px solid transparent',
                     color: activeTab === tab ? 'var(--gold)' : 'var(--text-muted)',
-                    cursor: 'none', marginBottom: -1,
+                    cursor: 'pointer', marginBottom: -1,
                     transition: 'color .2s',
                   }}
                 >
@@ -167,7 +167,7 @@ export default function DashboardPorteur() {
                   ].map(s => (
                     <div key={s.label} style={{ padding: '12px 16px', background: 'var(--dark-4)', border: '1px solid var(--border)' }}>
                       <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 4 }}>{s.label}</div>
-                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 22, color: 'var(--gold-light)' }}>{s.value}</div>
+                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 22, color: 'var(--text)' }}>{s.value}</div>
                     </div>
                   ))}
                 </div>
@@ -205,7 +205,7 @@ export default function DashboardPorteur() {
                   ].map(s => (
                     <div key={s.label} style={{ padding: '16px', background: 'var(--dark-4)', border: '1px solid var(--border)' }}>
                       <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase', marginBottom: 6 }}>{s.label}</div>
-                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 26, color: 'var(--gold-light)' }}>{s.value}</div>
+                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 26, color: 'var(--text)' }}>{s.value}</div>
                     </div>
                   ))}
                 </div>

@@ -64,7 +64,7 @@ export default function ProjectsPublicPage() {
           fontFamily: '"Cormorant Garamond",serif',
           fontSize: isMobile ? 36 : 64, fontWeight: 300, lineHeight: 1.1, marginBottom: 16,
         }}>
-          Projets <em style={{ fontStyle: 'italic', color: 'var(--gold-light)' }}>disponibles</em>
+          Projets <em style={{ fontStyle: 'italic', color: 'var(--gold)' }}>disponibles</em>
         </h1>
         <p style={{ fontSize: 14, color: 'var(--text-muted)', maxWidth: 500, lineHeight: 1.8, marginBottom: 40 }}>
           Découvrez les meilleures opportunités d'investissement en Afrique. Tous les projets sont vérifiés par notre équipe.
@@ -146,12 +146,12 @@ export default function ProjectsPublicPage() {
                   </p>
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3,1fr)', gap: 8, marginBottom: 16 }}>
                     {[
-                      { label: 'Objectif', val: `${((project.funding_goal ?? 0)/1000000).toFixed(0)}M ₣` },
+                      { label: 'Objectif', val: `${(parseFloat(String(project.funding_goal ?? 0))/1000000).toFixed(0)}M ₣` },
                       { label: 'ROI', val: `${project.expected_roi ?? '--'}%` },
                       { label: 'Durée', val: `${project.duration_months ?? '--'}m` },
                     ].map(s => (
                       <div key={s.label} style={{ textAlign: 'center', padding: '8px', background: 'var(--dark-3)', border: '1px solid var(--border)' }}>
-                        <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 18, color: 'var(--gold-light)' }}>{s.val}</div>
+                        <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 18, color: 'var(--text)' }}>{s.val}</div>
                         <div style={{ fontSize: 8, color: 'var(--text-muted)', letterSpacing: '.1em', textTransform: 'uppercase', marginTop: 2 }}>{s.label}</div>
                       </div>
                     ))}

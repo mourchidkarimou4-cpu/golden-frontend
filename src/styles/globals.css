@@ -112,20 +112,20 @@ body {
     border: 1px solid var(--border-bright);
     color: var(--text);
   }
-  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-outline:hover { border-color: var(--text-muted); color: var(--text); }
 
   .btn-gold-sm {
-    @apply inline-flex items-center gap-2 px-4 py-2 text-xs tracking-widest uppercase font-medium transition-all duration-300;
+    @apply inline-flex items-center justify-center gap-2 px-8 py-3 text-xs tracking-widest uppercase transition-all duration-300;
     background: transparent;
-    border: 1px solid var(--gold);
-    color: var(--gold);
+    border: 1px solid var(--border-bright);
+    color: var(--text-muted);
   }
-  .btn-gold-sm:hover { background: var(--gold); color: var(--dark); }
+  .btn-gold-sm:hover { border-color: var(--gold); color: var(--gold); }
 
   /* Section label */
   .section-label { @apply inline-flex items-center gap-3 mb-5; }
-  .section-label-line { @apply w-8 h-px; background: var(--gold); }
-  .section-label-text { @apply text-xs tracking-widest uppercase; color: var(--gold); }
+  .section-label-line { @apply w-8 h-px; background: var(--text-dim); }
+  .section-label-text { @apply text-xs tracking-widest uppercase; color: var(--text-muted); }
 
   /* Section title */
   .section-title {
@@ -229,8 +229,8 @@ body {
   /* Badge */
   .badge {
     @apply text-xs px-2 py-0.5 rounded-sm;
-    background: rgba(201,168,76,0.15);
-    color: var(--gold);
+    background: var(--dark-3);
+    color: var(--text-muted);
   }
 }
 
@@ -342,7 +342,7 @@ body {
 .card-hover::before {
   content: '';
   position: absolute; left: 0; top: 0; bottom: 0;
-  width: 2px; background: var(--gold);
+  width: 2px; background: var(--text-dim);
   transform: scaleY(0); transform-origin: bottom;
   transition: transform .3s;
 }
@@ -350,7 +350,7 @@ body {
   content: '';
   position: absolute; top: 0; left: 0; right: 0;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--text-dim), transparent);
   opacity: 0; transition: opacity .3s;
 }
 .card-hover:hover { border-color: var(--border-bright) !important; transform: translateY(-3px); }
@@ -409,4 +409,9 @@ body {
 [data-theme="light"] h2,
 [data-theme="light"] h3 {
   color: var(--text) !important;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }

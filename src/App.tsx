@@ -1,5 +1,7 @@
 // src/App.tsx
 import { useState, useCallback, useEffect } from 'react'
+import NotFoundPage from '@/pages/NotFoundPage'
+import SharePage from '@/pages/SharePage'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
 
@@ -77,7 +79,8 @@ function AppRoutes() {
       <Route path="/investisseur/profil"         element={<PrivateRoute role="investisseur"><ProfilPageInv /></PrivateRoute>} />
       <Route path="/investisseur/parametres"     element={<PrivateRoute role="investisseur"><ParametresPageInv /></PrivateRoute>} />
 
-      <Route path="*" element={<Navigate to="/" replace />} />
+      <Route path="/share/:token" element={<SharePage />} />
+        <Route path="*" element={<NotFoundPage />} />
     </Routes>
   )
 }

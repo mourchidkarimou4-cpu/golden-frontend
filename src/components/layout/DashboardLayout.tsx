@@ -1,6 +1,7 @@
 // src/components/layout/DashboardLayout.tsx
 import { ReactNode, useState, useEffect } from 'react'
 import React from 'react'
+import { LayoutDashboard, FolderOpen, MessageSquare, DollarSign, User, TrendingUp, Bell, LogOut } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 import { ThemeToggle } from '@/components/ui'
 import { NavLink, useNavigate, useLocation } from 'react-router-dom'
@@ -26,19 +27,19 @@ interface DashboardLayoutProps {
 
 // Bottom nav items porteur
 const BOTTOM_NAV_PORTEUR = [
-  { icon: '⊞', label: 'Accueil',   to: '/porteur' },
-  { icon: '◈', label: 'Projet',    to: '/porteur/projet' },
-  { icon: '✉', label: 'Messages',  to: '/porteur/messages' },
-  { icon: '₣', label: 'Finances',  to: '/porteur/finances' },
-  { icon: '◯', label: 'Profil',    to: '/porteur/profil' },
+  { icon: LayoutDashboard, label: 'Accueil',   to: '/porteur' },
+  { icon: FolderOpen,      label: 'Projet',    to: '/porteur/projet' },
+  { icon: MessageSquare,   label: 'Messages',  to: '/porteur/messages' },
+  { icon: DollarSign,      label: 'Finances',  to: '/porteur/finances' },
+  { icon: User,            label: 'Profil',    to: '/porteur/profil' },
 ]
 
 const BOTTOM_NAV_INVESTISSEUR = [
-  { icon: '⊞', label: 'Accueil',   to: '/investisseur' },
-  { icon: '◈', label: 'Projets',   to: '/investisseur/projets' },
-  { icon: '✉', label: 'Messages',  to: '/investisseur/messages' },
-  { icon: '₣', label: 'Portfolio', to: '/investisseur/portfolio' },
-  { icon: '◯', label: 'Profil',    to: '/investisseur/profil' },
+  { icon: LayoutDashboard, label: 'Accueil',   to: '/investisseur' },
+  { icon: TrendingUp,      label: 'Projets',   to: '/investisseur/projets' },
+  { icon: MessageSquare,   label: 'Messages',  to: '/investisseur/messages' },
+  { icon: DollarSign,      label: 'Portfolio', to: '/investisseur/portfolio' },
+  { icon: User,            label: 'Profil',    to: '/investisseur/profil' },
 ]
 
 export default function DashboardLayout({
@@ -125,7 +126,7 @@ export default function DashboardLayout({
             background: 'none', border: 'none',
             color: 'var(--text-muted)', fontSize: 16,
             cursor: 'pointer', padding: 4, transition: 'color .2s',
-          }}>⏻</button>
+          }}><LogOut size={15} strokeWidth={1.5} /></button>
         </div>
       </aside>
 
@@ -173,7 +174,7 @@ export default function DashboardLayout({
               color: 'var(--text-muted)', fontSize: 18,
               cursor: 'pointer', position: 'relative', padding: 4,
             }}>
-              🔔
+              <Bell size={18} strokeWidth={1.5} />
               <span style={{
                 position: 'absolute', top: 2, right: 2,
                 width: 7, height: 7,
@@ -217,7 +218,7 @@ export default function DashboardLayout({
               to={item.to}
               className={({ isActive }) => `bottom-nav-item ${isActive ? 'active' : ''}`}
             >
-              <span className="nav-icon">{item.icon}</span>
+              <item.icon size={18} strokeWidth={1.5} />
               <span>{item.label}</span>
             </NavLink>
           ))}

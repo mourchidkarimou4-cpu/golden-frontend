@@ -11,8 +11,8 @@ const DOC_TYPES = [
   { label: 'Business Plan', icon: '📄', required: true },
   { label: "Étude de marché", icon: '📊', required: true },
   { label: 'Statuts de la société', icon: '🏛', required: false },
-  { label: 'Bilan financier', icon: '₣', required: false },
-  { label: "Pièce d'identité", icon: '🪪', required: true },
+  { label: 'Bilan financier', required: false },
+  { label: "Pièce d'identité", required: true },
 ]
 
 export default function DocumentsPage() {
@@ -98,7 +98,7 @@ export default function DocumentsPage() {
           <SectionLabel>Documents requis</SectionLabel>
           {DOC_TYPES.map((d, i) => (
             <div key={i} style={{ display: 'flex', alignItems: 'center', gap: 12, padding: '10px 0', borderBottom: '1px solid var(--border)' }}>
-              <span style={{ fontSize: 18 }}>{d.icon}</span>
+              <span style={{ fontSize: 18 }}></span>
               <span style={{ fontSize: 12, color: 'var(--text)', flex: 1 }}>{d.label}</span>
               {d.required && (
                 <span style={{ fontSize: 9, color: '#f87171', letterSpacing: '0.08em', textTransform: 'uppercase' }}>Requis</span>

@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel, ProgressBar } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, RatingWidget } from '@/components/ui'
+import { TrendingUp } from 'lucide-react'
 import { investmentsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
@@ -25,7 +26,7 @@ export default function PortfolioPage() {
 
   if (loading) return (
     <DashboardLayout navItems={NAV_INVESTISSEUR} title="Portfolio">
-      <GoldenSpinner />
+      <SkeletonKpiGrid />
     </DashboardLayout>
   )
 
@@ -48,7 +49,7 @@ export default function PortfolioPage() {
         ].map(k => (
           <div key={k.label} className="kpi-card" style={{ padding: 20 }}>
             <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.12em', textTransform: 'uppercase', marginBottom: 8 }}>{k.label}</div>
-            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 28, color: 'var(--gold-light)' }}>{k.value}</div>
+            <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 28, color: 'var(--text)' }}>{k.value}</div>
             <div style={{ fontSize: 10, color: 'var(--text-dim)', marginTop: 2 }}>{k.unit}</div>
           </div>
         ))}
@@ -58,7 +59,7 @@ export default function PortfolioPage() {
         {/* Graphique */}
         <div className="kpi-card" style={{ padding: 28 }}>
           <SectionLabel>Évolution du portfolio (6 mois)</SectionLabel>
-          {investments.length === 0 && <div style={{ textAlign: 'center', padding: '20px', color: 'var(--text-muted)', fontSize: 13 }}>Aucun investissement pour le moment.</div>}
+
           <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 160, marginTop: 24, marginBottom: 16 }}>
             {investments.length > 0 && mockData.map((v, i) => (
               <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
@@ -78,10 +79,18 @@ export default function PortfolioPage() {
             <p style={{ color: 'var(--text-muted)', fontSize: 13, padding: '20px 0' }}>
               Aucun investissement pour le moment.
             </p>
+          ) : investments.length === 0 ? (
+            <EmptyState
+              icon={TrendingUp}
+              title="Aucun investissement"
+              description="Explorez les projets disponibles et faites votre premier investissement."
+              action={{ label: 'Explorer les projets', onClick: () => window.location.href = '/investisseur/projets' }}
+            />
           ) : (
             investments.map((inv: any, i: number) => (
-              <div key={i} style={{
-                padding: '14px 0', borderBottom: '1px solid var(--border)',
+              <div key={i} style={{ borderBottom: '1px solid var(--border)', paddingBottom: 8, marginBottom: 8 }}>
+              <div style={{
+                padding: '14px 0',
                 display: 'flex', justifyContent: 'space-between', alignItems: 'center',
               }}>
                 <div>
@@ -91,7 +100,7 @@ export default function PortfolioPage() {
                   </div>
                 </div>
                 <div style={{ textAlign: 'right' }}>
-                  <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 18, color: 'var(--gold-light)' }}>
+                  <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 18, color: 'var(--text)' }}>
                     {((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
                   </div>
                   <div style={{ fontSize: 10, color: inv.status === 'confirmed' ? '#4ade80' : '#fbbf24', marginTop: 2 }}>
@@ -99,6 +108,14 @@ export default function PortfolioPage() {
                   </div>
                 </div>
               </div>
+              {(inv.status === 'confirmed' || inv.status === 'completed') && (
+                <RatingWidget
+                  investmentId={inv.id}
+                  currentScore={inv.rating?.score ?? 0}
+                  currentComment={inv.rating?.comment ?? ''}
+                />
+              )}
+            </div>
             ))
           )}
         </div>

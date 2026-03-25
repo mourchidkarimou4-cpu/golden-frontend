@@ -230,7 +230,7 @@ export default function CreateProjectPage() {
                   ].map(s => (
                     <div key={s.label}>
                       <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '0.1em', textTransform: 'uppercase' }}>{s.label}</div>
-                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 22, color: 'var(--gold-light)', marginTop: 3 }}>{s.value}</div>
+                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 22, color: 'var(--text)', marginTop: 3 }}>{s.value}</div>
                     </div>
                   ))}
                 </div>

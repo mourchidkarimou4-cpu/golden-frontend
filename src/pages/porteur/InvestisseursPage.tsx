@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, SkeletonTable, SkeletonKpiGrid, EmptyState } from '@/components/ui'
+import { Users, CheckCircle, DollarSign, MessageSquare } from 'lucide-react'
 import { investmentsAPI } from '@/lib/api'
 import { useNavigate } from 'react-router-dom'
 
@@ -32,12 +33,8 @@ export default function InvestisseursPage() {
 
   if (loading) return (
     <DashboardLayout navItems={NAV_PORTEUR} title="Investisseurs">
-      <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
-        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
-        <span style={{ color: 'var(--text-dim)' }}>|</span>
-        <a href="/porteur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
-      </div>
-      <GoldenSpinner />
+      <SkeletonKpiGrid />
+      <SkeletonTable rows={5} />
     </DashboardLayout>
   )
 
@@ -45,14 +42,16 @@ export default function InvestisseursPage() {
     <DashboardLayout navItems={NAV_PORTEUR} title="Investisseurs" subtitle="Gérez vos relations investisseurs">
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 16, marginBottom: 32 }}>
         {[
-          { label: 'Total investisseurs', value: investments.length, icon: '◎' },
-          { label: 'Confirmés', value: confirmed, icon: '✓' },
-          { label: 'Capital levé', value: `${(totalRaised/1_000_000).toFixed(1)}M FCFA`, icon: '₣' },
+          { label: 'Total investisseurs', value: investments.length, Icon: Users },
+          { label: 'Confirmés', value: confirmed, Icon: CheckCircle },
+          { label: 'Capital levé', value: `${(totalRaised/1_000_000).toFixed(1)}M FCFA`, Icon: DollarSign },
         ].map(k => (
           <div key={k.label} className="kpi-card" style={{ padding: 24, display: 'flex', alignItems: 'center', gap: 16 }}>
-            <span style={{ fontSize: 28, color: 'var(--gold)', opacity: 0.7 }}>{k.icon}</span>
+            <div style={{ width: 40, height: 40, border: '1px solid var(--border)', display: 'grid', placeItems: 'center', color: 'var(--text-muted)', flexShrink: 0 }}>
+              <k.Icon size={16} strokeWidth={1.5} />
+            </div>
             <div>
-              <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 28, color: 'var(--gold-light)' }}>{k.value}</div>
+              <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 28, color: 'var(--text)' }}>{k.value}</div>
               <div style={{ fontSize: 10, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{k.label}</div>
             </div>
           </div>
@@ -73,9 +72,11 @@ export default function InvestisseursPage() {
           ))}
         </div>
         {filtered.length === 0 ? (
-          <div style={{ padding: '40px 0', textAlign: 'center', color: 'var(--text-muted)', fontSize: 13 }}>
-            Aucun investisseur pour le moment.
-          </div>
+          <EmptyState
+            icon={Users}
+            title="Aucun investisseur"
+            description="Aucun investisseur ne correspond à ce filtre pour le moment."
+          />
         ) : (
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
             <thead>
@@ -90,7 +91,7 @@ export default function InvestisseursPage() {
                 <tr key={i} style={{ borderBottom: '1px solid var(--border)' }}>
                   <td style={{ padding: '14px 0' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
-                      <div style={{ width: 32, height: 32, border: '1px solid var(--border-bright)', display: 'grid', placeItems: 'center', fontSize: 12, color: 'var(--gold)', flexShrink: 0 }}>
+                      <div style={{ width: 32, height: 32, border: '1px solid var(--border-bright)', display: 'grid', placeItems: 'center', fontSize: 12, color: 'var(--text-muted)', flexShrink: 0 }}>
                         {inv.investor_name?.[0] ?? 'I'}
                       </div>
                       <div>
@@ -99,7 +100,7 @@ export default function InvestisseursPage() {
                       </div>
                     </div>
                   </td>
-                  <td style={{ padding: '14px 0', fontSize: 13, color: 'var(--gold-light)', fontFamily: '"Cormorant Garamond", serif' }}>
+                  <td style={{ padding: '14px 0', fontSize: 13, color: 'var(--text)', fontFamily: '"Cormorant Garamond", serif' }}>
                     {((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
                   </td>
                   <td style={{ padding: '14px 0' }}>
@@ -111,7 +112,7 @@ export default function InvestisseursPage() {
                     {inv.created_at ? new Date(inv.created_at).toLocaleDateString('fr-FR') : '—'}
                   </td>
                   <td style={{ padding: '14px 0' }}>
-                    <button className="btn-gold-sm" onClick={() => navigate('/porteur/messages')} style={{ fontSize: 10 }}>✉ Contacter</button>
+                    <button className="btn-gold-sm" onClick={() => navigate('/porteur/messages')} style={{ fontSize: 10 }}>Contacter</button>
                   </td>
                 </tr>
               ))}

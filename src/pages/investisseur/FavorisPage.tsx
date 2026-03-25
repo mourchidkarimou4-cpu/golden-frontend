@@ -71,7 +71,7 @@ export default function FavorisPage() {
                 ].map(s => (
                   <div key={s.label} style={{ padding: 10, background: 'var(--dark-4)', border: '1px solid var(--border)', textAlign: 'center' }}>
                     <div style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase', letterSpacing: '0.1em', marginBottom: 4 }}>{s.label}</div>
-                    <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: 'var(--gold-light)' }}>{s.value}</div>
+                    <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: 'var(--text)' }}>{s.value}</div>
                   </div>
                 ))}
               </div>

@@ -68,25 +68,25 @@ export default function DashboardInvestisseur() {
           label="Portefeuille total"
           value={`${((summary?.total_invested ?? 0)/1_000_000).toFixed(0)}M ₣`}
           trend="↑ +8.4% YTD"
-          trendUp icon="₣"
+          trendUp
         />
         <KpiCard
           label="ROI moyen"
           value={`${summary?.average_roi ?? 0}%`}
           trend="↑ vs marché"
-          trendUp icon="%"
+          trendUp
         />
         <KpiCard
           label="Projets actifs"
           value={summary?.active_investments ?? 0}
           sub={`${summary?.total_investments ?? 0} au total`}
-          icon="◎"
+          
         />
         <KpiCard
           label="Investissements"
           value={summary?.total_investments ?? 0}
           sub="Toutes durées"
-          icon="◈"
+          
         />
       </div>
 
@@ -157,7 +157,7 @@ export default function DashboardInvestisseur() {
                   ].map(s => (
                     <div key={s.label} style={{ padding: 8, background: 'var(--dark-4)', border: '1px solid var(--border)', textAlign: 'center' }}>
                       <div style={{ fontSize: 9, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: 3 }}>{s.label}</div>
-                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 14, color: 'var(--gold-light)' }}>{s.value}</div>
+                      <div style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 14, color: 'var(--text)' }}>{s.value}</div>
                     </div>
                   ))}
                 </div>
@@ -194,7 +194,7 @@ export default function DashboardInvestisseur() {
               <div key={inv.id} style={{ padding: '14px', background: 'var(--dark-4)', border: '1px solid var(--border)' }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                   <span style={{ fontSize: 13, color: 'var(--text)', fontWeight: 500 }}>{inv.project_title}</span>
-                  <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: 'var(--gold-light)' }}>
+                  <span style={{ fontFamily: '"Cormorant Garamond", serif', fontSize: 16, color: 'var(--text)' }}>
                     {((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
                   </span>
                 </div>
@@ -222,7 +222,7 @@ export default function DashboardInvestisseur() {
                 {recent_investments.map((inv: any) => (
                   <tr key={inv.id} style={{ borderBottom: '1px solid var(--border)' }}>
                     <td style={{ padding: '10px 12px', fontSize: 13, color: 'var(--text)' }}>{inv.project_title}</td>
-                    <td style={{ padding: '10px 12px', fontSize: 13, color: 'var(--gold-light)', fontFamily: '"Cormorant Garamond", serif' }}>
+                    <td style={{ padding: '10px 12px', fontSize: 13, color: 'var(--text)', fontFamily: '"Cormorant Garamond", serif' }}>
                       {((inv.amount ?? 0)/1_000_000).toFixed(1)}M ₣
                     </td>
                     <td style={{ padding: '10px 12px', fontSize: 13, color: '#4ade80' }}>

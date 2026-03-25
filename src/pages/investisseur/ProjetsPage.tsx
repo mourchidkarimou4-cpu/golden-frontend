@@ -2,7 +2,8 @@
 import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner } from '@/components/ui'
+import { GoldenSpinner, SkeletonKpiGrid, EmptyState } from '@/components/ui'
+import { TrendingUp, Heart } from 'lucide-react'
 import { projectsAPI } from '@/lib/api'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 
@@ -33,7 +34,7 @@ export default function ProjetsPage() {
     <DashboardLayout navItems={NAV_INVESTISSEUR} title="Projets" subtitle="Explorez les opportunités d'investissement">
       <div style={{ display: 'flex', gap: 16, marginBottom: 16 }}>
         <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>← Retour</a>
-        <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>⊞ Accueil</a>
+        <a href="/investisseur" style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: 12 }}>Accueil</a>
       </div>
 
       {/* Filtres */}
@@ -63,12 +64,14 @@ export default function ProjetsPage() {
       </div>
 
       {loading ? (
-        <div style={{ display: 'flex', justifyContent: 'center', padding: 60 }}><GoldenSpinner /></div>
+        <SkeletonKpiGrid />
       ) : filtered.length === 0 ? (
-        <div style={{ textAlign: 'center', padding: '60px 20px', border: '1px solid var(--border)', color: 'var(--text-muted)' }}>
-          <div style={{ fontSize: 40, marginBottom: 16, opacity: .3 }}>◈</div>
-          <p style={{ fontSize: 14 }}>Aucun projet disponible pour le moment.</p>
-        </div>
+        <EmptyState
+          icon={TrendingUp}
+          title="Aucun projet disponible"
+          description="Aucun projet ne correspond à votre recherche pour le moment."
+          action={{ label: 'Réinitialiser les filtres', onClick: () => { setSector('Tous'); setSearch('') } }}
+        />
       ) : (
         <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : 'repeat(2,1fr)', gap: 16 }}>
           {filtered.map((project: any) => (
@@ -78,7 +81,7 @@ export default function ProjetsPage() {
             }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: 12 }}>
                 <div>
-                  <div style={{ fontSize: 9, color: 'var(--gold)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 4 }}>
+                  <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '.12em', textTransform: 'uppercase', marginBottom: 4 }}>
                     {project.sector}
                   </div>
                   <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, color: 'var(--text)' }}>
@@ -96,22 +99,23 @@ export default function ProjetsPage() {
               </p>
               <div style={{ display: 'flex', gap: 20, marginBottom: 16 }}>
                 {[
-                  { label: 'Objectif', val: `${(project.funding_goal/1000000).toFixed(0)}M ₣` },
+                  { label: 'Objectif', val: `${(parseFloat(String(project.funding_goal ?? 0))/1000000).toFixed(0)}M ₣` },
                   { label: 'ROI estimé', val: `${project.expected_roi ?? '--'}%` },
                   { label: 'Durée', val: `${project.duration_months ?? '--'}m` },
                 ].map(s => (
                   <div key={s.label}>
-                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, color: 'var(--gold-light)' }}>{s.val}</div>
+                    <div style={{ fontFamily: '"Cormorant Garamond",serif', fontSize: 20, color: 'var(--text)' }}>{s.val}</div>
                     <div style={{ fontSize: 9, color: 'var(--text-muted)', letterSpacing: '.1em', textTransform: 'uppercase' }}>{s.label}</div>
                   </div>
                 ))}
               </div>
               <div style={{ display: 'flex', gap: 8 }}>
                 <button onClick={() => projectsAPI.toggleFav?.(project.id)} style={{
+                  display: 'flex', alignItems: 'center', gap: 6,
                   padding: '8px 14px', background: 'transparent',
                   border: '1px solid var(--border)', color: 'var(--text-muted)',
                   fontSize: 10, cursor: 'pointer', letterSpacing: '.08em',
-                }}>♦ Favori</button>
+                }}><Heart size={12} strokeWidth={1.5} /> Favori</button>
                 <button style={{
                   flex: 1, padding: '8px', background: 'var(--gold)', color: 'var(--dark)',
                   border: 'none', fontSize: 10, cursor: 'pointer',
