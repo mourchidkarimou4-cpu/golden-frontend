@@ -223,7 +223,7 @@ export default function LandingPage() {
       <section style={{
         minHeight: '100vh',
         display: 'flex', flexDirection: 'column', justifyContent: 'center',
-        padding: isMobile ? '100px 24px 60px' : '140px 60px 80px',
+        padding: isMobile ? '120px 24px 60px' : '160px 60px 80px',
         position: 'relative', overflow: 'hidden',
       }}>
         {/* Hero Slideshow background */}
