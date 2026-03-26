@@ -84,7 +84,8 @@ export default function LandingPage() {
       {/* ── Navbar ──────────────────────────────────── */}
       <nav ref={navRef} className="navbar" style={{
         position: 'fixed', top: 0, left: 0, right: 0, zIndex: 100,
-        padding: isMobile ? '16px 20px' : '24px 60px',
+        padding: isMobile ? '8px 20px' : '10px 60px',
+        height: isMobile ? 48 : 56,
         display: 'flex', alignItems: 'center', justifyContent: 'space-between',
         borderBottom: '1px solid transparent',
         transition: 'all .4s',
