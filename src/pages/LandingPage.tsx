@@ -79,24 +79,34 @@ export default function LandingPage() {
 
   return (
     <div style={{ background: 'var(--dark)', minHeight: '100vh' }}>
-      {/* ── Bandeau d'annonce ─────────────────────────────── */}
+      {/* ── Bandeau annonce défilant ─────────────────────── */}
       <div style={{
-        background: 'var(--gold)',
-        color: 'var(--dark)',
-        padding: '10px 24px',
-        textAlign: 'center',
-        fontSize: 12,
-        fontWeight: 500,
-        letterSpacing: '.04em',
-        lineHeight: 1.6,
-        position: 'relative',
-        zIndex: 110,
+        background: 'var(--gold)', color: 'var(--dark)',
+        padding: '8px 0', overflow: 'hidden',
+        position: 'relative', zIndex: 110,
       }}>
-        Nous disposons de plusieurs investisseurs prêts à vous confier de{' '}
-        <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.{' '}
-        <a href="/register" style={{ color: 'var(--dark)', textDecoration: 'underline', fontWeight: 600 }}>
-          Rejoindre la plateforme →
-        </a>
+        <style>{`
+          @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+          }
+          .ticker-text {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: .04em;
+          }
+        `}</style>
+        <div className="ticker-text">
+          Nous disposons de plusieurs investisseurs prêts à vous confier de&nbsp;
+          <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.&nbsp;&nbsp;&nbsp;
+          Rejoignez la plateforme GOLDEN Investissement dès maintenant →&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          Nous disposons de plusieurs investisseurs prêts à vous confier de&nbsp;
+          <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.&nbsp;&nbsp;&nbsp;
+          Rejoignez la plateforme GOLDEN Investissement dès maintenant →
+        </div>
       </div>
 
       {/* ── Navbar ──────────────────────────────────── */}
