@@ -79,35 +79,7 @@ export default function LandingPage() {
 
   return (
     <div style={{ background: 'var(--dark)', minHeight: '100vh' }}>
-      {/* ── Bandeau annonce défilant ─────────────────────── */}
-      <div style={{
-        background: 'var(--gold)', color: 'var(--dark)',
-        padding: '8px 0', overflow: 'hidden',
-        position: 'relative', zIndex: 110,
-      }}>
-        <style>{`
-          @keyframes ticker {
-            0% { transform: translateX(100%); }
-            100% { transform: translateX(-100%); }
-          }
-          .ticker-text {
-            display: inline-block;
-            white-space: nowrap;
-            animation: ticker 25s linear infinite;
-            font-size: 12px;
-            font-weight: 500;
-            letter-spacing: .04em;
-          }
-        `}</style>
-        <div className="ticker-text">
-          Nous disposons de plusieurs investisseurs prêts à vous confier de&nbsp;
-          <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.&nbsp;&nbsp;&nbsp;
-          Rejoignez la plateforme GOLDEN Investissement dès maintenant →&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          Nous disposons de plusieurs investisseurs prêts à vous confier de&nbsp;
-          <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.&nbsp;&nbsp;&nbsp;
-          Rejoignez la plateforme GOLDEN Investissement dès maintenant →
-        </div>
-      </div>
+
 
       {/* ── Navbar ──────────────────────────────────── */}
       <nav ref={navRef} className="navbar" style={{
@@ -156,6 +128,64 @@ export default function LandingPage() {
           )}
         </div>
       </nav>
+
+      {/* ── Bandeau annonce défilant ─────────────────────── */}
+      <div style={{
+        background: 'linear-gradient(90deg, var(--dark-2), rgba(184,115,51,0.15), var(--dark-2))',
+        borderTop: '1px solid rgba(184,115,51,0.3)',
+        borderBottom: '1px solid rgba(184,115,51,0.3)',
+        padding: '7px 0', overflow: 'hidden',
+        position: 'fixed', top: isMobile ? 52 : 64,
+        left: 0, right: 0, zIndex: 99,
+      }}>
+        <style>{`
+          @keyframes ticker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+          }
+          .ticker-inner {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker 40s linear infinite;
+          }
+          .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 0 40px;
+            font-size: 11px;
+            font-weight: 400;
+            letter-spacing: .06em;
+            color: var(--text-muted);
+          }
+          .ticker-item strong { color: var(--gold); font-weight: 500; }
+          .ticker-dot {
+            width: 4px; height: 4px; border-radius: 50%;
+            background: var(--gold); opacity: 0.5;
+            display: inline-block; flex-shrink: 0;
+          }
+        `}</style>
+        <div className="ticker-inner">
+          {[0,1].map(k => (
+            <span key={k} style={{ display: 'inline-flex' }}>
+              <span className="ticker-item">
+                <span className="ticker-dot" />
+                Nous disposons d'investisseurs prêts à vous confier de&nbsp;
+                <strong>100 000 €</strong>&nbsp;à&nbsp;<strong>345 000 000 €</strong>&nbsp;
+                pour tout projet lucratif
+              </span>
+              <span className="ticker-item">
+                <span className="ticker-dot" />
+                Rejoignez GOLDEN Investissement — La plateforme africaine de référence
+              </span>
+              <span className="ticker-item">
+                <span className="ticker-dot" />
+                Porteurs de projets &amp; Investisseurs — Connectons vos ambitions
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
 
       {/* Mobile Menu Drawer */}
       {isMobile && menuOpen && (
