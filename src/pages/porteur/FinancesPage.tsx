@@ -3,9 +3,9 @@ import { useState, useEffect } from 'react'
 import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
 import { useIsMobile } from '@/hooks/useBreakpoint'
 import DashboardLayout from '@/components/layout/DashboardLayout'
-import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, NegotiationFlow } from '@/components/ui'
+import { GoldenSpinner, SectionLabel, ProgressBar, SkeletonKpiGrid, EmptyState, NegotiationFlow, BarChart } from '@/components/ui'
 import { DollarSign } from 'lucide-react'
-import { reportingAPI, investmentsAPI } from '@/lib/api'
+import { reportingAPI, investmentsAPI, analyticsAPI } from '@/lib/api'
 
 
 export default function FinancesPage() {
@@ -13,12 +13,15 @@ export default function FinancesPage() {
   const [dashboard, setDashboard] = useState<any>(null)
   const [investments, setInvestments] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
+  const [analytics, setAnalytics] = useState<any>(null)
 
   useEffect(() => {
     Promise.all([
       reportingAPI.dashboardPorteur(),
       investmentsAPI.list(),
-    ]).then(([dash, inv]) => {
+      analyticsAPI.get(),
+    ]).then(([dash, inv, ana]) => {
+      setAnalytics(ana.data)
       setDashboard(dash.data)
       setInvestments(inv.data.results ?? inv.data ?? [])
     }).finally(() => setLoading(false))
@@ -35,9 +38,8 @@ export default function FinancesPage() {
   const totalRaised = investments.reduce((s, i) => s + (i.amount ?? 0), 0)
   const amountNeeded = mainProject?.amount_needed ?? 0
   const pct = amountNeeded > 0 ? Math.min(100, Math.round((totalRaised / amountNeeded) * 100)) : 0
-  const MONTHS = ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Jun']
-  const mockData = [8, 14, 10, 22, 18, 28]
-  const maxVal = Math.max(...mockData)
+  const MONTHS = (analytics?.monthly_funding ?? []).map((m: any) => m.month)
+  const mockData = (analytics?.monthly_funding ?? []).map((m: any) => m.amount)
 
   return (
     <DashboardLayout navItems={NAV_PORTEUR} title="Finances" subtitle="Suivi financier de votre projet">
@@ -58,17 +60,8 @@ export default function FinancesPage() {
       <div style={{ display: 'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 320px', gap: 24 }}>
         <div className="kpi-card" style={{ padding: 28 }}>
           <SectionLabel>Évolution du financement (6 mois)</SectionLabel>
-          <div style={{ display: 'flex', alignItems: 'flex-end', gap: 12, height: 160, marginTop: 24, marginBottom: 16 }}>
-            {mockData.map((v, i) => (
-              <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6 }}>
-                <div style={{
-                  width: '100%', height: `${(v/maxVal)*140}px`,
-                  background: 'linear-gradient(to top, rgba(201,168,76,0.8), rgba(201,168,76,0.2))',
-                  border: '1px solid rgba(201,168,76,0.4)',
-                }} />
-                <span style={{ fontSize: 10, color: 'var(--text-muted)' }}>{MONTHS[i]}</span>
-              </div>
-            ))}
+          <div style={{ marginTop: 24, marginBottom: 16 }}>
+            <BarChart labels={MONTHS} data={mockData} label="Capital levé (M FCFA)" height={160} />
           </div>
           <div style={{ marginTop: 20 }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>

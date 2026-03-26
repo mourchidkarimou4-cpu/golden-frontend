@@ -1,8 +1,25 @@
 // src/App.tsx
 import { useState, useCallback, useEffect } from 'react'
 import NotFoundPage from '@/pages/NotFoundPage'
+
+function AnimatedOutlet({ children }: { children: React.ReactNode }) {
+  const location = useLocation()
+  return (
+    <div
+      key={location.pathname}
+      style={{
+        animation: 'fadeUp 0.35s ease both',
+      }}
+    >
+      {children}
+    </div>
+  )
+}
+import AdminDashboard from '@/pages/AdminDashboard'
+import SplashScreen from '@/components/ui/SplashScreen'
+
 import SharePage from '@/pages/SharePage'
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { BrowserRouter, useLocation, Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from '@/lib/auth'
 
 import LandingPage           from '@/pages/LandingPage'
@@ -49,7 +66,9 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
 }
 
 function AppRoutes() {
+  const location = useLocation()
   return (
+    <div key={location.pathname} style={{ animation: 'fadeUp 0.35s ease both' }}>
     <Routes>
       <Route path="/"         element={<LandingPage />} />
       <Route path="/about"     element={<AboutPage />} />
@@ -80,8 +99,10 @@ function AppRoutes() {
       <Route path="/investisseur/parametres"     element={<PrivateRoute role="investisseur"><ParametresPageInv /></PrivateRoute>} />
 
       <Route path="/share/:token" element={<SharePage />} />
+        <Route path="/admin-panel" element={<AdminDashboard />} />
         <Route path="*" element={<NotFoundPage />} />
     </Routes>
+    </div>
   )
 }
 
@@ -91,6 +112,12 @@ export default function App() {
     const saved = localStorage.getItem('golden_theme') ?? 'dark'
     document.documentElement.setAttribute('data-theme', saved)
   }, [])
+
+  const [splash, setSplash] = useState(() => !sessionStorage.getItem('splash_done'))
+
+  if (splash) return (
+    <SplashScreen onDone={() => { sessionStorage.setItem('splash_done', '1'); setSplash(false) }} />
+  )
 
   return (
     <AuthProvider>

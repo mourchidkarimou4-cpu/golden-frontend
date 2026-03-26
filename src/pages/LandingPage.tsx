@@ -79,6 +79,25 @@ export default function LandingPage() {
 
   return (
     <div style={{ background: 'var(--dark)', minHeight: '100vh' }}>
+      {/* ── Bandeau d'annonce ─────────────────────────────── */}
+      <div style={{
+        background: 'var(--gold)',
+        color: 'var(--dark)',
+        padding: '10px 24px',
+        textAlign: 'center',
+        fontSize: 12,
+        fontWeight: 500,
+        letterSpacing: '.04em',
+        lineHeight: 1.6,
+        position: 'relative',
+        zIndex: 110,
+      }}>
+        Nous disposons de plusieurs investisseurs prêts à vous confier de{' '}
+        <strong>100 000 €</strong> à <strong>345 000 000 €</strong> pour investir dans tout projet lucratif.{' '}
+        <a href="/register" style={{ color: 'var(--dark)', textDecoration: 'underline', fontWeight: 600 }}>
+          Rejoindre la plateforme →
+        </a>
+      </div>
 
       {/* ── Navbar ──────────────────────────────────── */}
       <nav ref={navRef} className="navbar" style={{
@@ -212,6 +231,19 @@ export default function LandingPage() {
           }}>
             GOLDEN Investissement rapproche porteurs de projets ambitieux et investisseurs éclairés.
             Une plateforme sécurisée, transparente et pensée pour l'Afrique.
+          </p>
+          <p style={{
+            fontSize: isMobile ? 12 : 14, lineHeight: 1.9, color: 'var(--text-muted)',
+            maxWidth: 480, marginBottom: isMobile ? 32 : 56,
+            animation: 'fadeUp .8s .25s ease both',
+            borderLeft: '2px solid var(--gold)',
+            paddingLeft: 16,
+            fontStyle: 'italic',
+            opacity: 0.85,
+          }}>
+            Si vos capitaux propres sont insuffisants pour démarrer ou reprendre votre projet d'entreprise,
+            vous pouvez les renforcer en faisant appel à des investisseurs extérieurs privés ou publics
+            contre une participation au capital de votre société.
           </p>
           <div style={{
             display: 'flex', flexDirection: isMobile ? 'column' : 'row',

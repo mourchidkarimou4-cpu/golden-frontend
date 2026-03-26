@@ -75,6 +75,12 @@ export const authAPI = {
     api.post('/users/me/change-password/', data),
 }
 
+export const notificationsAPI = {
+  list:       ()              => api.get('/core/notifications/'),
+  markRead:   (id: string)    => api.post(`/core/notifications/${id}/read/`),
+  markAllRead: ()             => api.post('/core/notifications/read-all/'),
+}
+
 export const projectsAPI = {
   list:      (params?: ProjectFilters) => api.get('/projects/', { params }),
   mine:      ()                        => api.get('/projects/mine/'),
@@ -87,10 +93,20 @@ export const projectsAPI = {
   submit:    (id: string)              => api.post(`/projects/${id}/submit/`),
   toggleFav:        (id: string)              => api.post(`/projects/${id}/favorite/`),
   createShareToken: (id: string)              => api.post(`/projects/${id}/share/`),
-  getByShareToken:  (token: string)           => api.get(`/projects/share/${token}/`),
+  getByShareToken:      (token: string)              => api.get(`/projects/share/${token}/`),
+  updateFavoriteNote:   (id: string, note: string) => api.patch(`/projects/${id}/favorite/note/`, { note }),
   addDoc:    (id: string, form: FormData) => api.post(`/projects/${id}/documents/`, form, {
     headers: { 'Content-Type': 'multipart/form-data' },
   }),
+}
+
+export const paymentAPI = {
+  init:   (id: string) => api.post(`/investments/${id}/payment/init/`),
+  check:  (id: string) => api.get(`/investments/${id}/payment/check/`),
+}
+
+export const analyticsAPI = {
+  get: () => api.get('/reporting/analytics/'),
 }
 
 export const matchingAPI = {
@@ -109,8 +125,11 @@ export const investmentsAPI = {
   list:      ()                         => api.get('/investments/'),
   portfolio:  ()                                              => api.get('/investments/portfolio/'),
   rate:       (id: string, data: {score: number, comment?: string}) => api.post(`/investments/${id}/rate/`, data),
-  myRatings:  ()                                              => api.get('/investments/my-ratings/'),
-  history:    (id: string)                                    => api.get(`/investments/${id}/history/`),
+  myRatings:    ()                                              => api.get('/investments/my-ratings/'),
+  getOffers:    (id: string)                                    => api.get(`/investments/${id}/offers/`),
+  makeOffer:    (id: string, data: object)                      => api.post(`/investments/${id}/offer/`, data),
+  history:      (id: string)                                    => api.get(`/investments/${id}/history/`),
+  getContract:  (id: string)                                    => api.get(`/investments/${id}/contract/`, { responseType: 'blob' }),
   create:    (data: InvestmentData)     => api.post('/investments/', data),
   detail:    (id: string)               => api.get(`/investments/${id}/`),
   update:    (id: string, data: object) => api.patch(`/investments/${id}/`, data),
