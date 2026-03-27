@@ -26,7 +26,6 @@ export default defineConfig({
           'vendor-charts': ['recharts'],
           'vendor-http': ['axios'],
           'vendor-ui': ['lucide-react', 'clsx', 'tailwind-merge'],
-          'vendor-supabase': ['@supabase/supabase-js'],
         },
       },
     },
