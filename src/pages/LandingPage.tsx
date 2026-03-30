@@ -6,30 +6,29 @@ import { useIsMobile } from '@/hooks/useBreakpoint'
 import { useScrollReveal } from '@/hooks/useCountUp'
 
 const HERO_SLIDES = [
-  { url: 'https://images.unsplash.com/photo-1664575602807-e002fc20892c?w=1600&q=90&auto=format&fit=crop', label: 'Entrepreneurs africains', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1600&q=90&auto=format&fit=crop', label: 'Équipes qui innovent', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=1600&q=90&auto=format&fit=crop', label: 'Vision & Leadership', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=1600&q=90&auto=format&fit=crop', label: 'Investisseurs de confiance', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=90&auto=format&fit=crop', label: 'Partenariats solides', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1600&q=90&auto=format&fit=crop', label: 'Entrepreneurs africains', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600&q=90&auto=format&fit=crop', label: 'Vision & Leadership', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=1600&q=90&auto=format&fit=crop', label: 'Investisseurs de confiance', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1664575602807-e002fc20892c?w=1600&q=90&auto=format&fit=crop', label: 'Capital & croissance', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1606836576983-8b458e75221d?w=1600&q=90&auto=format&fit=crop', label: 'Partenariats solides', position: 'center' },
 ]
 
 const HOW_SLIDES = [
-  { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80&auto=format&fit=crop', label: 'Présentation de projet' },
-  { url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=800&q=80&auto=format&fit=crop', label: 'Analyse & due diligence' },
-  { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=800&q=80&auto=format&fit=crop', label: 'Négociation & accord' },
-  { url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80&auto=format&fit=crop', label: 'Signature & financement' },
+  { url: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&q=80&auto=format&fit=crop', label: 'Présentation de projet' },
+  { url: 'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&q=80&auto=format&fit=crop', label: 'Négociation & accord' },
+  { url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=800&q=80&auto=format&fit=crop', label: 'Signature & financement' },
 ]
 
 const PORTEUR_SLIDES = [
-  { url: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80&auto=format&fit=crop', label: 'Porteur de projet', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1664575602807-e002fc20892c?w=600&q=80&auto=format&fit=crop', label: 'Entrepreneur africain', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1606836576983-8b458e75221d?w=600&q=80&auto=format&fit=crop', label: 'Vision & projet', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80&auto=format&fit=crop', label: 'Porteuse de projet', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?w=600&q=80&auto=format&fit=crop', label: 'Entrepreneur visionnaire', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=600&q=80&auto=format&fit=crop', label: 'Pitch & présentation', position: 'center' },
 ]
 
 const INVEST_SLIDES = [
-  { url: 'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80&auto=format&fit=crop', label: 'Investisseur', position: 'center top' },
-  { url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80&auto=format&fit=crop', label: 'Analyse de portefeuille', position: 'center' },
-  { url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80&auto=format&fit=crop', label: 'Partenariat stratégique', position: 'center' },
+  { url: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=600&q=80&auto=format&fit=crop', label: 'Investisseur confiant', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=600&q=80&auto=format&fit=crop', label: 'Analyse de portefeuille', position: 'center top' },
+  { url: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=600&q=80&auto=format&fit=crop', label: 'Partenariat stratégique', position: 'center' },
 ]
 
 const STEPS = [
