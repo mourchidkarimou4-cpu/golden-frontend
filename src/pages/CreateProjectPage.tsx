@@ -1,3 +1,4 @@
+import { isAxiosError } from '@/lib/axiosError'
 // src/pages/CreateProjectPage.tsx
 import { useState } from 'react'
 import DashboardLayout from '@/components/layout/DashboardLayout'
@@ -68,8 +69,8 @@ export default function CreateProjectPage() {
         min_investment:  form.min_investment ? parseFloat(form.min_investment) * 1_000_000 : undefined,
       })
       setCreated({ id: data.id, title: data.title })
-    } catch (err: any) {
-      const d = err.response?.data; setError(typeof d?.detail === 'string' ? d.detail : d?.error ?? JSON.stringify(d) ?? 'Erreur lors de la création.')
+    } catch (err: unknown) {
+      const d = isAxiosError(err) ? (err.response?.data as Record<string, string>) : null; setError(d?.detail ?? d?.error ?? 'Erreur lors de la création.')
     } finally {
       setLoading(false)
     }

@@ -1,3 +1,4 @@
+import { isAxiosError } from '@/lib/axiosError'
 // src/components/dashboard/InvestModal.tsx
 import { useState } from 'react'
 import { investmentsAPI } from '@/lib/api'
@@ -34,9 +35,9 @@ export default function InvestModal({ project, onClose, onSuccess }: InvestModal
         notes,
       })
       onSuccess()
-    } catch (e: any) {
-      setError(e.response?.data?.detail ?? e.response?.data?.amount?.[0] ?? 'Une erreur est survenue.')
-    } finally {
+    } catch (e: unknown) {
+      const d = isAxiosError(e) ? (e.response?.data as Record<string, string[]|string>) : null
+      setError((d?.detail as string) ?? (d?.amount as string[])?.[0] ?? 'Une erreur est survenue.')
       setLoading(false)
     }
   }

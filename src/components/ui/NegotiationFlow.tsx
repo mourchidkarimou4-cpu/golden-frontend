@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/components/ui/NegotiationFlow.tsx
 import { useState, useEffect } from 'react'
 import { ChevronDown, ChevronUp, Download, CheckCircle, Clock, XCircle, AlertCircle, Send, RefreshCw } from 'lucide-react'

@@ -1,3 +1,4 @@
+import { isAxiosError } from '@/lib/axiosError'
 // src/pages/RegisterPage.tsx
 import { useState, useEffect } from 'react'
 import { Link, useNavigate, useSearchParams } from 'react-router-dom'
@@ -32,9 +33,9 @@ export default function RegisterPage() {
       await authAPI.register(form)
       await login(form.email, form.password)
       navigate(form.role === 'porteur' ? '/porteur' : '/investisseur')
-    } catch (err: any) {
-      const d = err.response?.data
-      setError(typeof d?.detail === 'string' ? d.detail : d?.error ?? 'Une erreur est survenue.')
+    } catch (err: unknown) {
+      const d = isAxiosError(err) ? (err.response?.data as Record<string, string>) : null
+      setError(d?.detail ?? d?.error ?? 'Une erreur est survenue.')
     } finally { setLoading(false) }
   }
 

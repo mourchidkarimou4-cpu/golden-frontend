@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/pages/DashboardInvestisseur.tsx
 import { useState, useEffect } from 'react'
 import { NAV_INVESTISSEUR, type NavItem } from '@/lib/navItems'

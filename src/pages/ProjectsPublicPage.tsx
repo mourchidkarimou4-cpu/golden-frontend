@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/pages/ProjectsPublicPage.tsx
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'

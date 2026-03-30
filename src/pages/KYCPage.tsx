@@ -1,3 +1,4 @@
+import { isAxiosError } from '@/lib/axiosError'
 // src/pages/KYCPage.tsx
 import { useState , useRef} from 'react'
 import { CheckCircle, Plus } from 'lucide-react'
@@ -50,8 +51,8 @@ export default function KYCPage() {
       }
       setSuccess(true)
       setTimeout(() => navigate(user?.role === 'porteur' ? '/porteur' : '/investisseur'), 2000)
-    } catch (err: any) {
-      setError(err.response?.data?.detail ?? 'Erreur lors de l\'envoi.')
+    } catch (err: unknown) {
+      setError((isAxiosError(err) ? (err.response?.data as {detail?: string})?.detail : undefined) ?? "Erreur lors de l'envoi.")
     } finally {
       setLoading(false)
     }

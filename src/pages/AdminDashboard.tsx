@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/pages/AdminDashboard.tsx
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'

@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/pages/MessagesPage.tsx
 import { useState } from 'react'
 import { useIsMobile } from '@/hooks/useBreakpoint'

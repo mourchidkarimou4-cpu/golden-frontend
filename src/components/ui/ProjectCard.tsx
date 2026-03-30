@@ -1,5 +1,6 @@
 // src/components/ui/ProjectCard.tsx
 import { TrendingUp, Clock, MapPin, Heart } from 'lucide-react'
+import type { Project } from '@/types'
 import { projectsAPI } from '@/lib/api'
 
 const SECTOR_COLORS: Record<string, { bg: string; color: string; label: string }> = {
@@ -15,7 +16,7 @@ const SECTOR_COLORS: Record<string, { bg: string; color: string; label: string }
 }
 
 interface ProjectCardProps {
-  project: any
+  project: Project
   onFav?: () => void
   onClick?: () => void
 }
@@ -48,7 +49,7 @@ function MatchScoreRing({ score }: { score: number }) {
 export function ProjectCard({ project, onFav, onClick }: ProjectCardProps) {
   const handleFav = async (e: React.MouseEvent) => {
     e.stopPropagation()
-    await projectsAPI.toggleFav(project.id)
+    await projectsAPI.toggleFav(String(project.id))
     onFav?.()
   }
 

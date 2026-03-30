@@ -1,12 +1,13 @@
 // src/components/dashboard/ProjectCard.tsx
 import { useState } from 'react'
+import type { Project } from '@/types'
 import { SectorBadge, ProgressBar, StatusBadge } from '@/components/ui'
 import { projectsAPI } from '@/lib/api'
 
 interface ProjectCardProps {
-  project:    any
+  project: Project
   matchScore?: number
-  onInvest?:  (project: any) => void
+  onInvest?: (project: Project) => void
   showOwner?: boolean
 }
 
@@ -16,7 +17,7 @@ export default function ProjectCard({ project, matchScore, onInvest, showOwner }
   const toggleFav = async (e: React.MouseEvent) => {
     e.stopPropagation()
     setFaved(!faved)
-    await projectsAPI.toggleFav(project.id).catch(() => setFaved(faved))
+    await projectsAPI.toggleFav(String(project.id)).catch(() => setFaved(faved))
   }
 
   const pct = project.funding_percentage ?? 0

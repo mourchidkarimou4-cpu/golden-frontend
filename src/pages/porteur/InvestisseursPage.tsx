@@ -1,3 +1,4 @@
+import type { Project, Investment, User, Thread, Offer } from '@/types'
 // src/pages/porteur/InvestisseursPage.tsx
 import { useState, useEffect } from 'react'
 import { NAV_PORTEUR, type NavItem } from '@/lib/navItems'
