@@ -424,10 +424,10 @@ export default function LandingPage() {
               transition: 'border-color .4s',
             }}>
               {/* Slideshow card */}
-              <div style={{ marginBottom: 20, height: 160, overflow: 'hidden' }}>
+              <div style={{ marginBottom: 20, height: 220, overflow: 'hidden', borderRadius: 4, position: 'relative' }}>
                 <Slideshow
                   images={card.num === '01' ? PORTEUR_SLIDES : INVEST_SLIDES}
-                  height={160}
+                  height={220}
                   interval={card.num === '01' ? 4000 : 4500}
                   overlay="linear-gradient(to bottom, rgba(6,6,4,.1) 0%, rgba(6,6,4,.5) 100%)"
                 />
